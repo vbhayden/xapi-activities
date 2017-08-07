@@ -1,11 +1,11 @@
 import assertError from 'jscommons/dist/tests/utils/assertError';
 import { Warnings } from 'rulr';
+import assertProfile from '../../../utils/assertProfile';
 import {
   TEST_ACTIVITY_ID,
   TEST_CONTENT,
   TEST_INVALID_ACTIVITY_ID,
 } from '../../../utils/testValues';
-import assertProfile from '../utils/assertProfile';
 import setup from '../utils/setup';
 import overwriteProfile from './utils/overwriteProfile';
 

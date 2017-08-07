@@ -1,6 +1,7 @@
 import assertError from 'jscommons/dist/tests/utils/assertError';
 import * as stringToStream from 'string-to-stream';
 import NonJsonObject from '../../../errors/NonJsonObject';
+import assertProfile from '../../../utils/assertProfile';
 import {
   JSON_CONTENT_TYPE,
   TEST_ACTIVITY_ID,
@@ -11,7 +12,6 @@ import {
   TEST_PROFILE_ID,
   TEXT_CONTENT_TYPE,
 } from '../../../utils/testValues';
-import assertProfile from '../utils/assertProfile';
 import setup from '../utils/setup';
 import patchContent from './utils/patchContent';
 import patchExistingContent from './utils/patchExistingContent';

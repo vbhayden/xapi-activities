@@ -1,4 +1,5 @@
 import * as stringToStream from 'string-to-stream';
+import service from '../../../utils/testService';
 import {
   TEST_ACTIVITY_ID,
   TEST_CLIENT,
@@ -6,7 +7,6 @@ import {
   TEST_PROFILE_ID,
   TEXT_CONTENT_TYPE,
 } from '../../../utils/testValues';
-import service from './service';
 
 export default async () => {
   await service.overwriteProfile({

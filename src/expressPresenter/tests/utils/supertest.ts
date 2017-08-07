@@ -3,8 +3,8 @@ import * as supertest from 'supertest';
 import config from '../../../config';
 import logger from '../../../logger';
 import translatorFactory from '../../../translatorFactory';
+import service from '../../../utils/testService';
 import presenterFacade from '../../index';
-import service from './service';
 
 const app = express();
 const translator = translatorFactory();

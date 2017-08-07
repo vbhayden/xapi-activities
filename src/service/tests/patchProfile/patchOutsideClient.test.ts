@@ -1,5 +1,6 @@
 import * as stringToStream from 'string-to-stream';
 import ClientModel from '../../../models/ClientModel';
+import assertProfile from '../../../utils/assertProfile';
 import {
   JSON_CONTENT_TYPE,
   TEST_ACTIVITY_ID,
@@ -8,7 +9,6 @@ import {
   TEST_OBJECT_CONTENT,
   TEST_PROFILE_ID,
 } from '../../../utils/testValues';
-import assertProfile from '../utils/assertProfile';
 import setup from '../utils/setup';
 import patchContent from './utils/patchContent';
 

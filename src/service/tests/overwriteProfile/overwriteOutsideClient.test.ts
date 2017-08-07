@@ -1,5 +1,6 @@
 import * as stringToStream from 'string-to-stream';
 import ClientModel from '../../../models/ClientModel';
+import assertProfile from '../../../utils/assertProfile';
 import {
   TEST_ACTIVITY_ID,
   TEST_CLIENT_OUTSIDE_ORG,
@@ -8,7 +9,6 @@ import {
   TEST_PROFILE_ID,
   TEXT_CONTENT_TYPE,
 } from '../../../utils/testValues';
-import assertProfile from '../utils/assertProfile';
 import setup from '../utils/setup';
 import overwriteProfile from './utils/overwriteProfile';
 

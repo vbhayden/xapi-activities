@@ -1,5 +1,5 @@
 import setupService from 'jscommons/dist/tests/utils/setupService';
-import service from './service';
+import service from '../../../utils/testService';
 import supertest from './supertest';
 
 const setup = setupService(service);

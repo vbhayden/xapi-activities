@@ -1,3 +1,4 @@
+import assertProfile from '../../../utils/assertProfile';
 import {
   ALTERNATE_CONTENT_TYPE,
   JSON_CONTENT_TYPE,
@@ -5,7 +6,6 @@ import {
   TEST_PROFILE_ID,
 } from '../../../utils/testValues';
 import { NO_CONTENT_204_HTTP_CODE } from '../../utils/httpCodes';
-import assertProfile from '../utils/assertProfile';
 import setup from '../utils/setup';
 import createObjectContent from './utils/createObjectContent';
 

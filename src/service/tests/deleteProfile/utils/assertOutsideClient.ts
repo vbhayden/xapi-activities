@@ -1,7 +1,7 @@
 import NoModel from 'jscommons/dist/errors/NoModel';
 import assertError from 'jscommons/dist/tests/utils/assertError';
+import service from '../../../../utils/testService';
 import { TEST_ACTIVITY_ID, TEST_CLIENT, TEST_PROFILE_ID } from '../../../../utils/testValues';
-import service from '../../utils/service';
 
 export default async () => {
   const promise = service.deleteProfile({

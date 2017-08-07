@@ -2,6 +2,7 @@ import assertError from 'jscommons/dist/tests/utils/assertError';
 import { Warnings } from 'rulr';
 import * as stringToStream from 'string-to-stream';
 import NonJsonObject from '../../../errors/NonJsonObject';
+import assertProfile from '../../../utils/assertProfile';
 import {
   JSON_CONTENT_TYPE,
   TEST_CLIENT,
@@ -12,7 +13,6 @@ import {
   TEST_PROFILE_ID,
   TEXT_CONTENT_TYPE,
 } from '../../../utils/testValues';
-import assertProfile from '../utils/assertProfile';
 import createImmutableProfile from '../utils/createImmutableProfile';
 import setup from '../utils/setup';
 import patchContent from './utils/patchContent';

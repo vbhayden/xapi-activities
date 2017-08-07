@@ -1,3 +1,4 @@
+import assertProfile from '../../../utils/assertProfile';
 import {
   TEST_ACTIVITY_ID,
   TEST_CLIENT,
@@ -6,7 +7,6 @@ import {
   TEXT_CONTENT_TYPE,
 } from '../../../utils/testValues';
 import { NO_CONTENT_204_HTTP_CODE } from '../../utils/httpCodes';
-import assertProfile from '../utils/assertProfile';
 import createImmutableProfile from '../utils/createImmutableProfile';
 import setup from '../utils/setup';
 import overwriteProfile from './utils/overwriteProfile';

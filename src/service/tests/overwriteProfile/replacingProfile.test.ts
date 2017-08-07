@@ -1,4 +1,5 @@
 import * as stringToStream from 'string-to-stream';
+import assertProfile from '../../../utils/assertProfile';
 import {
   TEST_ACTIVITY_ID,
   TEST_CLIENT,
@@ -6,7 +7,6 @@ import {
   TEST_PROFILE_ID,
   TEXT_CONTENT_TYPE,
 } from '../../../utils/testValues';
-import assertProfile from '../utils/assertProfile';
 import createImmutableProfile from '../utils/createImmutableProfile';
 import setup from '../utils/setup';
 import overwriteProfile from './utils/overwriteProfile';

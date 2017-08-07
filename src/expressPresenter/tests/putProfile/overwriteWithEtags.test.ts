@@ -12,6 +12,7 @@ import {
   PRECONDITION_FAILED_412_HTTP_CODE,
 } from '../../utils/httpCodes';
 import createTextProfile from '../utils/createTextProfile';
+import setRequestEtags from '../utils/setRequestEtags';
 import setup from '../utils/setup';
 
 interface EtagOptions {
@@ -24,15 +25,7 @@ describe('expressPresenter.putProfile with etags', () => {
 
   const overwriteProfileWithEtag = ({ ifMatch, ifNoneMatch }: EtagOptions) => {
     const request = supertest.put('/xAPI/activities/profile');
-
-    // Sets the Etags on the request.
-    if (ifMatch !== undefined) {
-      request.set('If-Match', `"${ifMatch}"`);
-    }
-    if (ifNoneMatch !== undefined) {
-      request.set('If-None-Match', `"${ifNoneMatch}"`);
-    }
-
+    setRequestEtags(request, ifMatch, ifNoneMatch);
     return request
       .set('Content-Type', TEXT_CONTENT_TYPE)
       .query({

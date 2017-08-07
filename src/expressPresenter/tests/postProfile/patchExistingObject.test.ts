@@ -1,3 +1,4 @@
+import assertProfile from '../../../utils/assertProfile';
 import {
   JSON_CONTENT_TYPE,
   TEST_CONTENT,
@@ -5,7 +6,6 @@ import {
   TEXT_CONTENT_TYPE,
 } from '../../../utils/testValues';
 import { CLIENT_ERROR_400_HTTP_CODE, NO_CONTENT_204_HTTP_CODE } from '../../utils/httpCodes';
-import assertProfile from '../utils/assertProfile';
 import setup from '../utils/setup';
 import createObjectContent from './utils/createObjectContent';
 import patchContent from './utils/patchContent';

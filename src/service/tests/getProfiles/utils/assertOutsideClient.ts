@@ -1,6 +1,6 @@
 import * as assert from 'assert';
+import service from '../../../../utils/testService';
 import { TEST_ACTIVITY_ID, TEST_CLIENT } from '../../../../utils/testValues';
-import service from '../../utils/service';
 
 export default async () => {
   const profilesResult = await service.getProfiles({

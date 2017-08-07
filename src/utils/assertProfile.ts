@@ -1,7 +1,7 @@
 import * as assert from 'assert';
 import * as streamToString from 'stream-to-string';
-import { TEST_ACTIVITY_ID, TEST_CLIENT, TEST_PROFILE_ID } from '../../../utils/testValues';
-import service from './service';
+import service from './testService';
+import { TEST_ACTIVITY_ID, TEST_CLIENT, TEST_PROFILE_ID } from './testValues';
 
 export default async (content: string) => {
   const expectedProfileIds = [TEST_PROFILE_ID];

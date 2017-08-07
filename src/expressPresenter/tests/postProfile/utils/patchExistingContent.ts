@@ -1,9 +1,9 @@
+import service from '../../../../utils/testService';
 import {
   TEST_ACTIVITY_ID,
   TEST_CLIENT,
   TEST_PROFILE_ID,
 } from '../../../../utils/testValues';
-import service from '../../utils/service';
 import supertest from '../../utils/supertest';
 
 export default async (content: string, contentType: string, expectedCode: number) => {

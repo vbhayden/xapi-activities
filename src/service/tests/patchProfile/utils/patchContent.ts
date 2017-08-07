@@ -1,10 +1,10 @@
 import * as stringToStream from 'string-to-stream';
+import service from '../../../../utils/testService';
 import {
   TEST_ACTIVITY_ID,
   TEST_CLIENT,
   TEST_PROFILE_ID,
 } from '../../../../utils/testValues';
-import service from '../../utils/service';
 
 export default async (content: string, contentType: string) => {
   await service.patchProfile({
