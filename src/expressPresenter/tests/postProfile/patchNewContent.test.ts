@@ -1,5 +1,6 @@
 import {
   JSON_CONTENT_TYPE,
+  TEST_ACTIVITY_ID,
   TEST_CONTENT,
   TEST_INVALID_ACTIVITY_ID,
   TEST_JSON_CONTENT,
@@ -42,6 +43,28 @@ describe('expressPresenter.postProfile with new content', () => {
       .query({
         activityId: TEST_INVALID_ACTIVITY_ID,
         profileId: TEST_PROFILE_ID,
+      })
+      .send(TEST_CONTENT)
+      .expect(CLIENT_ERROR_400_HTTP_CODE);
+  });
+
+  it('should throw warnings when missing the activity id', async () => {
+    await supertest
+      .post('/xAPI/activities/profile')
+      .set('Content-Type', TEXT_CONTENT_TYPE)
+      .query({
+        profileId: TEST_PROFILE_ID,
+      })
+      .send(TEST_CONTENT)
+      .expect(CLIENT_ERROR_400_HTTP_CODE);
+  });
+
+  it('should throw warnings when missing the profile id', async () => {
+    await supertest
+      .post('/xAPI/activities/profile')
+      .set('Content-Type', TEXT_CONTENT_TYPE)
+      .query({
+        activityId: TEST_ACTIVITY_ID,
       })
       .send(TEST_CONTENT)
       .expect(CLIENT_ERROR_400_HTTP_CODE);

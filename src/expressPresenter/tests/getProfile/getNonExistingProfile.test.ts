@@ -28,4 +28,8 @@ describe('expressPresenter.getProfile with non-existing model', () => {
       })
       .expect(CLIENT_ERROR_400_HTTP_CODE);
   });
+
+  // Could have tested that 400s are returned when missing activity ID and profile ID.
+  // However, when missing profile ID, the express presenter will use getProfiles.
+  // The missing actvitiy ID case is covered in the getProfiles tests.
 });

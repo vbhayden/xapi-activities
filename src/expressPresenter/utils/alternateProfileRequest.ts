@@ -1,5 +1,6 @@
 /* tslint:disable:no-magic-numbers */
 import { Request, Response } from 'express';
+import InvalidContentType from '../../errors/InvalidContentType';
 import InvalidMethod from '../../errors/InvalidMethod';
 import Config from '../Config';
 import getActivityId from './getActivityId';
@@ -18,7 +19,7 @@ interface Options {
 
 export default async ({ config, method, req, res }: Options) => {
   if (req.header('Content-Type') !== 'application/x-www-form-urlencoded') {
-    throw new Error();
+    throw new InvalidContentType(req.header('Content-Type'));
   }
 
   switch (method) {

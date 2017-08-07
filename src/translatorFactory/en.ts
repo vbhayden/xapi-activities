@@ -12,6 +12,9 @@ const translator: Translator = {
   ifNoneMatchError: () => (
     'IfNoneMatch was used to detect that the resource was already present'
   ),
+  invalidContentTypeError: (err) => (
+    `Content type (${err.contentType}) is invalid for alternate request syntax`
+  ),
   invalidMethodError: (err) => (
     `Method (${err.method}) is invalid for alternate request syntax`
   ),

@@ -8,9 +8,9 @@ import {
 } from '../../../utils/testValues';
 import service from './service';
 
-export default async (activityId: string = TEST_ACTIVITY_ID) => {
+export default async () => {
   await service.overwriteProfile({
-    activityId,
+    activityId: TEST_ACTIVITY_ID,
     client: TEST_CLIENT,
     content: stringToStream(TEST_CONTENT),
     contentType: TEXT_CONTENT_TYPE,

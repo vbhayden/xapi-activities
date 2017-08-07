@@ -1,7 +1,9 @@
 import {
   TEST_ACTIVITY_ID,
+  TEST_CONTENT,
   TEST_INVALID_ACTIVITY_ID,
   TEST_INVALID_TIMESTAMP,
+  TEXT_CONTENT_TYPE,
 } from '../../../utils/testValues';
 import { CLIENT_ERROR_400_HTTP_CODE, OK_200_HTTP_CODE } from '../../utils/httpCodes';
 import setup from '../utils/setup';
@@ -35,6 +37,14 @@ describe('expressPresenter.getProfiles with non-existing agent', () => {
         activityId: TEST_INVALID_ACTIVITY_ID,
         since: TEST_INVALID_TIMESTAMP,
       })
+      .expect(CLIENT_ERROR_400_HTTP_CODE);
+  });
+
+  it('should throw warnings when missing the activity id', async () => {
+    await supertest
+      .get('/xAPI/activities/profile')
+      .set('Content-Type', TEXT_CONTENT_TYPE)
+      .send(TEST_CONTENT)
       .expect(CLIENT_ERROR_400_HTTP_CODE);
   });
 });

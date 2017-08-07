@@ -12,6 +12,7 @@ const getContent = (req: Request, contentType: string) => {
   if (contentType === 'application/json') {
     return stringToStream(JSON.stringify(req.body));
   }
+  /* istanbul ignore next - superagent always streams content */
   if (isString(req.body)) {
     return stringToStream(req.body);
   }

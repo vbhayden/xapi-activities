@@ -7,6 +7,7 @@ import { Warnings } from 'rulr';
 import Conflict from '../../errors/Conflict';
 import IfMatch from '../../errors/IfMatch';
 import IfNoneMatch from '../../errors/IfNoneMatch';
+import InvalidContentType from '../../errors/InvalidContentType';
 import InvalidMethod from '../../errors/InvalidMethod';
 import MaxEtags from '../../errors/MaxEtags';
 import NonJsonObject from '../../errors/NonJsonObject';
@@ -24,6 +25,7 @@ interface Options extends CommonOptions {
 }
 
 export default ({ translator, errorId, res, err }: Options): Response => {
+  /* istanbul ignore next - all server errors expected during tests are caught */
   if (isNull(err) || isUndefined(null)) {
     const code = SERVER_ERROR_500_HTTP_CODE;
     const message = translator.serverError();
@@ -31,7 +33,11 @@ export default ({ translator, errorId, res, err }: Options): Response => {
   }
 
   switch (err.constructor) {
-    case MaxEtags: {
+    case InvalidContentType: {
+      const code = CLIENT_ERROR_400_HTTP_CODE;
+      const message = translator.invalidContentTypeError(err as InvalidContentType);
+      return sendMessage({ res, code, errorId, message });
+    } case MaxEtags: {
       const code = CLIENT_ERROR_400_HTTP_CODE;
       const message = translator.maxEtagsError(err as MaxEtags);
       return sendMessage({ res, code, errorId, message });
