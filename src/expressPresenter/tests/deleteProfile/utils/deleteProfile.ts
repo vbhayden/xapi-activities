@@ -1,7 +1,8 @@
+import { Test } from 'supertest';
 import { TEST_PROFILE_ID } from '../../../../utils/testValues';
 import supertest from '../../utils/supertest';
 
-export default (activityId: string) => {
+export default (activityId: string): Test => {
   const profileId = TEST_PROFILE_ID;
   return supertest
     .delete('/xAPI/activities/profile')

@@ -1,7 +1,7 @@
 import ClientModel from '../../models/ClientModel';
 import Profile from '../../models/Profile';
 
-interface Options {
+export interface Options {
   readonly client: ClientModel;
   readonly activityId: string;
   readonly profile: Profile;

@@ -3,7 +3,7 @@ import ClientModel from '../../models/ClientModel';
 import Profile from '../../models/Profile';
 import Config from '../Config';
 
-interface Options {
+export interface Options {
   readonly client: ClientModel;
   readonly content: any;
   readonly contentType: string;

@@ -10,7 +10,7 @@ import getProfileFromService from './getProfileFromService';
 import getProfileId from './getProfileId';
 import getProfilesFromService from './getProfilesFromService';
 
-interface Options {
+export interface Options {
   readonly config: Config;
   readonly method: string;
   readonly req: Request;

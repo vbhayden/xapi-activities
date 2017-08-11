@@ -1,6 +1,7 @@
 import { Request } from 'express';
 import { isString } from 'lodash';
 import * as stringToStream from 'string-to-stream';
+import ClientModel from '../../models/ClientModel';
 import Config from '../Config';
 import getActivityId from './getActivityId';
 import getClient from './getClient';
@@ -19,7 +20,17 @@ const getContent = (req: Request, contentType: string) => {
   return req;
 };
 
-export default async (config: Config, req: Request) => {
+export interface Result {
+  readonly activityId: string;
+  readonly client: ClientModel;
+  readonly content: NodeJS.ReadableStream;
+  readonly contentType: string;
+  readonly ifMatch?: string;
+  readonly ifNoneMatch?: string;
+  readonly profileId: string;
+}
+
+export default async (config: Config, req: Request): Promise<Result> => {
   const client = await getClient(config, req.header('Authorization'));
   const ifMatch = getEtag(req.header('If-Match'));
   const ifNoneMatch = getEtag(req.header('If-None-Match'));

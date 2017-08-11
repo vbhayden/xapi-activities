@@ -20,7 +20,7 @@ import {
 } from './httpCodes';
 import sendWarnings from './sendWarnings';
 
-interface Options extends CommonOptions {
+export interface Options extends CommonOptions {
   readonly translator: Translator;
 }
 

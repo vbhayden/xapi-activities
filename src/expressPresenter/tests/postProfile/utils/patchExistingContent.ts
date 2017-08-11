@@ -1,3 +1,4 @@
+import { Response } from 'supertest';
 import service from '../../../../utils/testService';
 import {
   TEST_ACTIVITY_ID,
@@ -6,7 +7,11 @@ import {
 } from '../../../../utils/testValues';
 import supertest from '../../utils/supertest';
 
-export default async (content: string, contentType: string, expectedCode: number) => {
+export default async (
+  content: string,
+  contentType: string,
+  expectedCode: number,
+): Promise<Response> => {
   const getProfileResult = await service.getProfile({
     activityId: TEST_ACTIVITY_ID,
     client: TEST_CLIENT,

@@ -2,7 +2,7 @@ import IfMatch from '../../errors/IfMatch';
 import IfNoneMatch from '../../errors/IfNoneMatch';
 import Profile from '../../models/Profile';
 
-interface Options {
+export interface Options {
   readonly profile: Profile;
   readonly ifMatch?: string;
   readonly ifNoneMatch?: string;

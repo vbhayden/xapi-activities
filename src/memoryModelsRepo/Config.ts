@@ -1,7 +1,7 @@
 /* tslint:disable:readonly-keyword */
 import Profile from '../models/Profile';
 
-interface State {
+export interface State {
   activityProfiles: Profile[];
 }
 
