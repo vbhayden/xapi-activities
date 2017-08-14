@@ -27,7 +27,7 @@ exports.default = {
         storageDir: lodash_1.defaultTo(process.env.FS_LOCAL_STORAGE_DIR, storageDir),
     },
     mongoModelsRepo: {
-        url: lodash_1.defaultTo(process.env.MONGO_URL, 'mongodb://localhost:27017/xapiagents'),
+        url: lodash_1.defaultTo(process.env.MONGO_URL, 'mongodb://localhost:27017/xapiactivities'),
     },
     repoFactory: {
         authRepoName: lodash_1.defaultTo(process.env.AUTH_REPO, 'fetch'),
@@ -43,7 +43,7 @@ exports.default = {
             signatureVersion: 'v4',
             sslEnabled: true,
         },
-        bucketName: lodash_1.defaultTo(process.env.FS_S3_BUCKET, 'xapi-agents'),
+        bucketName: lodash_1.defaultTo(process.env.FS_S3_BUCKET, 'xapi-activities'),
         subFolder: lodash_1.defaultTo(process.env.FS_S3_BUCKET_SUBFOLDER, '/storage'),
     },
     winston: {
@@ -55,7 +55,7 @@ exports.default = {
             },
             enabled: lodash_1.defaultTo(boolean(process.env.WINSTON_CLOUDWATCH_ENABLED), false),
             level: lodash_1.defaultTo(process.env.WINSTON_CLOUDWATCH_LEVEL, 'info'),
-            logGroupName: lodash_1.defaultTo(process.env.WINSTON_CLOUDWATCH_LOG_GROUP_NAME, 'xapi-agents'),
+            logGroupName: lodash_1.defaultTo(process.env.WINSTON_CLOUDWATCH_LOG_GROUP_NAME, 'xapi-activities'),
             logStreamName: process.env.WINSTON_CLOUDWATCH_LOG_STREAM_NAME,
         },
         console: {
