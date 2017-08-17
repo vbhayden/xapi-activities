@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
+var constants_1 = require("../utils/constants");
 var catchErrors_1 = require("./utils/catchErrors");
 var getActivityId_1 = require("./utils/getActivityId");
 var getClient_1 = require("./utils/getClient");
@@ -53,7 +54,7 @@ exports.default = function (config) {
                 case 2:
                     result = _a.sent();
                     res.status(httpCodes_1.OK_200_HTTP_CODE);
-                    res.setHeader('X-Experience-API-Version', 'xapiHeaderVersion');
+                    res.setHeader('X-Experience-API-Version', constants_1.xapiHeaderVersion);
                     res.json(result);
                     return [2 /*return*/];
             }
