@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var httpCodes_1 = require("./httpCodes");
+var constants_1 = require("../../utils/constants");
 exports.default = function (_a) {
     var activityId = _a.activityId, client = _a.client, config = _a.config, profileId = _a.profileId, res = _a.res;
     return __awaiter(_this, void 0, void 0, function () {
@@ -49,7 +50,7 @@ exports.default = function (_a) {
                     res.status(httpCodes_1.OK_200_HTTP_CODE);
                     res.setHeader('ETag', "\"" + getProfileResult.etag + "\"");
                     res.setHeader('Last-Modified', getProfileResult.updatedAt.toISOString());
-                    res.setHeader('X-Experience-API-Version', 'xapiHeaderVersion');
+                    res.setHeader('X-Experience-API-Version', constants_1.xapiHeaderVersion);
                     res.setHeader('Content-Type', getProfileResult.contentType);
                     getProfileResult.content.pipe(res);
                     return [2 /*return*/];
