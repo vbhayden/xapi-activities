@@ -17,7 +17,7 @@ export default async ({ activityId, client, config, profileId, res }: Options) =
   res.status(OK_200_HTTP_CODE);
   res.setHeader('ETag', `"${getProfileResult.etag}"`);
   res.setHeader('Last-Modified', getProfileResult.updatedAt.toISOString());
-  res.setHeader('X-Experience-API-Version', 'xapiHeaderVersion');
+  res.setHeader('X-Experience-API-Version', xapiHeaderVersion);
   res.setHeader('Content-Type', getProfileResult.contentType);
   getProfileResult.content.pipe(res);
   return;
