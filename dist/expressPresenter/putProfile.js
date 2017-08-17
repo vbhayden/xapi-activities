@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
+var constants_1 = require("../utils/constants");
 var catchErrors_1 = require("./utils/catchErrors");
 var getProfileWriteOpts_1 = require("./utils/getProfileWriteOpts");
 var httpCodes_1 = require("./utils/httpCodes");
@@ -51,7 +52,7 @@ exports.default = function (config) {
                 case 2:
                     _a.sent();
                     res.status(httpCodes_1.NO_CONTENT_204_HTTP_CODE);
-                    res.setHeader('X-Experience-API-Version', 'xapiHeaderVersion');
+                    res.setHeader('X-Experience-API-Version', constants_1.xapiHeaderVersion);
                     res.send();
                     return [2 /*return*/];
             }

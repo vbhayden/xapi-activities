@@ -16,10 +16,12 @@ export default (config: Config) => {
       profileId: opts.profileId,
     });
 
-    if (deleteResult.contentType !== 'application/json') {
-      await config.repo.deleteProfileContent({
-        key: deleteResult.id,
-      });
+    if (deleteResult.contentType === 'application/json') {
+      return;
     }
+
+    await config.repo.deleteProfileContent({
+      key: deleteResult.id,
+    });
   };
 };

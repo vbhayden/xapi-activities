@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
+var constants_1 = require("../../utils/constants");
 var httpCodes_1 = require("./httpCodes");
 exports.default = function (_a) {
     var activityId = _a.activityId, client = _a.client, config = _a.config, res = _a.res, since = _a.since;
@@ -47,7 +48,7 @@ exports.default = function (_a) {
                 case 1:
                     getProfilesResult = _a.sent();
                     res.status(httpCodes_1.OK_200_HTTP_CODE);
-                    res.setHeader('X-Experience-API-Version', 'xapiHeaderVersion');
+                    res.setHeader('X-Experience-API-Version', constants_1.xapiHeaderVersion);
                     res.json(getProfilesResult.profileIds);
                     return [2 /*return*/];
             }

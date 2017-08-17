@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
+import { xapiHeaderVersion } from '../utils/constants';
 import Config from './Config';
 import alternateProfileRequest from './utils/alternateProfileRequest';
 import catchErrors from './utils/catchErrors';
 import getProfileWriteOpts from './utils/getProfileWriteOpts';
 import { NO_CONTENT_204_HTTP_CODE } from './utils/httpCodes';
-import { xapiHeaderVersion } from '../utils/constants';
 
 export default (config: Config) => {
   return catchErrors(config, async (req: Request, res: Response): Promise<void> => {
@@ -17,7 +17,7 @@ export default (config: Config) => {
     const opts = await getProfileWriteOpts(config, req);
     await config.service.patchProfile(opts);
     res.status(NO_CONTENT_204_HTTP_CODE);
-    res.setHeader('X-Experience-API-Version', 'xapiHeaderVersion');
+    res.setHeader('X-Experience-API-Version', xapiHeaderVersion);
     res.send();
   });
 };

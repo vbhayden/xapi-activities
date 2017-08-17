@@ -1,8 +1,8 @@
 import { Response } from 'express';
 import ClientModel from '../../models/ClientModel';
+import { xapiHeaderVersion } from '../../utils/constants';
 import Config from '../Config';
 import { OK_200_HTTP_CODE } from './httpCodes';
-import { xapiHeaderVersion } from '../../utils/constants';
 
 export interface Options {
   readonly activityId: string;

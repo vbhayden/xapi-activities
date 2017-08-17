@@ -36,8 +36,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var httpCodes_1 = require("./httpCodes");
 var constants_1 = require("../../utils/constants");
+var httpCodes_1 = require("./httpCodes");
 exports.default = function (_a) {
     var activityId = _a.activityId, client = _a.client, config = _a.config, profileId = _a.profileId, res = _a.res;
     return __awaiter(_this, void 0, void 0, function () {
