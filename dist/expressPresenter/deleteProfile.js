@@ -57,7 +57,7 @@ exports.default = function (config) {
                 case 2:
                     _a.sent();
                     res.status(httpCodes_1.NO_CONTENT_204_HTTP_CODE);
-                    res.setHeader('X-Experience-API-Version', '1.0.0');
+                    res.setHeader('X-Experience-API-Version', 'xapiHeaderVersion');
                     res.send();
                     return [2 /*return*/];
             }

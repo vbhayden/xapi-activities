@@ -49,7 +49,7 @@ exports.default = function (_a) {
                     res.status(httpCodes_1.OK_200_HTTP_CODE);
                     res.setHeader('ETag', "\"" + getProfileResult.etag + "\"");
                     res.setHeader('Last-Modified', getProfileResult.updatedAt.toISOString());
-                    res.setHeader('X-Experience-API-Version', '1.0.0');
+                    res.setHeader('X-Experience-API-Version', 'xapiHeaderVersion');
                     res.setHeader('Content-Type', getProfileResult.contentType);
                     getProfileResult.content.pipe(res);
                     return [2 /*return*/];

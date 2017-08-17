@@ -6,6 +6,7 @@ import getClient from './utils/getClient';
 import getEtag from './utils/getEtag';
 import getProfileId from './utils/getProfileId';
 import { NO_CONTENT_204_HTTP_CODE } from './utils/httpCodes';
+import { xapiHeaderVersion } from '../utils/constants';
 
 export default (config: Config) => {
   return catchErrors(config, async (req: Request, res: Response): Promise<void> => {
@@ -16,7 +17,7 @@ export default (config: Config) => {
 
     await config.service.deleteProfile({ activityId, client, profileId, ifMatch });
     res.status(NO_CONTENT_204_HTTP_CODE);
-    res.setHeader('X-Experience-API-Version', '1.0.0');
+    res.setHeader('X-Experience-API-Version', 'xapiHeaderVersion');
     res.send();
   });
 };

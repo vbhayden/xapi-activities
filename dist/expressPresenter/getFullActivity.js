@@ -53,7 +53,7 @@ exports.default = function (config) {
                 case 2:
                     result = _a.sent();
                     res.status(httpCodes_1.OK_200_HTTP_CODE);
-                    res.setHeader('X-Experience-API-Version', '1.0.0');
+                    res.setHeader('X-Experience-API-Version', 'xapiHeaderVersion');
                     res.json(result);
                     return [2 /*return*/];
             }

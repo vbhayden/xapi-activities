@@ -4,6 +4,7 @@ import catchErrors from './utils/catchErrors';
 import getActivityId from './utils/getActivityId';
 import getClient from './utils/getClient';
 import { OK_200_HTTP_CODE } from './utils/httpCodes';
+import { xapiHeaderVersion } from '../utils/constants';
 
 export default (config: Config) => {
   return catchErrors(config, async (req: Request, res: Response): Promise<void> => {
@@ -11,7 +12,7 @@ export default (config: Config) => {
     const activityId = getActivityId(req.query.activityId);
     const result = await config.service.getFullActivity({ client, activityId });
     res.status(OK_200_HTTP_CODE);
-    res.setHeader('X-Experience-API-Version', '1.0.0');
+    res.setHeader('X-Experience-API-Version', 'xapiHeaderVersion');
     res.json(result);
   });
 };
