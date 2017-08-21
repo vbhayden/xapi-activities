@@ -9,5 +9,4 @@ export default async () => {
     client: TEST_CLIENT,
     profileId: TEST_PROFILE_ID,
   });
-  await assertError(NoModel, promise);
 };

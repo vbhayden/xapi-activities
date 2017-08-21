@@ -1,5 +1,5 @@
 import { TEST_ACTIVITY_ID, TEST_PROFILE_ID } from '../../../../utils/testValues';
-import { NOT_FOUND_404_HTTP_CODE } from '../../../utils/httpCodes';
+import { NO_CONTENT_204_HTTP_CODE } from '../../../utils/httpCodes';
 import supertest from '../../utils/supertest';
 
 export default async () => {
@@ -8,5 +8,5 @@ export default async () => {
   await supertest
     .delete('/xAPI/activities/profile')
     .query({ activityId, profileId })
-    .expect(NOT_FOUND_404_HTTP_CODE);
+    .expect(NO_CONTENT_204_HTTP_CODE);
 };

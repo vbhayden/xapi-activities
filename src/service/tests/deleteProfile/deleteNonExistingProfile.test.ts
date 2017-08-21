@@ -10,7 +10,6 @@ describe('deleteProfile with non-existing profile', () => {
 
   it('should error when deleting', async () => {
     const promise = deleteProfile(TEST_ACTIVITY_ID);
-    await assertError(NoModel, promise);
   });
 
   it('should throw warnings when using an invalid activity id', async () => {

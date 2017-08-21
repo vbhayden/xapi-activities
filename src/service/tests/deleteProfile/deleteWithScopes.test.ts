@@ -18,13 +18,12 @@ describe('deleteProfile with scopes', () => {
     await assertError(Forbidden, promise);
   });
 
-  it('should throw no model error when using valid scopes', async () => {
+  it('should not throw any error when using valid scopes on a non-existent profile', async () => {
     const scopes = [XAPI_PROFILE_ALL];
     const promise = service.deleteProfile({
       activityId: TEST_ACTIVITY_ID,
       client: { ...TEST_CLIENT, scopes },
       profileId: TEST_PROFILE_ID,
     });
-    await assertError(NoModel, promise);
   });
 });
