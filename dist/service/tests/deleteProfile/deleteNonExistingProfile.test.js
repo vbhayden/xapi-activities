@@ -43,11 +43,14 @@ var setup_1 = require("../utils/setup");
 var deleteProfile_1 = require("./utils/deleteProfile");
 describe('deleteProfile with non-existing profile', function () {
     setup_1.default();
-    it('should error when deleting', function () { return __awaiter(_this, void 0, void 0, function () {
-        var promise;
+    it('should not error when deleting', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            promise = deleteProfile_1.default(testValues_1.TEST_ACTIVITY_ID);
-            return [2 /*return*/];
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, deleteProfile_1.default(testValues_1.TEST_ACTIVITY_ID)];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
         });
     }); });
     it('should throw warnings when using an invalid activity id', function () { return __awaiter(_this, void 0, void 0, function () {

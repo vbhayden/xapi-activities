@@ -70,15 +70,20 @@ describe('deleteProfile with scopes', function () {
         });
     }); });
     it('should not throw any error when using valid scopes on a non-existent profile', function () { return __awaiter(_this, void 0, void 0, function () {
-        var scopes, promise;
+        var scopes;
         return __generator(this, function (_a) {
-            scopes = [scopes_1.XAPI_PROFILE_ALL];
-            promise = service.deleteProfile({
-                activityId: testValues_1.TEST_ACTIVITY_ID,
-                client: __assign({}, testValues_1.TEST_CLIENT, { scopes: scopes }),
-                profileId: testValues_1.TEST_PROFILE_ID,
-            });
-            return [2 /*return*/];
+            switch (_a.label) {
+                case 0:
+                    scopes = [scopes_1.XAPI_PROFILE_ALL];
+                    return [4 /*yield*/, service.deleteProfile({
+                            activityId: testValues_1.TEST_ACTIVITY_ID,
+                            client: __assign({}, testValues_1.TEST_CLIENT, { scopes: scopes }),
+                            profileId: testValues_1.TEST_PROFILE_ID,
+                        })];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
         });
     }); });
 });

@@ -39,14 +39,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var testService_1 = require("../../../../utils/testService");
 var testValues_1 = require("../../../../utils/testValues");
 exports.default = function () { return __awaiter(_this, void 0, void 0, function () {
-    var promise;
     return __generator(this, function (_a) {
-        promise = testService_1.default.deleteProfile({
-            activityId: testValues_1.TEST_ACTIVITY_ID,
-            client: testValues_1.TEST_CLIENT,
-            profileId: testValues_1.TEST_PROFILE_ID,
-        });
-        return [2 /*return*/];
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, testService_1.default.deleteProfile({
+                    activityId: testValues_1.TEST_ACTIVITY_ID,
+                    client: testValues_1.TEST_CLIENT,
+                    profileId: testValues_1.TEST_PROFILE_ID,
+                })];
+            case 1:
+                _a.sent();
+                return [2 /*return*/];
+        }
     });
 }); };
 //# sourceMappingURL=assertOutsideClient.js.map
