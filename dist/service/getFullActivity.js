@@ -43,7 +43,13 @@ exports.default = function (_config) {
         return __generator(this, function (_a) {
             checkProfileReadScopes_1.default(opts.client.scopes);
             validateActivityId_1.default(opts.activityId);
-            return [2 /*return*/, { id: opts.activityId }];
+            return [2 /*return*/, {
+                    definition: {
+                        name: {},
+                    },
+                    id: opts.activityId,
+                    objectType: 'Activity',
+                }];
         });
     }); };
 };
