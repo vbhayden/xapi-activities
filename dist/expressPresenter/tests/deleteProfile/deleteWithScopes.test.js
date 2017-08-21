@@ -68,7 +68,7 @@ describe('expressPresenter.deleteProfile with scopes', function () {
                         activityId: testValues_1.TEST_ACTIVITY_ID,
                         profileId: testValues_1.TEST_PROFILE_ID,
                     })
-                        .expect(httpCodes_1.NOT_FOUND_404_HTTP_CODE)];
+                        .expect(httpCodes_1.NO_CONTENT_204_HTTP_CODE)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];

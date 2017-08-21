@@ -49,7 +49,7 @@ exports.default = function () { return __awaiter(_this, void 0, void 0, function
                 return [4 /*yield*/, supertest_1.default
                         .delete('/xAPI/activities/profile')
                         .query({ activityId: activityId, profileId: profileId })
-                        .expect(httpCodes_1.NOT_FOUND_404_HTTP_CODE)];
+                        .expect(httpCodes_1.NO_CONTENT_204_HTTP_CODE)];
             case 1:
                 _a.sent();
                 return [2 /*return*/];

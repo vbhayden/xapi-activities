@@ -1,7 +1,7 @@
 import { TEST_ACTIVITY_ID, TEST_PROFILE_ID } from '../../../utils/testValues';
 import {
   FORBIDDEN_403_HTTP_CODE,
-  NOT_FOUND_404_HTTP_CODE,
+  NO_CONTENT_204_HTTP_CODE,
 } from '../../utils/httpCodes';
 import setup from '../utils/setup';
 
@@ -27,6 +27,6 @@ describe('expressPresenter.deleteProfile with scopes', () => {
         activityId: TEST_ACTIVITY_ID,
         profileId: TEST_PROFILE_ID,
       })
-      .expect(NOT_FOUND_404_HTTP_CODE);
+      .expect(NO_CONTENT_204_HTTP_CODE);
   });
 });

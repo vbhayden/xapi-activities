@@ -45,7 +45,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var Forbidden_1 = require("jscommons/dist/errors/Forbidden");
-var NoModel_1 = require("jscommons/dist/errors/NoModel");
 var assertError_1 = require("jscommons/dist/tests/utils/assertError");
 var scopes_1 = require("../../../utils/scopes");
 var testValues_1 = require("../../../utils/testValues");
@@ -70,18 +69,17 @@ describe('deleteProfile with scopes', function () {
             }
         });
     }); });
-    it('should throw no model error when using valid scopes', function () { return __awaiter(_this, void 0, void 0, function () {
-        var scopes, promise;
+    it('should not throw any error when using valid scopes on a non-existent profile', function () { return __awaiter(_this, void 0, void 0, function () {
+        var scopes;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     scopes = [scopes_1.XAPI_PROFILE_ALL];
-                    promise = service.deleteProfile({
-                        activityId: testValues_1.TEST_ACTIVITY_ID,
-                        client: __assign({}, testValues_1.TEST_CLIENT, { scopes: scopes }),
-                        profileId: testValues_1.TEST_PROFILE_ID,
-                    });
-                    return [4 /*yield*/, assertError_1.default(NoModel_1.default, promise)];
+                    return [4 /*yield*/, service.deleteProfile({
+                            activityId: testValues_1.TEST_ACTIVITY_ID,
+                            client: __assign({}, testValues_1.TEST_CLIENT, { scopes: scopes }),
+                            profileId: testValues_1.TEST_PROFILE_ID,
+                        })];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];
