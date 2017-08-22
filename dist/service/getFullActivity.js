@@ -44,9 +44,6 @@ exports.default = function (_config) {
             checkProfileReadScopes_1.default(opts.client.scopes);
             validateActivityId_1.default(opts.activityId);
             return [2 /*return*/, {
-                    definition: {
-                        name: {},
-                    },
                     id: opts.activityId,
                     objectType: 'Activity',
                 }];
