@@ -6,6 +6,7 @@ import Config from '../Config';
 import getActivityId from './getActivityId';
 import getAlternateProfileWriteOpts from './getAlternateProfileWriteOpts';
 import getClient from './getClient';
+import getHeader from './getHeader';
 import getProfileFromService from './getProfileFromService';
 import getProfileId from './getProfileId';
 import getProfilesFromService from './getProfilesFromService';
@@ -24,13 +25,14 @@ export default async ({ config, method, req, res }: Options) => {
 
   switch (method) {
     case 'POST': {
-      const opts = await getAlternateProfileWriteOpts(config, req);
-      await config.service.patchProfile(opts);
+      const client = await getClient(config, getHeader(req, 'Authorization'));
+      const opts = await getAlternateProfileWriteOpts(req);
+      await config.service.patchProfile({ client, ...opts });
       res.status(204).send();
       return;
     }
     case 'GET': {
-      const client = await getClient(config, req.body.Authorization);
+      const client = await getClient(config, getHeader(req, 'Authorization'));
       const activityId = getActivityId(req.body.activityId);
 
       if (req.body.profileId === undefined) {
@@ -43,14 +45,15 @@ export default async ({ config, method, req, res }: Options) => {
       }
     }
     case 'PUT': {
-      const opts = await getAlternateProfileWriteOpts(config, req);
-      await config.service.overwriteProfile(opts);
+      const client = await getClient(config, getHeader(req, 'Authorization'));
+      const opts = await getAlternateProfileWriteOpts(req);
+      await config.service.overwriteProfile({ client, ...opts });
       res.status(204).send();
       return;
     }
     case 'DELETE': {
-      const client = await getClient(config, req.body.Authorization);
-      const ifMatch = req.body['If-Match'];
+      const client = await getClient(config, getHeader(req, 'Authorization'));
+      const ifMatch = getHeader(req, 'If-Match');
       const profileId = getProfileId(req.body.profileId);
       const activityId = getActivityId(req.body.activityId);
 
