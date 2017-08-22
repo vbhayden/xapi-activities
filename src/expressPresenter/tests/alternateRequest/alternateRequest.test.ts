@@ -10,6 +10,7 @@ describe('expressPresenter using the alternate request syntax', () => {
     await supertest
       .post('/xAPI/activities/profile')
       .set('Content-Type', ALTERNATE_CONTENT_TYPE)
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({ method: 'invalid_method' })
       .expect(CLIENT_ERROR_400_HTTP_CODE);
   });
@@ -18,6 +19,7 @@ describe('expressPresenter using the alternate request syntax', () => {
     await supertest
       .post('/xAPI/activities/profile')
       .set('Content-Type', 'invalid_content_type')
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({ method: 'GET' })
       .expect(CLIENT_ERROR_400_HTTP_CODE);
   });
