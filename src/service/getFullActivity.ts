@@ -8,6 +8,12 @@ export default (_config: Config) => {
   return async (opts: GetFullActivityOptions): Promise<GetFullActivityResult> => {
     checkProfileReadScopes(opts.client.scopes);
     validateActivityId(opts.activityId);
-    return { id: opts.activityId };
+    return {
+      definition: {
+        name: {},
+      },
+      id: opts.activityId,
+      objectType: 'Activity',
+    };
   };
 };

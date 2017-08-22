@@ -15,7 +15,9 @@ describe('expressPresenter.getFullAgent', () => {
         activityId: TEST_ACTIVITY_ID,
       })
       .expect(OK_200_HTTP_CODE, {
+        definition: { name: {} },
         id: TEST_ACTIVITY_ID,
+        objectType: 'Activity',
       });
   });
 
