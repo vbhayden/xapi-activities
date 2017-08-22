@@ -10,6 +10,7 @@ import getHeader from './getHeader';
 import getProfileFromService from './getProfileFromService';
 import getProfileId from './getProfileId';
 import getProfilesFromService from './getProfilesFromService';
+import validateVersionHeader from './validateVersionHeader';
 
 export interface Options {
   readonly config: Config;
@@ -26,6 +27,7 @@ export default async ({ config, method, req, res }: Options) => {
   switch (method) {
     case 'POST': {
       const client = await getClient(config, getHeader(req, 'Authorization'));
+      validateVersionHeader(getHeader(req, 'X-Experience-API-Version'));
       const opts = await getAlternateProfileWriteOpts(req);
       await config.service.patchProfile({ client, ...opts });
       res.status(204).send();
@@ -33,6 +35,7 @@ export default async ({ config, method, req, res }: Options) => {
     }
     case 'GET': {
       const client = await getClient(config, getHeader(req, 'Authorization'));
+      validateVersionHeader(getHeader(req, 'X-Experience-API-Version'));
       const activityId = getActivityId(req.body.activityId);
 
       if (req.body.profileId === undefined) {
@@ -46,6 +49,7 @@ export default async ({ config, method, req, res }: Options) => {
     }
     case 'PUT': {
       const client = await getClient(config, getHeader(req, 'Authorization'));
+      validateVersionHeader(getHeader(req, 'X-Experience-API-Version'));
       const opts = await getAlternateProfileWriteOpts(req);
       await config.service.overwriteProfile({ client, ...opts });
       res.status(204).send();
@@ -53,6 +57,7 @@ export default async ({ config, method, req, res }: Options) => {
     }
     case 'DELETE': {
       const client = await getClient(config, getHeader(req, 'Authorization'));
+      validateVersionHeader(getHeader(req, 'X-Experience-API-Version'));
       const ifMatch = getHeader(req, 'If-Match');
       const profileId = getProfileId(req.body.profileId);
       const activityId = getActivityId(req.body.activityId);

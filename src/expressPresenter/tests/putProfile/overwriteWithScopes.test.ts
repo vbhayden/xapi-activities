@@ -1,3 +1,4 @@
+import { xapiHeaderVersion } from '../../../utils/constants';
 import {
   TEST_ACTIVITY_ID,
   TEST_CONTENT,
@@ -15,6 +16,7 @@ describe('expressPresenter.putProfile with scopes', () => {
   const overwriteProfileWithScopes = (token: string) => {
     return supertest
       .put('/xAPI/activities/profile')
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .set('Authorization', token)
       .set('Content-Type', TEXT_CONTENT_TYPE)
       .query({

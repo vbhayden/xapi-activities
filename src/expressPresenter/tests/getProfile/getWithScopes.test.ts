@@ -1,3 +1,4 @@
+import { xapiHeaderVersion } from '../../../utils/constants';
 import { TEST_ACTIVITY_ID, TEST_PROFILE_ID } from '../../../utils/testValues';
 import {
   FORBIDDEN_403_HTTP_CODE,
@@ -12,6 +13,7 @@ describe('expressPresenter.getProfile with scopes', () => {
     await supertest
       .get('/xAPI/activities/profile')
       .set('Authorization', 'invalid_scope_client')
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         activityId: TEST_ACTIVITY_ID,
         profileId: TEST_PROFILE_ID,
@@ -23,6 +25,7 @@ describe('expressPresenter.getProfile with scopes', () => {
     await supertest
       .get('/xAPI/activities/profile')
       .set('Authorization', 'valid_scope_client')
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         activityId: TEST_ACTIVITY_ID,
         profileId: TEST_PROFILE_ID,

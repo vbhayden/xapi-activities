@@ -53,6 +53,7 @@ var getHeader_1 = require("./getHeader");
 var getProfileFromService_1 = require("./getProfileFromService");
 var getProfileId_1 = require("./getProfileId");
 var getProfilesFromService_1 = require("./getProfilesFromService");
+var validateVersionHeader_1 = require("./validateVersionHeader");
 exports.default = function (_a) {
     var config = _a.config, method = _a.method, req = _a.req, res = _a.res;
     return __awaiter(_this, void 0, void 0, function () {
@@ -74,6 +75,7 @@ exports.default = function (_a) {
                 case 1: return [4 /*yield*/, getClient_1.default(config, getHeader_1.default(req, 'Authorization'))];
                 case 2:
                     client = _b.sent();
+                    validateVersionHeader_1.default(getHeader_1.default(req, 'X-Experience-API-Version'));
                     return [4 /*yield*/, getAlternateProfileWriteOpts_1.default(req)];
                 case 3:
                     opts = _b.sent();
@@ -85,6 +87,7 @@ exports.default = function (_a) {
                 case 5: return [4 /*yield*/, getClient_1.default(config, getHeader_1.default(req, 'Authorization'))];
                 case 6:
                     client = _b.sent();
+                    validateVersionHeader_1.default(getHeader_1.default(req, 'X-Experience-API-Version'));
                     activityId = getActivityId_1.default(req.body.activityId);
                     if (!(req.body.profileId === undefined)) return [3 /*break*/, 8];
                     return [4 /*yield*/, getProfilesFromService_1.default({ config: config, res: res, activityId: activityId, client: client })];
@@ -100,6 +103,7 @@ exports.default = function (_a) {
                 case 10: return [4 /*yield*/, getClient_1.default(config, getHeader_1.default(req, 'Authorization'))];
                 case 11:
                     client = _b.sent();
+                    validateVersionHeader_1.default(getHeader_1.default(req, 'X-Experience-API-Version'));
                     return [4 /*yield*/, getAlternateProfileWriteOpts_1.default(req)];
                 case 12:
                     opts = _b.sent();
@@ -111,6 +115,7 @@ exports.default = function (_a) {
                 case 14: return [4 /*yield*/, getClient_1.default(config, getHeader_1.default(req, 'Authorization'))];
                 case 15:
                     client = _b.sent();
+                    validateVersionHeader_1.default(getHeader_1.default(req, 'X-Experience-API-Version'));
                     ifMatch = getHeader_1.default(req, 'If-Match');
                     profileId = getProfileId_1.default(req.body.profileId);
                     activityId = getActivityId_1.default(req.body.activityId);

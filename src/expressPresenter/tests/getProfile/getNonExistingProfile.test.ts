@@ -1,3 +1,4 @@
+import { xapiHeaderVersion } from '../../../utils/constants';
 import {
   TEST_ACTIVITY_ID,
   TEST_INVALID_ACTIVITY_ID,
@@ -12,6 +13,7 @@ describe('expressPresenter.getProfile with non-existing model', () => {
   it('should error when getting a non-existing model', async () => {
     await supertest
       .get('/xAPI/activities/profile')
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         activityId: TEST_ACTIVITY_ID,
         profileId: TEST_PROFILE_ID,
@@ -22,6 +24,7 @@ describe('expressPresenter.getProfile with non-existing model', () => {
   it('should throw warnings when using an invalid activity id', async () => {
     await supertest
       .get('/xAPI/activities/profile')
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         activityId: TEST_INVALID_ACTIVITY_ID,
         profileId: TEST_PROFILE_ID,

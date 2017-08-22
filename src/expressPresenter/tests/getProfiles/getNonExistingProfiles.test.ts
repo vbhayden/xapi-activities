@@ -1,3 +1,4 @@
+import { xapiHeaderVersion } from '../../../utils/constants';
 import {
   TEST_ACTIVITY_ID,
   TEST_CONTENT,
@@ -15,6 +16,7 @@ describe('expressPresenter.getProfiles with non-existing agent', () => {
   it('should return no profile ids when getting a non-existing activity id', async () => {
     await supertest
       .get('/xAPI/activities/profile')
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         activityId: TEST_ACTIVITY_ID,
       })
@@ -24,6 +26,7 @@ describe('expressPresenter.getProfiles with non-existing agent', () => {
   it('should throw warnings when using an invalid activity id', async () => {
     await supertest
       .get('/xAPI/activities/profile')
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         activityId: TEST_INVALID_ACTIVITY_ID,
       })
@@ -33,6 +36,7 @@ describe('expressPresenter.getProfiles with non-existing agent', () => {
   it('should throw warnings when using an invalid since', async () => {
     await supertest
       .get('/xAPI/activities/profile')
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         activityId: TEST_INVALID_ACTIVITY_ID,
         since: TEST_INVALID_TIMESTAMP,
@@ -43,6 +47,7 @@ describe('expressPresenter.getProfiles with non-existing agent', () => {
   it('should throw warnings when missing the activity id', async () => {
     await supertest
       .get('/xAPI/activities/profile')
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .set('Content-Type', TEXT_CONTENT_TYPE)
       .send(TEST_CONTENT)
       .expect(CLIENT_ERROR_400_HTTP_CODE);

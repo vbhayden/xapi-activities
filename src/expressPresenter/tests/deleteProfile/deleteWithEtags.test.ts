@@ -1,3 +1,4 @@
+import { xapiHeaderVersion } from '../../../utils/constants';
 import {
   TEST_ACTIVITY_ID,
   TEST_CLIENT,
@@ -23,6 +24,7 @@ describe('expressPresenter.deleteProfile with etags', () => {
     await supertest
       .delete('/xAPI/activities/profile')
       .set('If-Match', `"${getProfileResult.etag}"`)
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         activityId: TEST_ACTIVITY_ID,
         profileId: TEST_PROFILE_ID,
@@ -35,6 +37,7 @@ describe('expressPresenter.deleteProfile with etags', () => {
     await supertest
       .delete('/xAPI/activities/profile')
       .set('If-Match', `"incorrect_etag"`)
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         activityId: TEST_ACTIVITY_ID,
         profileId: TEST_PROFILE_ID,
@@ -46,6 +49,7 @@ describe('expressPresenter.deleteProfile with etags', () => {
     await createTextProfile();
     await supertest
       .delete('/xAPI/activities/profile')
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         activityId: TEST_ACTIVITY_ID,
         profileId: TEST_PROFILE_ID,

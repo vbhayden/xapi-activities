@@ -1,3 +1,4 @@
+import { xapiHeaderVersion } from '../../../utils/constants';
 import {
   ALTERNATE_CONTENT_TYPE,
   TEST_ACTIVITY_ID,
@@ -16,6 +17,7 @@ describe('expressPresenter.getProfile using the alternate request syntax', () =>
     await supertest
       .post('/xAPI/activities/profile')
       .set('Content-Type', ALTERNATE_CONTENT_TYPE)
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({ method: 'GET' })
       .send({
         activityId: TEST_ACTIVITY_ID,

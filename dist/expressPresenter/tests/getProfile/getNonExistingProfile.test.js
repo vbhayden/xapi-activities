@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
+var constants_1 = require("../../../utils/constants");
 var testValues_1 = require("../../../utils/testValues");
 var httpCodes_1 = require("../../utils/httpCodes");
 var setup_1 = require("../utils/setup");
@@ -46,6 +47,7 @@ describe('expressPresenter.getProfile with non-existing model', function () {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, supertest
                         .get('/xAPI/activities/profile')
+                        .set('X-Experience-API-Version', constants_1.xapiHeaderVersion)
                         .query({
                         activityId: testValues_1.TEST_ACTIVITY_ID,
                         profileId: testValues_1.TEST_PROFILE_ID,
@@ -62,6 +64,7 @@ describe('expressPresenter.getProfile with non-existing model', function () {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, supertest
                         .get('/xAPI/activities/profile')
+                        .set('X-Experience-API-Version', constants_1.xapiHeaderVersion)
                         .query({
                         activityId: testValues_1.TEST_INVALID_ACTIVITY_ID,
                         profileId: testValues_1.TEST_PROFILE_ID,

@@ -1,3 +1,4 @@
+import { xapiHeaderVersion } from '../../../utils/constants';
 import { ALTERNATE_CONTENT_TYPE } from '../../../utils/testValues';
 import { CLIENT_ERROR_400_HTTP_CODE } from '../../utils/httpCodes';
 import setup from '../utils/setup';

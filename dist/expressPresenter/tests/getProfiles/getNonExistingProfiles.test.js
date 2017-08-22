@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
+var constants_1 = require("../../../utils/constants");
 var testValues_1 = require("../../../utils/testValues");
 var httpCodes_1 = require("../../utils/httpCodes");
 var setup_1 = require("../utils/setup");
@@ -47,6 +48,7 @@ describe('expressPresenter.getProfiles with non-existing agent', function () {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, supertest_1.default
                         .get('/xAPI/activities/profile')
+                        .set('X-Experience-API-Version', constants_1.xapiHeaderVersion)
                         .query({
                         activityId: testValues_1.TEST_ACTIVITY_ID,
                     })
@@ -62,6 +64,7 @@ describe('expressPresenter.getProfiles with non-existing agent', function () {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, supertest_1.default
                         .get('/xAPI/activities/profile')
+                        .set('X-Experience-API-Version', constants_1.xapiHeaderVersion)
                         .query({
                         activityId: testValues_1.TEST_INVALID_ACTIVITY_ID,
                     })
@@ -77,6 +80,7 @@ describe('expressPresenter.getProfiles with non-existing agent', function () {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, supertest_1.default
                         .get('/xAPI/activities/profile')
+                        .set('X-Experience-API-Version', constants_1.xapiHeaderVersion)
                         .query({
                         activityId: testValues_1.TEST_INVALID_ACTIVITY_ID,
                         since: testValues_1.TEST_INVALID_TIMESTAMP,
@@ -93,6 +97,7 @@ describe('expressPresenter.getProfiles with non-existing agent', function () {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, supertest_1.default
                         .get('/xAPI/activities/profile')
+                        .set('X-Experience-API-Version', constants_1.xapiHeaderVersion)
                         .set('Content-Type', testValues_1.TEXT_CONTENT_TYPE)
                         .send(testValues_1.TEST_CONTENT)
                         .expect(httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];

@@ -1,4 +1,5 @@
 import assertProfile from '../../../utils/assertProfile';
+import { xapiHeaderVersion } from '../../../utils/constants';
 import {
   JSON_CONTENT_TYPE,
   TEST_ACTIVITY_ID,
@@ -17,6 +18,7 @@ describe('expressPresenter.postProfile when outside client', () => {
   const patchOutsideProfile = async (token: string) => {
     await supertest
       .post('/xAPI/activities/profile')
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .set('Authorization', token)
       .set('Content-Type', JSON_CONTENT_TYPE)
       .query({

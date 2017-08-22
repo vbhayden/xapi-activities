@@ -1,3 +1,4 @@
+import { xapiHeaderVersion } from '../../../utils/constants';
 import {
   TEST_ACTIVITY_ID,
   TEST_CLIENT,
@@ -28,6 +29,7 @@ describe('expressPresenter.putProfile with etags', () => {
     setRequestEtags(request, ifMatch, ifNoneMatch);
     return request
       .set('Content-Type', TEXT_CONTENT_TYPE)
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         activityId: TEST_ACTIVITY_ID,
         profileId: TEST_PROFILE_ID,

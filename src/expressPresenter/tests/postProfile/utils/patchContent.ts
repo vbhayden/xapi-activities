@@ -1,4 +1,5 @@
 import { Test } from 'supertest';
+import { xapiHeaderVersion } from '../../../../utils/constants';
 import {
   TEST_ACTIVITY_ID,
   TEST_PROFILE_ID,
@@ -9,6 +10,7 @@ export default (content: string, contentType: string): Test => {
   return supertest
     .post('/xAPI/activities/profile')
     .set('Content-Type', contentType)
+    .set('X-Experience-API-Version', xapiHeaderVersion)
     .query({
       activityId: TEST_ACTIVITY_ID,
       profileId: TEST_PROFILE_ID,

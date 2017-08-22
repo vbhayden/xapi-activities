@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var bluebird_1 = require("bluebird");
+var constants_1 = require("../../../utils/constants");
 var testValues_1 = require("../../../utils/testValues");
 var httpCodes_1 = require("../../utils/httpCodes");
 var createTextProfile_1 = require("../utils/createTextProfile");
@@ -49,6 +50,7 @@ describe('expressPresenter.getProfiles with since', function () {
         return supertest_1.default
             .get('/xAPI/activities/profile')
             .set('Authorization', 'valid_scope_client')
+            .set('X-Experience-API-Version', constants_1.xapiHeaderVersion)
             .query({
             activityId: testValues_1.TEST_ACTIVITY_ID,
             since: timestamp.toISOString(),
