@@ -45,8 +45,8 @@ var getProfileId_1 = require("./getProfileId");
 exports.default = function (req) { return __awaiter(_this, void 0, void 0, function () {
     var ifMatch, ifNoneMatch, profileId, activityId, contentType, content;
     return __generator(this, function (_a) {
-        ifMatch = getEtag_1.default(getHeader_1.default(req, 'If-Match'));
-        ifNoneMatch = getEtag_1.default(getHeader_1.default(req, 'If-None-Match'));
+        ifMatch = getEtag_1.default(getHeader_1.default(req, 'If-Match', undefined));
+        ifNoneMatch = getEtag_1.default(getHeader_1.default(req, 'If-None-Match', undefined));
         profileId = getProfileId_1.default(req.body.profileId);
         activityId = getActivityId_1.default(req.body.activityId);
         contentType = getContentType_1.default(req.body['Content-Type']);

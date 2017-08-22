@@ -16,8 +16,8 @@ export interface Result {
 }
 
 export default async (req: Request): Promise<Result> => {
-  const ifMatch = getEtag(getHeader(req, 'If-Match'));
-  const ifNoneMatch = getEtag(getHeader(req, 'If-None-Match'));
+  const ifMatch = getEtag(getHeader(req, 'If-Match', undefined));
+  const ifNoneMatch = getEtag(getHeader(req, 'If-None-Match', undefined));
   const profileId = getProfileId(req.body.profileId);
   const activityId = getActivityId(req.body.activityId);
   const contentType = getContentType(req.body['Content-Type']);
