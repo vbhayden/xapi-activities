@@ -18,7 +18,6 @@ describe('getFullAgent with existing model', () => {
       client: TEST_CLIENT,
     });
     const expectedResult: GetFullActivityResult = {
-      definition: { name: {} },
       id: TEST_ACTIVITY_ID,
       objectType: 'Activity',
     };

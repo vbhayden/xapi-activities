@@ -9,9 +9,6 @@ export default (_config: Config) => {
     checkProfileReadScopes(opts.client.scopes);
     validateActivityId(opts.activityId);
     return {
-      definition: {
-        name: {},
-      },
       id: opts.activityId,
       objectType: 'Activity',
     };
