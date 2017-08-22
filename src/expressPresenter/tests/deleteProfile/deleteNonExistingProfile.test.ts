@@ -1,3 +1,4 @@
+import { xapiHeaderVersion } from '../../../utils/constants';
 import {
   TEST_ACTIVITY_ID,
   TEST_INVALID_ACTIVITY_ID,
@@ -21,6 +22,7 @@ describe('expressPresenter.deleteProfile with non-existing profile', () => {
   it('should throw warnings when missing the activity id', async () => {
     await supertest
       .delete('/xAPI/activities/profile')
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         profileId: TEST_PROFILE_ID,
       })
@@ -30,6 +32,7 @@ describe('expressPresenter.deleteProfile with non-existing profile', () => {
   it('should throw warnings when missing the profile id', async () => {
     await supertest
       .delete('/xAPI/activities/profile')
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         activityId: TEST_ACTIVITY_ID,
       })

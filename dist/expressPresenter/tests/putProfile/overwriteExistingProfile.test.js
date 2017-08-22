@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var assertProfile_1 = require("../../../utils/assertProfile");
+var constants_1 = require("../../../utils/constants");
 var testValues_1 = require("../../../utils/testValues");
 var httpCodes_1 = require("../../utils/httpCodes");
 var createImmutableProfile_1 = require("../utils/createImmutableProfile");
@@ -63,6 +64,7 @@ describe('expressPresenter.putProfile with existing model', function () {
                     return [4 /*yield*/, supertest
                             .put('/xAPI/activities/profile')
                             .set('If-Match', "\"" + getProfileResult.etag + "\"")
+                            .set('X-Experience-API-Version', constants_1.xapiHeaderVersion)
                             .set('Content-Type', testValues_1.TEXT_CONTENT_TYPE)
                             .query({
                             activityId: testValues_1.TEST_ACTIVITY_ID,

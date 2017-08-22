@@ -1,4 +1,5 @@
 import { delay } from 'bluebird';
+import { xapiHeaderVersion } from '../../../utils/constants';
 import { TEST_ACTIVITY_ID, TEST_PROFILE_ID } from '../../../utils/testValues';
 import { OK_200_HTTP_CODE } from '../../utils/httpCodes';
 import createTextProfile from '../utils/createTextProfile';
@@ -14,6 +15,7 @@ describe('expressPresenter.getProfiles with since', () => {
     return supertest
       .get('/xAPI/activities/profile')
       .set('Authorization', 'valid_scope_client')
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         activityId: TEST_ACTIVITY_ID,
         since: timestamp.toISOString(),

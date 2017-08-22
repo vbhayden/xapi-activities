@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var assertProfile_1 = require("../../../utils/assertProfile");
+var constants_1 = require("../../../utils/constants");
 var testValues_1 = require("../../../utils/testValues");
 var httpCodes_1 = require("../../utils/httpCodes");
 var createImmutableProfile_1 = require("../utils/createImmutableProfile");
@@ -99,6 +100,7 @@ describe('expressPresenter.postProfile with new content', function () {
                 case 0: return [4 /*yield*/, supertest
                         .post('/xAPI/activities/profile')
                         .set('Content-Type', testValues_1.TEXT_CONTENT_TYPE)
+                        .set('X-Experience-API-Version', constants_1.xapiHeaderVersion)
                         .query({
                         activityId: testValues_1.TEST_INVALID_ACTIVITY_ID,
                         profileId: testValues_1.TEST_PROFILE_ID,
@@ -117,6 +119,7 @@ describe('expressPresenter.postProfile with new content', function () {
                 case 0: return [4 /*yield*/, supertest
                         .post('/xAPI/activities/profile')
                         .set('Content-Type', testValues_1.TEXT_CONTENT_TYPE)
+                        .set('X-Experience-API-Version', constants_1.xapiHeaderVersion)
                         .query({
                         profileId: testValues_1.TEST_PROFILE_ID,
                     })
@@ -134,6 +137,7 @@ describe('expressPresenter.postProfile with new content', function () {
                 case 0: return [4 /*yield*/, supertest
                         .post('/xAPI/activities/profile')
                         .set('Content-Type', testValues_1.TEXT_CONTENT_TYPE)
+                        .set('X-Experience-API-Version', constants_1.xapiHeaderVersion)
                         .query({
                         activityId: testValues_1.TEST_ACTIVITY_ID,
                     })

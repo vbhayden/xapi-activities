@@ -38,25 +38,20 @@ var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var stringToStream = require("string-to-stream");
 var getActivityId_1 = require("./getActivityId");
-var getClient_1 = require("./getClient");
 var getContentType_1 = require("./getContentType");
 var getEtag_1 = require("./getEtag");
+var getHeader_1 = require("./getHeader");
 var getProfileId_1 = require("./getProfileId");
-exports.default = function (config, req) { return __awaiter(_this, void 0, void 0, function () {
-    var client, ifMatch, ifNoneMatch, profileId, activityId, contentType, content;
+exports.default = function (req) { return __awaiter(_this, void 0, void 0, function () {
+    var ifMatch, ifNoneMatch, profileId, activityId, contentType, content;
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, getClient_1.default(config, req.body.Authorization)];
-            case 1:
-                client = _a.sent();
-                ifMatch = getEtag_1.default(req.body['If-Match']);
-                ifNoneMatch = getEtag_1.default(req.body['If-None-Match']);
-                profileId = getProfileId_1.default(req.body.profileId);
-                activityId = getActivityId_1.default(req.body.activityId);
-                contentType = getContentType_1.default(req.body['Content-Type']);
-                content = stringToStream(req.body.content);
-                return [2 /*return*/, { activityId: activityId, client: client, content: content, contentType: contentType, ifMatch: ifMatch, ifNoneMatch: ifNoneMatch, profileId: profileId }];
-        }
+        ifMatch = getEtag_1.default(getHeader_1.default(req, 'If-Match'));
+        ifNoneMatch = getEtag_1.default(getHeader_1.default(req, 'If-None-Match'));
+        profileId = getProfileId_1.default(req.body.profileId);
+        activityId = getActivityId_1.default(req.body.activityId);
+        contentType = getContentType_1.default(req.body['Content-Type']);
+        content = stringToStream(req.body.content);
+        return [2 /*return*/, { activityId: activityId, content: content, contentType: contentType, ifMatch: ifMatch, ifNoneMatch: ifNoneMatch, profileId: profileId }];
     });
 }); };
 //# sourceMappingURL=getAlternateProfileWriteOpts.js.map

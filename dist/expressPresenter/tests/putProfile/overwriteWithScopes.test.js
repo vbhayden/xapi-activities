@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
+var constants_1 = require("../../../utils/constants");
 var testValues_1 = require("../../../utils/testValues");
 var httpCodes_1 = require("../../utils/httpCodes");
 var setup_1 = require("../utils/setup");
@@ -44,6 +45,7 @@ describe('expressPresenter.putProfile with scopes', function () {
     var overwriteProfileWithScopes = function (token) {
         return supertest
             .put('/xAPI/activities/profile')
+            .set('X-Experience-API-Version', constants_1.xapiHeaderVersion)
             .set('Authorization', token)
             .set('Content-Type', testValues_1.TEXT_CONTENT_TYPE)
             .query({

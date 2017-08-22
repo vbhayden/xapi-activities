@@ -1,4 +1,5 @@
 import assertProfile from '../../../utils/assertProfile';
+import { xapiHeaderVersion } from '../../../utils/constants';
 import {
   ALTERNATE_CONTENT_TYPE,
   TEST_ACTIVITY_ID,
@@ -16,6 +17,7 @@ describe('expressPresenter.putProfile using the alternate request syntax', () =>
     await supertest
       .post('/xAPI/activities/profile')
       .set('Content-Type', ALTERNATE_CONTENT_TYPE)
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         method: 'PUT',
       })

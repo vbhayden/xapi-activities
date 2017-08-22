@@ -1,3 +1,4 @@
+import { xapiHeaderVersion } from '../../../utils/constants';
 import {
   JSON_CONTENT_TYPE,
   TEST_ACTIVITY_ID,
@@ -16,6 +17,7 @@ describe('expressPresenter.postProfile with scopes', () => {
     return supertest
       .put('/xAPI/activities/profile')
       .set('Authorization', token)
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .set('Content-Type', TEST_OBJECT_CONTENT)
       .query({
         activityId: TEST_ACTIVITY_ID,

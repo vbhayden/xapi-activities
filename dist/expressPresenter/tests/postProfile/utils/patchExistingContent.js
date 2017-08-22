@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
+var constants_1 = require("../../../../utils/constants");
 var testService_1 = require("../../../../utils/testService");
 var testValues_1 = require("../../../../utils/testValues");
 var supertest_1 = require("../../utils/supertest");
@@ -54,6 +55,7 @@ exports.default = function (content, contentType, expectedCode) { return __await
                         .post('/xAPI/activities/profile')
                         .set('Content-Type', contentType)
                         .set('If-Match', "\"" + getProfileResult.etag + "\"")
+                        .set('X-Experience-API-Version', constants_1.xapiHeaderVersion)
                         .query({
                         activityId: testValues_1.TEST_ACTIVITY_ID,
                         profileId: testValues_1.TEST_PROFILE_ID,

@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var stringToStream = require("string-to-stream");
+var constants_1 = require("../../../utils/constants");
 var testValues_1 = require("../../../utils/testValues");
 var httpCodes_1 = require("../../utils/httpCodes");
 var setRequestEtags_1 = require("../utils/setRequestEtags");
@@ -65,6 +66,7 @@ describe('expressPresenter.postProfile with etags', function () {
         setRequestEtags_1.default(request, ifMatch, ifNoneMatch);
         return request
             .set('Content-Type', testValues_1.JSON_CONTENT_TYPE)
+            .set('X-Experience-API-Version', constants_1.xapiHeaderVersion)
             .query({
             activityId: testValues_1.TEST_ACTIVITY_ID,
             profileId: testValues_1.TEST_PROFILE_ID,

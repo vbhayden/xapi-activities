@@ -1,3 +1,4 @@
+import { xapiHeaderVersion } from '../../../utils/constants';
 import {
   TEST_ACTIVITY_ID,
   TEST_PROFILE_ID,
@@ -15,6 +16,7 @@ describe('expressPresenter.getProfile with existing profile', () => {
     await createTextProfile();
     await supertest
       .get('/xAPI/activities/profile')
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         activityId: TEST_ACTIVITY_ID,
         profileId: TEST_PROFILE_ID,
@@ -26,6 +28,7 @@ describe('expressPresenter.getProfile with existing profile', () => {
     await createJsonProfile();
     await supertest
       .get('/xAPI/activities/profile')
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         activityId: TEST_ACTIVITY_ID,
         profileId: TEST_PROFILE_ID,

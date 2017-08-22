@@ -1,4 +1,5 @@
 import assertProfile from '../../../utils/assertProfile';
+import { xapiHeaderVersion } from '../../../utils/constants';
 import {
   JSON_CONTENT_TYPE,
   TEST_ACTIVITY_ID,
@@ -40,6 +41,7 @@ describe('expressPresenter.postProfile with new content', () => {
     await supertest
       .post('/xAPI/activities/profile')
       .set('Content-Type', TEXT_CONTENT_TYPE)
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         activityId: TEST_INVALID_ACTIVITY_ID,
         profileId: TEST_PROFILE_ID,
@@ -52,6 +54,7 @@ describe('expressPresenter.postProfile with new content', () => {
     await supertest
       .post('/xAPI/activities/profile')
       .set('Content-Type', TEXT_CONTENT_TYPE)
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         profileId: TEST_PROFILE_ID,
       })
@@ -63,6 +66,7 @@ describe('expressPresenter.postProfile with new content', () => {
     await supertest
       .post('/xAPI/activities/profile')
       .set('Content-Type', TEXT_CONTENT_TYPE)
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         activityId: TEST_ACTIVITY_ID,
       })

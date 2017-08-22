@@ -1,4 +1,5 @@
 import assertProfile from '../../../utils/assertProfile';
+import { xapiHeaderVersion } from '../../../utils/constants';
 import {
   TEST_ACTIVITY_ID,
   TEST_CLIENT,
@@ -28,6 +29,7 @@ describe('expressPresenter.putProfile with existing model', () => {
     await supertest
       .put('/xAPI/activities/profile')
       .set('If-Match', `"${getProfileResult.etag}"`)
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .set('Content-Type', TEXT_CONTENT_TYPE)
       .query({
         activityId: TEST_ACTIVITY_ID,

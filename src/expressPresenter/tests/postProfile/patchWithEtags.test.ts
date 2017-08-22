@@ -1,4 +1,5 @@
 import * as stringToStream from 'string-to-stream';
+import { xapiHeaderVersion } from '../../../utils/constants';
 import {
   JSON_CONTENT_TYPE,
   TEST_ACTIVITY_ID,
@@ -37,6 +38,7 @@ describe('expressPresenter.postProfile with etags', () => {
     setRequestEtags(request, ifMatch, ifNoneMatch);
     return request
       .set('Content-Type', JSON_CONTENT_TYPE)
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         activityId: TEST_ACTIVITY_ID,
         profileId: TEST_PROFILE_ID,

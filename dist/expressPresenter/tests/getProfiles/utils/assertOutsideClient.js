@@ -36,6 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
+var constants_1 = require("../../../../utils/constants");
 var testValues_1 = require("../../../../utils/testValues");
 var httpCodes_1 = require("../../../utils/httpCodes");
 var supertest_1 = require("../../utils/supertest");
@@ -47,6 +48,7 @@ exports.default = function () { return __awaiter(_this, void 0, void 0, function
                 activityId = testValues_1.TEST_ACTIVITY_ID;
                 return [4 /*yield*/, supertest_1.default
                         .get('/xAPI/activities/profile')
+                        .set('X-Experience-API-Version', constants_1.xapiHeaderVersion)
                         .query({ activityId: activityId })
                         .expect(httpCodes_1.OK_200_HTTP_CODE, [])];
             case 1:
