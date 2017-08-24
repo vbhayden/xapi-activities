@@ -41,6 +41,7 @@ var alternateProfileRequest_1 = require("./utils/alternateProfileRequest");
 var catchErrors_1 = require("./utils/catchErrors");
 var getProfileWriteOpts_1 = require("./utils/getProfileWriteOpts");
 var httpCodes_1 = require("./utils/httpCodes");
+var validateVersionHeader_1 = require("./utils/validateVersionHeader");
 exports.default = function (config) {
     return catchErrors_1.default(config, function (req, res) { return __awaiter(_this, void 0, void 0, function () {
         var method, opts;
@@ -54,6 +55,7 @@ exports.default = function (config) {
                     return [4 /*yield*/, getProfileWriteOpts_1.default(config, req)];
                 case 1:
                     opts = _a.sent();
+                    validateVersionHeader_1.default(req.header('X-Experience-API-Version'));
                     return [4 /*yield*/, config.service.patchProfile(opts)];
                 case 2:
                     _a.sent();

@@ -1,6 +1,4 @@
-import {
-  TEST_INVALID_ACTIVITY_ID,
-} from '../../../utils/testValues';
+import { TEST_INVALID_ACTIVITY_ID } from '../../../utils/testValues';
 import {
   CLIENT_ERROR_400_HTTP_CODE,
   NOT_FOUND_404_HTTP_CODE,

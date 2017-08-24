@@ -44,8 +44,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-/* tslint:disable:no-let */
-var Conflict_1 = require("../errors/Conflict");
 var checkEtag_1 = require("./utils/checkEtag");
 var checkMaxEtags_1 = require("./utils/checkMaxEtags");
 var createProfile_1 = require("./utils/createProfile");
@@ -62,9 +60,6 @@ exports.default = function (config) {
                     return profile;
                 }
                 checkEtag_1.default({ profile: profile, ifMatch: ifMatch, ifNoneMatch: ifNoneMatch });
-                if (ifMatch === undefined && ifNoneMatch === undefined) {
-                    throw new Conflict_1.default();
-                }
                 existingId = profile.id;
                 return __assign({}, profile, { 
                     // Overwrites the content and contentType.

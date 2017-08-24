@@ -1,3 +1,4 @@
+import { xapiHeaderVersion } from '../../../utils/constants';
 import {
   TEST_ACTIVITY_ID,
   TEST_INVALID_ACTIVITY_ID,
@@ -11,17 +12,20 @@ describe('expressPresenter.getFullAgent', () => {
   it('should return the activity id when using a valid activity id', async () => {
     await supertest
       .get('/xAPI/activities')
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         activityId: TEST_ACTIVITY_ID,
       })
       .expect(OK_200_HTTP_CODE, {
         id: TEST_ACTIVITY_ID,
+        objectType: 'Activity',
       });
   });
 
   it('should throw warnings when using an invalid activity id', async () => {
     await supertest
       .get('/xAPI/activities')
+      .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({
         activityId: TEST_INVALID_ACTIVITY_ID,
       })

@@ -36,18 +36,33 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var checkProfileReadScopes_1 = require("./utils/checkProfileReadScopes");
-var validateActivityId_1 = require("./utils/validateActivityId");
-exports.default = function (_config) {
-    return function (opts) { return __awaiter(_this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            checkProfileReadScopes_1.default(opts.client.scopes);
-            validateActivityId_1.default(opts.activityId);
-            return [2 /*return*/, {
-                    id: opts.activityId,
-                    objectType: 'Activity',
-                }];
-        });
-    }); };
-};
-//# sourceMappingURL=getFullActivity.js.map
+var constants_1 = require("../../../../utils/constants");
+var testService_1 = require("../../../../utils/testService");
+var testValues_1 = require("../../../../utils/testValues");
+var supertest_1 = require("../../utils/supertest");
+exports.default = function (content, contentType, expectedCode) { return __awaiter(_this, void 0, void 0, function () {
+    var getProfileResult;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, testService_1.default.getProfile({
+                    activityId: testValues_1.TEST_ACTIVITY_ID,
+                    client: testValues_1.TEST_CLIENT,
+                    profileId: testValues_1.TEST_PROFILE_ID,
+                })];
+            case 1:
+                getProfileResult = _a.sent();
+                return [2 /*return*/, supertest_1.default
+                        .post('/xAPI/activities/profile')
+                        .set('Content-Type', contentType)
+                        .set('If-Match', "\"" + getProfileResult.etag + "\"")
+                        .set('X-Experience-API-Version', constants_1.xapiHeaderVersion)
+                        .query({
+                        activityId: testValues_1.TEST_ACTIVITY_ID,
+                        profileId: testValues_1.TEST_PROFILE_ID,
+                    })
+                        .send(content)
+                        .expect(expectedCode)];
+        }
+    });
+}); };
+//# sourceMappingURL=patchExistingContent.js.map

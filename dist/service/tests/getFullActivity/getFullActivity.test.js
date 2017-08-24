@@ -55,6 +55,7 @@ describe('getFullAgent with existing model', function () {
                     fullActivity = _a.sent();
                     expectedResult = {
                         id: testValues_1.TEST_ACTIVITY_ID,
+                        objectType: 'Activity',
                     };
                     assert.deepEqual(fullActivity, expectedResult);
                     return [2 /*return*/];

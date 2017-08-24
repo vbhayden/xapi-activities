@@ -1,4 +1,3 @@
-import NoModel from 'jscommons/dist/errors/NoModel';
 import assertError from 'jscommons/dist/tests/utils/assertError';
 import { Warnings } from 'rulr';
 import { TEST_INVALID_ACTIVITY_ID } from '../../../utils/testValues';
@@ -8,9 +7,8 @@ import deleteProfile from './utils/deleteProfile';
 describe('deleteProfile with non-existing profile', () => {
   setup();
 
-  it('should error when deleting', async () => {
-    const promise = deleteProfile();
-    await assertError(NoModel, promise);
+  it('should not error when deleting', async () => {
+    await deleteProfile();
   });
 
   it('should throw warnings when using an invalid activity id', async () => {

@@ -5,6 +5,7 @@ import alternateProfileRequest from './utils/alternateProfileRequest';
 import catchErrors from './utils/catchErrors';
 import getProfileWriteOpts from './utils/getProfileWriteOpts';
 import { NO_CONTENT_204_HTTP_CODE } from './utils/httpCodes';
+import validateVersionHeader from './utils/validateVersionHeader';
 
 export default (config: Config) => {
   return catchErrors(config, async (req: Request, res: Response): Promise<void> => {
@@ -15,6 +16,7 @@ export default (config: Config) => {
     }
 
     const opts = await getProfileWriteOpts(config, req);
+    validateVersionHeader(req.header('X-Experience-API-Version'));
     await config.service.patchProfile(opts);
     res.status(NO_CONTENT_204_HTTP_CODE);
     res.setHeader('X-Experience-API-Version', xapiHeaderVersion);

@@ -19,6 +19,7 @@ describe('getFullAgent with existing model', () => {
     });
     const expectedResult: GetFullActivityResult = {
       id: TEST_ACTIVITY_ID,
+      objectType: 'Activity',
     };
     assert.deepEqual(fullActivity, expectedResult);
   };

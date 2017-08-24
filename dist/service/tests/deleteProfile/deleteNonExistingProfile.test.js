@@ -36,7 +36,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var NoModel_1 = require("jscommons/dist/errors/NoModel");
 var assertError_1 = require("jscommons/dist/tests/utils/assertError");
 var rulr_1 = require("rulr");
 var testValues_1 = require("../../../utils/testValues");
@@ -44,13 +43,10 @@ var setup_1 = require("../utils/setup");
 var deleteProfile_1 = require("./utils/deleteProfile");
 describe('deleteProfile with non-existing profile', function () {
     setup_1.default();
-    it('should error when deleting', function () { return __awaiter(_this, void 0, void 0, function () {
-        var promise;
+    it('should not error when deleting', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    promise = deleteProfile_1.default();
-                    return [4 /*yield*/, assertError_1.default(NoModel_1.default, promise)];
+                case 0: return [4 /*yield*/, deleteProfile_1.default()];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];

@@ -41,6 +41,7 @@ var getActivityId_1 = require("./utils/getActivityId");
 var getClient_1 = require("./utils/getClient");
 var getProfileFromService_1 = require("./utils/getProfileFromService");
 var getProfilesFromService_1 = require("./utils/getProfilesFromService");
+var validateVersionHeader_1 = require("./utils/validateVersionHeader");
 exports.default = function (config) {
     return catchErrors_1.default(config, function (req, res) { return __awaiter(_this, void 0, void 0, function () {
         var client, activityId, since, profileId;
@@ -49,6 +50,7 @@ exports.default = function (config) {
                 case 0: return [4 /*yield*/, getClient_1.default(config, req.header('Authorization'))];
                 case 1:
                     client = _a.sent();
+                    validateVersionHeader_1.default(req.header('X-Experience-API-Version'));
                     activityId = getActivityId_1.default(req.query.activityId);
                     since = req.query.since;
                     if (!(req.query.profileId === undefined)) return [3 /*break*/, 3];

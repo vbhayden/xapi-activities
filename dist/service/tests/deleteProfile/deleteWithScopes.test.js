@@ -37,7 +37,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var Forbidden_1 = require("jscommons/dist/errors/Forbidden");
-var NoModel_1 = require("jscommons/dist/errors/NoModel");
 var assertError_1 = require("jscommons/dist/tests/utils/assertError");
 var testValues_1 = require("../../../utils/testValues");
 var setup_1 = require("../utils/setup");
@@ -59,15 +58,12 @@ describe('deleteProfile with scopes', function () {
             }
         });
     }); });
-    it('should throw no model error when using valid scopes', function () { return __awaiter(_this, void 0, void 0, function () {
-        var promise;
+    it('should not throw an error when using valid scopes', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    promise = deleteProfile_1.default({
+                case 0: return [4 /*yield*/, deleteProfile_1.default({
                         client: testValues_1.TEST_VALID_SCOPE_CLIENT,
-                    });
-                    return [4 /*yield*/, assertError_1.default(NoModel_1.default, promise)];
+                    })];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];

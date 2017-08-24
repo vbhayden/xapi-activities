@@ -43,6 +43,7 @@ var getClient_1 = require("./utils/getClient");
 var getEtag_1 = require("./utils/getEtag");
 var getProfileId_1 = require("./utils/getProfileId");
 var httpCodes_1 = require("./utils/httpCodes");
+var validateVersionHeader_1 = require("./utils/validateVersionHeader");
 exports.default = function (config) {
     return catchErrors_1.default(config, function (req, res) { return __awaiter(_this, void 0, void 0, function () {
         var client, ifMatch, profileId, activityId;
@@ -51,6 +52,7 @@ exports.default = function (config) {
                 case 0: return [4 /*yield*/, getClient_1.default(config, req.header('Authorization'))];
                 case 1:
                     client = _a.sent();
+                    validateVersionHeader_1.default(req.header('X-Experience-API-Version'));
                     ifMatch = getEtag_1.default(req.header('If-Match'));
                     profileId = getProfileId_1.default(req.query.profileId);
                     activityId = getActivityId_1.default(req.query.activityId);

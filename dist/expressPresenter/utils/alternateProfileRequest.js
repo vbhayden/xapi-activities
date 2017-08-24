@@ -1,4 +1,12 @@
 "use strict";
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -41,13 +49,15 @@ var InvalidMethod_1 = require("../../errors/InvalidMethod");
 var getActivityId_1 = require("./getActivityId");
 var getAlternateProfileWriteOpts_1 = require("./getAlternateProfileWriteOpts");
 var getClient_1 = require("./getClient");
+var getHeader_1 = require("./getHeader");
 var getProfileFromService_1 = require("./getProfileFromService");
 var getProfileId_1 = require("./getProfileId");
 var getProfilesFromService_1 = require("./getProfilesFromService");
+var validateVersionHeader_1 = require("./validateVersionHeader");
 exports.default = function (_a) {
     var config = _a.config, method = _a.method, req = _a.req, res = _a.res;
     return __awaiter(_this, void 0, void 0, function () {
-        var _a, opts, client, activityId, profileId, opts, client, ifMatch, profileId, activityId;
+        var _a, client, opts, client, activityId, profileId, client, opts, client, ifMatch, profileId, activityId;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
@@ -57,59 +67,69 @@ exports.default = function (_a) {
                     _a = method;
                     switch (_a) {
                         case 'POST': return [3 /*break*/, 1];
-                        case 'GET': return [3 /*break*/, 4];
-                        case 'PUT': return [3 /*break*/, 9];
-                        case 'DELETE': return [3 /*break*/, 12];
+                        case 'GET': return [3 /*break*/, 5];
+                        case 'PUT': return [3 /*break*/, 10];
+                        case 'DELETE': return [3 /*break*/, 14];
                     }
-                    return [3 /*break*/, 15];
-                case 1: return [4 /*yield*/, getAlternateProfileWriteOpts_1.default(config, req)];
+                    return [3 /*break*/, 17];
+                case 1: return [4 /*yield*/, getClient_1.default(config, getHeader_1.default(req, 'Authorization'))];
                 case 2:
-                    opts = _b.sent();
-                    return [4 /*yield*/, config.service.patchProfile(opts)];
+                    client = _b.sent();
+                    validateVersionHeader_1.default(getHeader_1.default(req, 'X-Experience-API-Version'));
+                    return [4 /*yield*/, getAlternateProfileWriteOpts_1.default(req)];
                 case 3:
+                    opts = _b.sent();
+                    return [4 /*yield*/, config.service.patchProfile(__assign({ client: client }, opts))];
+                case 4:
                     _b.sent();
                     res.status(204).send();
                     return [2 /*return*/];
-                case 4: return [4 /*yield*/, getClient_1.default(config, req.body.Authorization)];
-                case 5:
-                    client = _b.sent();
-                    activityId = getActivityId_1.default(req.body.activityId);
-                    if (!(req.body.profileId === undefined)) return [3 /*break*/, 7];
-                    return [4 /*yield*/, getProfilesFromService_1.default({ config: config, res: res, activityId: activityId, client: client })];
+                case 5: return [4 /*yield*/, getClient_1.default(config, getHeader_1.default(req, 'Authorization'))];
                 case 6:
+                    client = _b.sent();
+                    validateVersionHeader_1.default(getHeader_1.default(req, 'X-Experience-API-Version'));
+                    activityId = getActivityId_1.default(req.body.activityId);
+                    if (!(req.body.profileId === undefined)) return [3 /*break*/, 8];
+                    return [4 /*yield*/, getProfilesFromService_1.default({ config: config, res: res, activityId: activityId, client: client })];
+                case 7:
                     _b.sent();
                     return [2 /*return*/];
-                case 7:
+                case 8:
                     profileId = req.body.profileId;
                     return [4 /*yield*/, getProfileFromService_1.default({ config: config, res: res, activityId: activityId, client: client, profileId: profileId })];
-                case 8:
+                case 9:
                     _b.sent();
                     return [2 /*return*/];
-                case 9: return [4 /*yield*/, getAlternateProfileWriteOpts_1.default(config, req)];
-                case 10:
-                    opts = _b.sent();
-                    return [4 /*yield*/, config.service.overwriteProfile(opts)];
+                case 10: return [4 /*yield*/, getClient_1.default(config, getHeader_1.default(req, 'Authorization'))];
                 case 11:
+                    client = _b.sent();
+                    validateVersionHeader_1.default(getHeader_1.default(req, 'X-Experience-API-Version'));
+                    return [4 /*yield*/, getAlternateProfileWriteOpts_1.default(req)];
+                case 12:
+                    opts = _b.sent();
+                    return [4 /*yield*/, config.service.overwriteProfile(__assign({ client: client }, opts))];
+                case 13:
                     _b.sent();
                     res.status(204).send();
                     return [2 /*return*/];
-                case 12: return [4 /*yield*/, getClient_1.default(config, req.body.Authorization)];
-                case 13:
+                case 14: return [4 /*yield*/, getClient_1.default(config, getHeader_1.default(req, 'Authorization'))];
+                case 15:
                     client = _b.sent();
-                    ifMatch = req.body['If-Match'];
+                    validateVersionHeader_1.default(getHeader_1.default(req, 'X-Experience-API-Version'));
+                    ifMatch = getHeader_1.default(req, 'If-Match');
                     profileId = getProfileId_1.default(req.body.profileId);
                     activityId = getActivityId_1.default(req.body.activityId);
                     return [4 /*yield*/, config.service.deleteProfile({ activityId: activityId, client: client, profileId: profileId, ifMatch: ifMatch })];
-                case 14:
+                case 16:
                     _b.sent();
                     res.status(204).send();
                     return [2 /*return*/];
-                case 15:
+                case 17:
                     {
                         throw new InvalidMethod_1.default(method);
                     }
-                    _b.label = 16;
-                case 16: return [2 /*return*/];
+                    _b.label = 18;
+                case 18: return [2 /*return*/];
             }
         });
     });

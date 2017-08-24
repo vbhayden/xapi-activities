@@ -53,12 +53,12 @@ describe('expressPresenter.deleteProfile with scopes', function () {
             }
         });
     }); });
-    it('should throw no model error when using valid scopes', function () { return __awaiter(_this, void 0, void 0, function () {
+    it('should not throw an error when using valid scopes', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, deleteProfile_1.default()
                         .set('Authorization', 'valid_scope_client')
-                        .expect(httpCodes_1.NOT_FOUND_404_HTTP_CODE)];
+                        .expect(httpCodes_1.NO_CONTENT_204_HTTP_CODE)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];

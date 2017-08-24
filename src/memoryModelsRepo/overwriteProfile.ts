@@ -23,10 +23,6 @@ export default (config: Config) => {
 
       checkEtag({ profile, ifMatch, ifNoneMatch });
 
-      if (ifMatch === undefined && ifNoneMatch === undefined) {
-        throw new Conflict();
-      }
-
       existingId = profile.id;
       return {
         ...profile,

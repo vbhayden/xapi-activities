@@ -1,5 +1,4 @@
 import Forbidden from 'jscommons/dist/errors/Forbidden';
-import NoModel from 'jscommons/dist/errors/NoModel';
 import assertError from 'jscommons/dist/tests/utils/assertError';
 import { TEST_INVALID_SCOPE_CLIENT, TEST_VALID_SCOPE_CLIENT } from '../../../utils/testValues';
 import setup from '../utils/setup';
@@ -15,10 +14,9 @@ describe('deleteProfile with scopes', () => {
     await assertError(Forbidden, promise);
   });
 
-  it('should throw no model error when using valid scopes', async () => {
-    const promise = deleteProfile({
+  it('should not throw an error when using valid scopes', async () => {
+    await deleteProfile({
       client: TEST_VALID_SCOPE_CLIENT,
     });
-    await assertError(NoModel, promise);
   });
 });
