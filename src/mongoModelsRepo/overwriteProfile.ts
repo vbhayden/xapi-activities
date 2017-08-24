@@ -1,7 +1,6 @@
 /* tslint:disable:max-file-line-count */
 import { isPlainObject } from 'lodash';
 import { ObjectID } from 'mongodb';
-import Conflict from '../errors/Conflict';
 import IfMatch from '../errors/IfMatch';
 import IfNoneMatch from '../errors/IfNoneMatch';
 import MaxEtags from '../errors/MaxEtags';
