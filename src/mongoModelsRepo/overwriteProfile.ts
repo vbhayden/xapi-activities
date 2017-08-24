@@ -92,10 +92,6 @@ export default (config: Config) => {
       throw new IfNoneMatch();
     }
 
-    if (!wasCreated && checkConflict) {
-      throw new Conflict();
-    }
-
     return {
       id: createOpResult.value._id.toString(),
     };

@@ -47,7 +47,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /* tslint:disable:max-file-line-count */
 var lodash_1 = require("lodash");
 var mongodb_1 = require("mongodb");
-var Conflict_1 = require("../errors/Conflict");
 var IfMatch_1 = require("../errors/IfMatch");
 var IfNoneMatch_1 = require("../errors/IfNoneMatch");
 var MaxEtags_1 = require("../errors/MaxEtags");
@@ -115,9 +114,6 @@ exports.default = function (config) {
                     }
                     if (!wasCreated && checkIfNoneMatch) {
                         throw new IfNoneMatch_1.default();
-                    }
-                    if (!wasCreated && checkConflict) {
-                        throw new Conflict_1.default();
                     }
                     return [2 /*return*/, {
                             id: createOpResult.value._id.toString(),
