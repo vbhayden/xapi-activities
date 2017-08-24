@@ -16,7 +16,6 @@ export default (config: Config) => {
     const collection = (await config.db).collection('activityProfiles');
     const checkIfMatch = opts.ifMatch !== undefined;
     const checkIfNoneMatch = opts.ifNoneMatch === '*';
-    const checkConflict = opts.ifMatch === undefined && opts.ifNoneMatch === undefined;
 
     if (checkIfMatch && checkIfNoneMatch) {
       throw new MaxEtags();

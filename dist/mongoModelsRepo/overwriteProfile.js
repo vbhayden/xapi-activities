@@ -54,7 +54,7 @@ var MaxEtags_1 = require("../errors/MaxEtags");
 // Docs: https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Communication.md#concurrency
 exports.default = function (config) {
     return function (opts) { return __awaiter(_this, void 0, void 0, function () {
-        var collection, checkIfMatch, checkIfNoneMatch, checkConflict, profileFilter, update, ifMatchFilter, updateOpResult, updatedDocuments, createOpResult, wasCreated;
+        var collection, checkIfMatch, checkIfNoneMatch, profileFilter, update, ifMatchFilter, updateOpResult, updatedDocuments, createOpResult, wasCreated;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, config.db];
@@ -62,7 +62,6 @@ exports.default = function (config) {
                     collection = (_a.sent()).collection('activityProfiles');
                     checkIfMatch = opts.ifMatch !== undefined;
                     checkIfNoneMatch = opts.ifNoneMatch === '*';
-                    checkConflict = opts.ifMatch === undefined && opts.ifNoneMatch === undefined;
                     if (checkIfMatch && checkIfNoneMatch) {
                         throw new MaxEtags_1.default();
                     }
