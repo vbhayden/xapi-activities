@@ -39,18 +39,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var testValues_1 = require("../../../utils/testValues");
 var httpCodes_1 = require("../../utils/httpCodes");
 var setup_1 = require("../utils/setup");
+var getProfile_1 = require("./utils/getProfile");
 describe('expressPresenter.getProfile with scopes', function () {
-    var supertest = setup_1.default().supertest;
+    setup_1.default();
     it('should throw forbidden error when using invalid scope', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, supertest
-                        .get('/xAPI/activities/profile')
-                        .set('Authorization', 'invalid_scope_client')
-                        .query({
-                        activityId: testValues_1.TEST_ACTIVITY_ID,
-                        profileId: testValues_1.TEST_PROFILE_ID,
-                    })
+                case 0: return [4 /*yield*/, getProfile_1.default()
+                        .set('Authorization', testValues_1.TEST_INVALID_SCOPE_TOKEN)
                         .expect(httpCodes_1.FORBIDDEN_403_HTTP_CODE)];
                 case 1:
                     _a.sent();
@@ -61,13 +57,8 @@ describe('expressPresenter.getProfile with scopes', function () {
     it('should throw no model error when using valid scopes', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, supertest
-                        .get('/xAPI/activities/profile')
-                        .set('Authorization', 'valid_scope_client')
-                        .query({
-                        activityId: testValues_1.TEST_ACTIVITY_ID,
-                        profileId: testValues_1.TEST_PROFILE_ID,
-                    })
+                case 0: return [4 /*yield*/, getProfile_1.default()
+                        .set('Authorization', testValues_1.TEST_VALID_SCOPE_TOKEN)
                         .expect(httpCodes_1.NOT_FOUND_404_HTTP_CODE)];
                 case 1:
                     _a.sent();

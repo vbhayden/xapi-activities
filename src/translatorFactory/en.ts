@@ -21,6 +21,9 @@ const translator: Translator = {
   maxEtagsError: () => (
     'IfMatch and IfNoneMatch cannot be used at the same time'
   ),
+  missingEtagsError: () => (
+    'IfMatch and IfNoneMatch header are missing'
+  ),
   nonJsonObjectError: () => (
     'Expected a JSON object to be provided and stored (if it exists)'
   ),

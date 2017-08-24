@@ -38,18 +38,13 @@ var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var NoModel_1 = require("jscommons/dist/errors/NoModel");
 var assertError_1 = require("jscommons/dist/tests/utils/assertError");
-var testService_1 = require("../../../../utils/testService");
-var testValues_1 = require("../../../../utils/testValues");
+var getTestProfile_1 = require("../../../../utils/getTestProfile");
 exports.default = function () { return __awaiter(_this, void 0, void 0, function () {
     var promise;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                promise = testService_1.default.getProfile({
-                    activityId: testValues_1.TEST_ACTIVITY_ID,
-                    client: testValues_1.TEST_CLIENT,
-                    profileId: testValues_1.TEST_PROFILE_ID,
-                });
+                promise = getTestProfile_1.default();
                 return [4 /*yield*/, assertError_1.default(NoModel_1.default, promise)];
             case 1:
                 _a.sent();

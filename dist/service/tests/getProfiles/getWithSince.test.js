@@ -38,17 +38,16 @@ var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var assert = require("assert");
 var bluebird_1 = require("bluebird");
+var createTextProfile_1 = require("../../../utils/createTextProfile");
+var getTestProfiles_1 = require("../../../utils/getTestProfiles");
 var testValues_1 = require("../../../utils/testValues");
-var createTextProfile_1 = require("../utils/createTextProfile");
 var setup_1 = require("../utils/setup");
 var TEST_DELAY_MS = 2;
 describe('getProfiles with since', function () {
-    var service = setup_1.default();
+    setup_1.default();
     var getProfiles = function (timestamp) { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            return [2 /*return*/, service.getProfiles({
-                    activityId: testValues_1.TEST_ACTIVITY_ID,
-                    client: testValues_1.TEST_CLIENT,
+            return [2 /*return*/, getTestProfiles_1.default({
                     since: timestamp.toISOString(),
                 })];
         });

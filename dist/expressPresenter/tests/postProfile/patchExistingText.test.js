@@ -36,34 +36,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var stringToStream = require("string-to-stream");
+var createTextProfile_1 = require("../../../utils/createTextProfile");
 var testValues_1 = require("../../../utils/testValues");
 var httpCodes_1 = require("../../utils/httpCodes");
 var setup_1 = require("../utils/setup");
 var patchContent_1 = require("./utils/patchContent");
-var patchExistingContent_1 = require("./utils/patchExistingContent");
 describe('expressPresenter.postProfile with existing text content', function () {
-    var service = setup_1.default().service;
-    var createTextContent = function () { return __awaiter(_this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, service.overwriteProfile({
-                        activityId: testValues_1.TEST_ACTIVITY_ID,
-                        client: testValues_1.TEST_CLIENT,
-                        content: stringToStream(testValues_1.TEST_CONTENT),
-                        contentType: testValues_1.TEXT_CONTENT_TYPE,
-                        profileId: testValues_1.TEST_PROFILE_ID,
-                    })];
-                case 1:
-                    _a.sent();
-                    return [2 /*return*/];
-            }
-        });
-    }); };
+    setup_1.default();
     it('should error when patching with text content', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, createTextContent()];
+                case 0: return [4 /*yield*/, createTextProfile_1.default()];
                 case 1:
                     _a.sent();
                     return [4 /*yield*/, patchContent_1.default(testValues_1.TEST_CONTENT, testValues_1.TEXT_CONTENT_TYPE).expect(httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];
@@ -76,7 +59,7 @@ describe('expressPresenter.postProfile with existing text content', function () 
     it('should error when patching with JSON content', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, createTextContent()];
+                case 0: return [4 /*yield*/, createTextProfile_1.default()];
                 case 1:
                     _a.sent();
                     return [4 /*yield*/, patchContent_1.default(testValues_1.TEST_JSON_CONTENT, testValues_1.JSON_CONTENT_TYPE).expect(httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];
@@ -89,10 +72,10 @@ describe('expressPresenter.postProfile with existing text content', function () 
     it('should error when patching with object content', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, createTextContent()];
+                case 0: return [4 /*yield*/, createTextProfile_1.default()];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, patchExistingContent_1.default(testValues_1.TEST_OBJECT_CONTENT, testValues_1.JSON_CONTENT_TYPE, httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];
+                    return [4 /*yield*/, patchContent_1.default(testValues_1.TEST_OBJECT_CONTENT, testValues_1.JSON_CONTENT_TYPE).expect(httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];
                 case 2:
                     _a.sent();
                     return [2 /*return*/];

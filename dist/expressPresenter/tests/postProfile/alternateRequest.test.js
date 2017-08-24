@@ -37,35 +37,43 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var assertProfile_1 = require("../../../utils/assertProfile");
+var constants_1 = require("../../../utils/constants");
+var createObjectProfile_1 = require("../../../utils/createObjectProfile");
+var getTestProfile_1 = require("../../../utils/getTestProfile");
 var testValues_1 = require("../../../utils/testValues");
 var httpCodes_1 = require("../../utils/httpCodes");
 var setup_1 = require("../utils/setup");
-var createObjectContent_1 = require("./utils/createObjectContent");
 describe('expressPresenter.postProfile using the alternate request syntax', function () {
     var supertest = setup_1.default().supertest;
     it('should merge when patching with object content ', function () { return __awaiter(_this, void 0, void 0, function () {
+        var getProfileResult;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, createObjectContent_1.default()];
+                case 0: return [4 /*yield*/, createObjectProfile_1.default()];
                 case 1:
                     _a.sent();
+                    return [4 /*yield*/, getTestProfile_1.default()];
+                case 2:
+                    getProfileResult = _a.sent();
                     return [4 /*yield*/, supertest
                             .post('/xAPI/activities/profile')
                             .set('Content-Type', testValues_1.ALTERNATE_CONTENT_TYPE)
+                            .set('X-Experience-API-Version', constants_1.xapiHeaderVersion)
                             .query({
                             method: 'POST',
                         })
                             .send({
                             'Content-Type': testValues_1.JSON_CONTENT_TYPE,
+                            'If-Match': getProfileResult.etag,
                             activityId: testValues_1.TEST_ACTIVITY_ID,
-                            content: '{"bar": 2}',
+                            content: testValues_1.TEST_OBJECT_PATCH_CONTENT,
                             profileId: testValues_1.TEST_PROFILE_ID,
                         })
                             .expect(httpCodes_1.NO_CONTENT_204_HTTP_CODE)];
-                case 2:
-                    _a.sent();
-                    return [4 /*yield*/, assertProfile_1.default('{"foo":1,"bar":2}')];
                 case 3:
+                    _a.sent();
+                    return [4 /*yield*/, assertProfile_1.default(testValues_1.TEST_OBJECT_MERGED_CONTENT)];
+                case 4:
                     _a.sent();
                     return [2 /*return*/];
             }

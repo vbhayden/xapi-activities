@@ -36,22 +36,21 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
+var createTextProfile_1 = require("../../../utils/createTextProfile");
 var testValues_1 = require("../../../utils/testValues");
 var httpCodes_1 = require("../../utils/httpCodes");
 var setup_1 = require("../utils/setup");
-var supertest_1 = require("../utils/supertest");
+var getProfiles_1 = require("./utils/getProfiles");
 describe('expressPresenter.getProfiles with non-existing agent', function () {
     setup_1.default();
     it('should return no profile ids when getting a non-existing activity id', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, supertest_1.default
-                        .get('/xAPI/activities/profile')
-                        .query({
-                        activityId: testValues_1.TEST_ACTIVITY_ID,
-                    })
-                        .expect(httpCodes_1.OK_200_HTTP_CODE, [])];
+                case 0: return [4 /*yield*/, createTextProfile_1.default()];
                 case 1:
+                    _a.sent();
+                    return [4 /*yield*/, getProfiles_1.default().expect(httpCodes_1.OK_200_HTTP_CODE, [testValues_1.TEST_PROFILE_ID])];
+                case 2:
                     _a.sent();
                     return [2 /*return*/];
             }
@@ -60,12 +59,9 @@ describe('expressPresenter.getProfiles with non-existing agent', function () {
     it('should throw warnings when using an invalid activity id', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, supertest_1.default
-                        .get('/xAPI/activities/profile')
-                        .query({
+                case 0: return [4 /*yield*/, getProfiles_1.default({
                         activityId: testValues_1.TEST_INVALID_ACTIVITY_ID,
-                    })
-                        .expect(httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];
+                    }).expect(httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];
@@ -75,13 +71,9 @@ describe('expressPresenter.getProfiles with non-existing agent', function () {
     it('should throw warnings when using an invalid since', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, supertest_1.default
-                        .get('/xAPI/activities/profile')
-                        .query({
-                        activityId: testValues_1.TEST_INVALID_ACTIVITY_ID,
+                case 0: return [4 /*yield*/, getProfiles_1.default({
                         since: testValues_1.TEST_INVALID_TIMESTAMP,
-                    })
-                        .expect(httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];
+                    }).expect(httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];
@@ -91,11 +83,9 @@ describe('expressPresenter.getProfiles with non-existing agent', function () {
     it('should throw warnings when missing the activity id', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, supertest_1.default
-                        .get('/xAPI/activities/profile')
-                        .set('Content-Type', testValues_1.TEXT_CONTENT_TYPE)
-                        .send(testValues_1.TEST_CONTENT)
-                        .expect(httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];
+                case 0: return [4 /*yield*/, getProfiles_1.default({
+                        activityId: undefined,
+                    }).expect(httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];

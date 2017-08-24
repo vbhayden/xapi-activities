@@ -42,11 +42,11 @@ var httpCodes_1 = require("../../utils/httpCodes");
 var setup_1 = require("../utils/setup");
 var overwriteProfile_1 = require("./utils/overwriteProfile");
 describe('expressPresenter.putProfile with non-existing model', function () {
-    var supertest = setup_1.default().supertest;
-    it('should create when using valid activity id', function () { return __awaiter(_this, void 0, void 0, function () {
+    setup_1.default();
+    it('should create when using valid activityId', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, overwriteProfile_1.default(testValues_1.TEST_ACTIVITY_ID, testValues_1.TEST_CONTENT).expect(httpCodes_1.NO_CONTENT_204_HTTP_CODE)];
+                case 0: return [4 /*yield*/, overwriteProfile_1.default().expect(httpCodes_1.NO_CONTENT_204_HTTP_CODE)];
                 case 1:
                     _a.sent();
                     return [4 /*yield*/, assertProfile_1.default(testValues_1.TEST_CONTENT)];
@@ -56,27 +56,22 @@ describe('expressPresenter.putProfile with non-existing model', function () {
             }
         });
     }); });
-    it('should throw warnings when using an invalid activity id', function () { return __awaiter(_this, void 0, void 0, function () {
+    it('should throw warnings when using an invalid activityId', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, overwriteProfile_1.default(testValues_1.TEST_INVALID_ACTIVITY_ID, testValues_1.TEST_CONTENT).expect(httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];
+                case 0: return [4 /*yield*/, overwriteProfile_1.default({
+                        activityId: testValues_1.TEST_INVALID_ACTIVITY_ID,
+                    }).expect(httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];
             }
         });
     }); });
-    it('should throw warnings when missing the activity id', function () { return __awaiter(_this, void 0, void 0, function () {
+    it('should throw warnings when missing the activityId', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, supertest
-                        .put('/xAPI/activities/profile')
-                        .set('Content-Type', testValues_1.TEXT_CONTENT_TYPE)
-                        .query({
-                        profileId: testValues_1.TEST_PROFILE_ID,
-                    })
-                        .send(testValues_1.TEST_CONTENT)
-                        .expect(httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];
+                case 0: return [4 /*yield*/, overwriteProfile_1.default({ activityId: undefined }).expect(httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];
@@ -86,14 +81,7 @@ describe('expressPresenter.putProfile with non-existing model', function () {
     it('should throw warnings when missing the profile id', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, supertest
-                        .put('/xAPI/activities/profile')
-                        .set('Content-Type', testValues_1.TEXT_CONTENT_TYPE)
-                        .query({
-                        activityId: testValues_1.TEST_ACTIVITY_ID,
-                    })
-                        .send(testValues_1.TEST_CONTENT)
-                        .expect(httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];
+                case 0: return [4 /*yield*/, overwriteProfile_1.default({ profileId: undefined }).expect(httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];

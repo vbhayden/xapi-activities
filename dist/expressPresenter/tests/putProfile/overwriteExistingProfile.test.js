@@ -36,60 +36,45 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
+var assertImmutableProfile_1 = require("../../../utils/assertImmutableProfile");
 var assertProfile_1 = require("../../../utils/assertProfile");
+var createImmutableProfile_1 = require("../../../utils/createImmutableProfile");
+var createTextProfile_1 = require("../../../utils/createTextProfile");
 var testValues_1 = require("../../../utils/testValues");
-var httpCodes_1 = require("../../utils/httpCodes");
-var createImmutableProfile_1 = require("../utils/createImmutableProfile");
 var setup_1 = require("../utils/setup");
-var overwriteProfile_1 = require("./utils/overwriteProfile");
+var overwriteExistingProfile_1 = require("./utils/overwriteExistingProfile");
 describe('expressPresenter.putProfile with existing model', function () {
-    var _a = setup_1.default(), service = _a.service, supertest = _a.supertest;
+    setup_1.default();
     it('should overwrite model when overwriting an existing model', function () { return __awaiter(_this, void 0, void 0, function () {
-        var initialContent, getProfileResult;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    initialContent = 'initial_dummy_content';
-                    return [4 /*yield*/, overwriteProfile_1.default(testValues_1.TEST_ACTIVITY_ID, initialContent)];
+                case 0: return [4 /*yield*/, createTextProfile_1.default()];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, service.getProfile({
-                            activityId: testValues_1.TEST_ACTIVITY_ID,
-                            client: testValues_1.TEST_CLIENT,
-                            profileId: testValues_1.TEST_PROFILE_ID,
-                        })];
+                    return [4 /*yield*/, overwriteExistingProfile_1.default(testValues_1.TEST_ACTIVITY_ID, testValues_1.TEST_IMMUTABLE_CONTENT)];
                 case 2:
-                    getProfileResult = _a.sent();
-                    return [4 /*yield*/, supertest
-                            .put('/xAPI/activities/profile')
-                            .set('If-Match', "\"" + getProfileResult.etag + "\"")
-                            .set('Content-Type', testValues_1.TEXT_CONTENT_TYPE)
-                            .query({
-                            activityId: testValues_1.TEST_ACTIVITY_ID,
-                            profileId: testValues_1.TEST_PROFILE_ID,
-                        })
-                            .send(testValues_1.TEST_CONTENT)
-                            .expect(httpCodes_1.NO_CONTENT_204_HTTP_CODE)];
-                case 3:
                     _a.sent();
-                    return [4 /*yield*/, assertProfile_1.default(testValues_1.TEST_CONTENT)];
-                case 4:
+                    return [4 /*yield*/, assertProfile_1.default(testValues_1.TEST_IMMUTABLE_CONTENT)];
+                case 3:
                     _a.sent();
                     return [2 /*return*/];
             }
         });
     }); });
-    it('should not overwrite existing models when using a non-existing model', function () { return __awaiter(_this, void 0, void 0, function () {
+    it('should not overwrite non-matched models', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, createImmutableProfile_1.default()];
+                case 0: return [4 /*yield*/, createTextProfile_1.default()];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, overwriteProfile_1.default(testValues_1.TEST_ACTIVITY_ID, testValues_1.TEST_CONTENT).expect(httpCodes_1.NO_CONTENT_204_HTTP_CODE)];
+                    return [4 /*yield*/, createImmutableProfile_1.default()];
                 case 2:
                     _a.sent();
-                    return [4 /*yield*/, assertProfile_1.default(testValues_1.TEST_CONTENT)];
+                    return [4 /*yield*/, overwriteExistingProfile_1.default(testValues_1.TEST_ACTIVITY_ID)];
                 case 3:
+                    _a.sent();
+                    return [4 /*yield*/, assertImmutableProfile_1.default()];
+                case 4:
                     _a.sent();
                     return [2 /*return*/];
             }

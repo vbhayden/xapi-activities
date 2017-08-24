@@ -36,27 +36,21 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
+var createJsonProfile_1 = require("../../../utils/createJsonProfile");
+var createTextProfile_1 = require("../../../utils/createTextProfile");
 var testValues_1 = require("../../../utils/testValues");
-var testValues_2 = require("../../../utils/testValues");
 var httpCodes_1 = require("../../utils/httpCodes");
-var createJsonProfile_1 = require("../utils/createJsonProfile");
-var createTextProfile_1 = require("../utils/createTextProfile");
 var setup_1 = require("../utils/setup");
-describe('expressPresenter.getProfile with existing profile', function () {
-    var supertest = setup_1.default().supertest;
+var getProfile_1 = require("./utils/getProfile");
+describe('expressPresenter.getProfile with existing state', function () {
+    setup_1.default();
     it('should get when getting text', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, createTextProfile_1.default()];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, supertest
-                            .get('/xAPI/activities/profile')
-                            .query({
-                            activityId: testValues_1.TEST_ACTIVITY_ID,
-                            profileId: testValues_1.TEST_PROFILE_ID,
-                        })
-                            .expect(httpCodes_1.OK_200_HTTP_CODE, testValues_2.TEST_CONTENT)];
+                    return [4 /*yield*/, getProfile_1.default().expect(httpCodes_1.OK_200_HTTP_CODE, testValues_1.TEST_CONTENT)];
                 case 2:
                     _a.sent();
                     return [2 /*return*/];
@@ -69,13 +63,7 @@ describe('expressPresenter.getProfile with existing profile', function () {
                 case 0: return [4 /*yield*/, createJsonProfile_1.default()];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, supertest
-                            .get('/xAPI/activities/profile')
-                            .query({
-                            activityId: testValues_1.TEST_ACTIVITY_ID,
-                            profileId: testValues_1.TEST_PROFILE_ID,
-                        })
-                            .expect(httpCodes_1.OK_200_HTTP_CODE, JSON.parse(testValues_2.TEST_JSON_CONTENT))];
+                    return [4 /*yield*/, getProfile_1.default().expect(httpCodes_1.OK_200_HTTP_CODE, JSON.parse(testValues_1.TEST_JSON_CONTENT))];
                 case 2:
                     _a.sent();
                     return [2 /*return*/];

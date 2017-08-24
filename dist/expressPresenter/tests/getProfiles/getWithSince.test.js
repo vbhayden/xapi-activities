@@ -37,23 +37,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var bluebird_1 = require("bluebird");
+var createTextProfile_1 = require("../../../utils/createTextProfile");
 var testValues_1 = require("../../../utils/testValues");
 var httpCodes_1 = require("../../utils/httpCodes");
-var createTextProfile_1 = require("../utils/createTextProfile");
 var setup_1 = require("../utils/setup");
-var supertest_1 = require("../utils/supertest");
+var getProfiles_1 = require("./utils/getProfiles");
 var TEST_DELAY_MS = 2;
 describe('expressPresenter.getProfiles with since', function () {
     setup_1.default();
-    var getProfiles = function (timestamp) {
-        return supertest_1.default
-            .get('/xAPI/activities/profile')
-            .set('Authorization', 'valid_scope_client')
-            .query({
-            activityId: testValues_1.TEST_ACTIVITY_ID,
-            since: timestamp.toISOString(),
-        });
-    };
     it('should return no profile ids when updated before since', function () { return __awaiter(_this, void 0, void 0, function () {
         var timestamp;
         return __generator(this, function (_a) {
@@ -65,7 +56,7 @@ describe('expressPresenter.getProfiles with since', function () {
                 case 2:
                     _a.sent();
                     timestamp = new Date();
-                    return [4 /*yield*/, getProfiles(timestamp).expect(httpCodes_1.OK_200_HTTP_CODE, [])];
+                    return [4 /*yield*/, getProfiles_1.default({ since: timestamp.toISOString() }).expect(httpCodes_1.OK_200_HTTP_CODE, [])];
                 case 3:
                     _a.sent();
                     return [2 /*return*/];
@@ -84,7 +75,9 @@ describe('expressPresenter.getProfiles with since', function () {
                     return [4 /*yield*/, createTextProfile_1.default()];
                 case 2:
                     _a.sent();
-                    return [4 /*yield*/, getProfiles(timestamp).expect(httpCodes_1.OK_200_HTTP_CODE, [testValues_1.TEST_PROFILE_ID])];
+                    return [4 /*yield*/, getProfiles_1.default({
+                            since: timestamp.toISOString(),
+                        }).expect(httpCodes_1.OK_200_HTTP_CODE, [testValues_1.TEST_PROFILE_ID])];
                 case 3:
                     _a.sent();
                     return [2 /*return*/];

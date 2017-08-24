@@ -47,7 +47,7 @@ describe('overwriteProfile with non-existing model', function () {
     it('should create when using valid activity id', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, overwriteProfile_1.default(testValues_1.TEST_ACTIVITY_ID, testValues_1.TEST_CONTENT)];
+                case 0: return [4 /*yield*/, overwriteProfile_1.default({}, testValues_1.TEST_CONTENT)];
                 case 1:
                     _a.sent();
                     return [4 /*yield*/, assertProfile_1.default(testValues_1.TEST_CONTENT)];
@@ -62,7 +62,9 @@ describe('overwriteProfile with non-existing model', function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    promise = overwriteProfile_1.default(testValues_1.TEST_INVALID_ACTIVITY_ID, testValues_1.TEST_CONTENT);
+                    promise = overwriteProfile_1.default({
+                        activityId: testValues_1.TEST_INVALID_ACTIVITY_ID,
+                    }, testValues_1.TEST_CONTENT);
                     return [4 /*yield*/, assertError_1.default(rulr_1.Warnings, promise)];
                 case 1:
                     _a.sent();

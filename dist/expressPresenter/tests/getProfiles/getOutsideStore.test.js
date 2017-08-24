@@ -36,9 +36,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
+var overwriteProfileOutsideClient_1 = require("../../../utils/overwriteProfileOutsideClient");
+var patchProfileOutsideClient_1 = require("../../../utils/patchProfileOutsideClient");
 var testValues_1 = require("../../../utils/testValues");
-var overwriteProfileOutsideClient_1 = require("../utils/overwriteProfileOutsideClient");
-var patchProfileOutsideClient_1 = require("../utils/patchProfileOutsideClient");
 var setup_1 = require("../utils/setup");
 var assertOutsideClient_1 = require("./utils/assertOutsideClient");
 describe('expressPresenter.getProfiles outside the store', function () {

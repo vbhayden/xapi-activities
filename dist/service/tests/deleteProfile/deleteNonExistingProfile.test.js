@@ -49,7 +49,7 @@ describe('deleteProfile with non-existing profile', function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    promise = deleteProfile_1.default(testValues_1.TEST_ACTIVITY_ID);
+                    promise = deleteProfile_1.default();
                     return [4 /*yield*/, assertError_1.default(NoModel_1.default, promise)];
                 case 1:
                     _a.sent();
@@ -62,7 +62,7 @@ describe('deleteProfile with non-existing profile', function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    promise = deleteProfile_1.default(testValues_1.TEST_INVALID_ACTIVITY_ID);
+                    promise = deleteProfile_1.default({ activityId: testValues_1.TEST_INVALID_ACTIVITY_ID });
                     return [4 /*yield*/, assertError_1.default(rulr_1.Warnings, promise)];
                 case 1:
                     _a.sent();

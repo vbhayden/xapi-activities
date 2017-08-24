@@ -36,9 +36,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
+var constants_1 = require("../../../utils/constants");
+var createTextProfile_1 = require("../../../utils/createTextProfile");
 var testValues_1 = require("../../../utils/testValues");
 var httpCodes_1 = require("../../utils/httpCodes");
-var createTextProfile_1 = require("../utils/createTextProfile");
 var setup_1 = require("../utils/setup");
 describe('expressPresenter.getProfile using the alternate request syntax', function () {
     var supertest = setup_1.default().supertest;
@@ -51,6 +52,7 @@ describe('expressPresenter.getProfile using the alternate request syntax', funct
                     return [4 /*yield*/, supertest
                             .post('/xAPI/activities/profile')
                             .set('Content-Type', testValues_1.ALTERNATE_CONTENT_TYPE)
+                            .set('X-Experience-API-Version', constants_1.xapiHeaderVersion)
                             .query({ method: 'GET' })
                             .send({
                             activityId: testValues_1.TEST_ACTIVITY_ID,

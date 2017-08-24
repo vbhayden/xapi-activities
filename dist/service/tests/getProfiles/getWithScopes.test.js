@@ -1,12 +1,4 @@
 "use strict";
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -47,20 +39,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var assert = require("assert");
 var Forbidden_1 = require("jscommons/dist/errors/Forbidden");
 var assertError_1 = require("jscommons/dist/tests/utils/assertError");
-var scopes_1 = require("../../../utils/scopes");
+var getTestProfiles_1 = require("../../../utils/getTestProfiles");
 var testValues_1 = require("../../../utils/testValues");
 var setup_1 = require("../utils/setup");
 describe('getProfiles with scopes', function () {
-    var service = setup_1.default();
+    setup_1.default();
     it('should throw forbidden error when using invalid scope', function () { return __awaiter(_this, void 0, void 0, function () {
-        var scopes, promise;
+        var promise;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    scopes = ['invalid_scope'];
-                    promise = service.getProfiles({
-                        activityId: testValues_1.TEST_ACTIVITY_ID,
-                        client: __assign({}, testValues_1.TEST_CLIENT, { scopes: scopes }),
+                    promise = getTestProfiles_1.default({
+                        client: testValues_1.TEST_INVALID_SCOPE_CLIENT,
                     });
                     return [4 /*yield*/, assertError_1.default(Forbidden_1.default, promise)];
                 case 1:
@@ -70,15 +60,12 @@ describe('getProfiles with scopes', function () {
         });
     }); });
     it('should return no models when using valid scopes', function () { return __awaiter(_this, void 0, void 0, function () {
-        var scopes, getProfilesResult;
+        var getProfilesResult;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    scopes = [scopes_1.XAPI_READ];
-                    return [4 /*yield*/, service.getProfiles({
-                            activityId: testValues_1.TEST_ACTIVITY_ID,
-                            client: __assign({}, testValues_1.TEST_CLIENT, { scopes: scopes }),
-                        })];
+                case 0: return [4 /*yield*/, getTestProfiles_1.default({
+                        client: testValues_1.TEST_VALID_SCOPE_CLIENT,
+                    })];
                 case 1:
                     getProfilesResult = _a.sent();
                     assert.deepEqual(getProfilesResult.profileIds, []);

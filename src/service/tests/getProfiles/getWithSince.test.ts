@@ -1,22 +1,17 @@
 import * as assert from 'assert';
 import { delay } from 'bluebird';
-import {
-  TEST_ACTIVITY_ID,
-  TEST_CLIENT,
-  TEST_PROFILE_ID,
-} from '../../../utils/testValues';
-import createTextProfile from '../utils/createTextProfile';
+import createTextProfile from '../../../utils/createTextProfile';
+import getTestProfiles from '../../../utils/getTestProfiles';
+import { TEST_PROFILE_ID } from '../../../utils/testValues';
 import setup from '../utils/setup';
 
 const TEST_DELAY_MS = 2;
 
 describe('getProfiles with since', () => {
-  const service = setup();
+  setup();
 
   const getProfiles = async (timestamp: Date) => {
-    return service.getProfiles({
-      activityId: TEST_ACTIVITY_ID,
-      client: TEST_CLIENT,
+    return getTestProfiles({
       since: timestamp.toISOString(),
     });
   };

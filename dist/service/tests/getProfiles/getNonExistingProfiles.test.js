@@ -39,18 +39,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var assert = require("assert");
 var assertError_1 = require("jscommons/dist/tests/utils/assertError");
 var rulr_1 = require("rulr");
+var getTestProfiles_1 = require("../../../utils/getTestProfiles");
 var testValues_1 = require("../../../utils/testValues");
 var setup_1 = require("../utils/setup");
 describe('getProfiles with non-existing agent', function () {
-    var service = setup_1.default();
+    setup_1.default();
     it('should return no profile ids when getting a non-existing activity id', function () { return __awaiter(_this, void 0, void 0, function () {
         var profilesResult;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, service.getProfiles({
-                        activityId: testValues_1.TEST_ACTIVITY_ID,
-                        client: testValues_1.TEST_CLIENT,
-                    })];
+                case 0: return [4 /*yield*/, getTestProfiles_1.default()];
                 case 1:
                     profilesResult = _a.sent();
                     assert.deepEqual(profilesResult.profileIds, []);
@@ -63,9 +61,8 @@ describe('getProfiles with non-existing agent', function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    promise = service.getProfiles({
+                    promise = getTestProfiles_1.default({
                         activityId: testValues_1.TEST_INVALID_ACTIVITY_ID,
-                        client: testValues_1.TEST_CLIENT,
                     });
                     return [4 /*yield*/, assertError_1.default(rulr_1.Warnings, promise)];
                 case 1:
@@ -79,9 +76,7 @@ describe('getProfiles with non-existing agent', function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    promise = service.getProfiles({
-                        activityId: testValues_1.TEST_INVALID_ACTIVITY_ID,
-                        client: testValues_1.TEST_CLIENT,
+                    promise = getTestProfiles_1.default({
                         since: testValues_1.TEST_INVALID_TIMESTAMP,
                     });
                     return [4 /*yield*/, assertError_1.default(rulr_1.Warnings, promise)];

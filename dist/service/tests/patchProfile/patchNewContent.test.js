@@ -38,15 +38,14 @@ var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var assertError_1 = require("jscommons/dist/tests/utils/assertError");
 var rulr_1 = require("rulr");
-var stringToStream = require("string-to-stream");
 var NonJsonObject_1 = require("../../../errors/NonJsonObject");
 var assertProfile_1 = require("../../../utils/assertProfile");
 var testValues_1 = require("../../../utils/testValues");
-var createImmutableProfile_1 = require("../utils/createImmutableProfile");
 var setup_1 = require("../utils/setup");
 var patchContent_1 = require("./utils/patchContent");
+var patchProfile_1 = require("./utils/patchProfile");
 describe('patchProfile with new content', function () {
-    var service = setup_1.default();
+    setup_1.default();
     it('should error when patching with text content', function () { return __awaiter(_this, void 0, void 0, function () {
         var promise;
         return __generator(this, function (_a) {
@@ -86,33 +85,13 @@ describe('patchProfile with new content', function () {
             }
         });
     }); });
-    it('should not patch existing models when patching a non-existing model', function () { return __awaiter(_this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, createImmutableProfile_1.default()];
-                case 1:
-                    _a.sent();
-                    return [4 /*yield*/, patchContent_1.default(testValues_1.TEST_OBJECT_CONTENT, testValues_1.JSON_CONTENT_TYPE)];
-                case 2:
-                    _a.sent();
-                    return [4 /*yield*/, assertProfile_1.default(testValues_1.TEST_OBJECT_CONTENT)];
-                case 3:
-                    _a.sent();
-                    return [2 /*return*/];
-            }
-        });
-    }); });
     it('should throw warnings when using an invalid activity id', function () { return __awaiter(_this, void 0, void 0, function () {
         var promise;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    promise = service.patchProfile({
+                    promise = patchProfile_1.default({
                         activityId: testValues_1.TEST_INVALID_ACTIVITY_ID,
-                        client: testValues_1.TEST_CLIENT,
-                        content: stringToStream(testValues_1.TEST_CONTENT),
-                        contentType: testValues_1.TEXT_CONTENT_TYPE,
-                        profileId: testValues_1.TEST_PROFILE_ID,
                     });
                     return [4 /*yield*/, assertError_1.default(rulr_1.Warnings, promise)];
                 case 1:

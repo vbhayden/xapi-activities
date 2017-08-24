@@ -1,27 +1,23 @@
 import * as assert from 'assert';
 import Forbidden from 'jscommons/dist/errors/Forbidden';
 import assertError from 'jscommons/dist/tests/utils/assertError';
-import { XAPI_READ } from '../../../utils/scopes';
-import { TEST_ACTIVITY_ID, TEST_CLIENT } from '../../../utils/testValues';
+import getTestProfiles from '../../../utils/getTestProfiles';
+import { TEST_INVALID_SCOPE_CLIENT, TEST_VALID_SCOPE_CLIENT } from '../../../utils/testValues';
 import setup from '../utils/setup';
 
 describe('getProfiles with scopes', () => {
-  const service = setup();
+  setup();
 
   it('should throw forbidden error when using invalid scope', async () => {
-    const scopes = ['invalid_scope'];
-    const promise = service.getProfiles({
-      activityId: TEST_ACTIVITY_ID,
-      client: { ...TEST_CLIENT, scopes },
+    const promise = getTestProfiles({
+      client: TEST_INVALID_SCOPE_CLIENT,
     });
     await assertError(Forbidden, promise);
   });
 
   it('should return no models when using valid scopes', async () => {
-    const scopes = [XAPI_READ];
-    const getProfilesResult = await service.getProfiles({
-      activityId: TEST_ACTIVITY_ID,
-      client: { ...TEST_CLIENT, scopes },
+    const getProfilesResult = await getTestProfiles({
+      client: TEST_VALID_SCOPE_CLIENT,
     });
     assert.deepEqual(getProfilesResult.profileIds, []);
   });

@@ -37,28 +37,46 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var streamToString = require("stream-to-string");
+var Conflict_1 = require("../errors/Conflict");
+var MissingEtags_1 = require("../errors/MissingEtags");
 var checkProfileWriteScopes_1 = require("./utils/checkProfileWriteScopes");
 var createEtag_1 = require("./utils/createEtag");
 var validateActivityId_1 = require("./utils/validateActivityId");
 exports.default = function (config) {
     return function (opts) { return __awaiter(_this, void 0, void 0, function () {
-        var etag, jsonContent, _a, _b, _c, overwriteProfileResult;
+        var etag, hasProfile, jsonContent, _a, _b, _c, overwriteProfileResult;
         return __generator(this, function (_d) {
             switch (_d.label) {
                 case 0:
                     checkProfileWriteScopes_1.default(opts.client.scopes);
                     validateActivityId_1.default(opts.activityId);
                     etag = createEtag_1.default();
-                    if (!(opts.contentType === 'application/json')) return [3 /*break*/, 2];
+                    if (!(opts.ifMatch === undefined && opts.ifNoneMatch === undefined)) return [3 /*break*/, 2];
+                    return [4 /*yield*/, config.repo.hasProfile({
+                            activityId: opts.activityId,
+                            client: opts.client,
+                            profileId: opts.profileId,
+                        })];
+                case 1:
+                    hasProfile = (_d.sent()).hasProfile;
+                    if (hasProfile) {
+                        throw new Conflict_1.default();
+                    }
+                    else {
+                        throw new MissingEtags_1.default();
+                    }
+                    _d.label = 2;
+                case 2:
+                    if (!(opts.contentType === 'application/json')) return [3 /*break*/, 4];
                     _c = (_b = JSON).parse;
                     return [4 /*yield*/, streamToString(opts.content)];
-                case 1:
-                    _a = _c.apply(_b, [_d.sent()]);
-                    return [3 /*break*/, 3];
-                case 2:
-                    _a = undefined;
-                    _d.label = 3;
                 case 3:
+                    _a = _c.apply(_b, [_d.sent()]);
+                    return [3 /*break*/, 5];
+                case 4:
+                    _a = undefined;
+                    _d.label = 5;
+                case 5:
                     jsonContent = (_a);
                     return [4 /*yield*/, config.repo.overwriteProfile({
                             activityId: opts.activityId,
@@ -70,17 +88,17 @@ exports.default = function (config) {
                             ifNoneMatch: opts.ifNoneMatch,
                             profileId: opts.profileId,
                         })];
-                case 4:
+                case 6:
                     overwriteProfileResult = _d.sent();
-                    if (!(opts.contentType !== 'application/json')) return [3 /*break*/, 6];
+                    if (!(opts.contentType !== 'application/json')) return [3 /*break*/, 8];
                     return [4 /*yield*/, config.repo.storeProfileContent({
                             content: opts.content,
                             key: overwriteProfileResult.id,
                         })];
-                case 5:
+                case 7:
                     _d.sent();
-                    _d.label = 6;
-                case 6: return [2 /*return*/];
+                    _d.label = 8;
+                case 8: return [2 /*return*/];
             }
         });
     }); };

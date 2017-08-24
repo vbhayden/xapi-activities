@@ -41,20 +41,14 @@ var testValues_1 = require("../../../utils/testValues");
 var httpCodes_1 = require("../../utils/httpCodes");
 var setup_1 = require("../utils/setup");
 var patchContent_1 = require("./utils/patchContent");
+var patchProfile_1 = require("./utils/patchProfile");
 describe('expressPresenter.postProfile when outside client', function () {
-    var supertest = setup_1.default().supertest;
-    var patchOutsideProfile = function (token) { return __awaiter(_this, void 0, void 0, function () {
+    setup_1.default();
+    var patchOutsideClient = function (token) { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, supertest
-                        .post('/xAPI/activities/profile')
+                case 0: return [4 /*yield*/, patchProfile_1.default({}, testValues_1.TEST_OBJECT_PATCH_CONTENT)
                         .set('Authorization', token)
-                        .set('Content-Type', testValues_1.JSON_CONTENT_TYPE)
-                        .query({
-                        activityId: testValues_1.TEST_ACTIVITY_ID,
-                        profileId: testValues_1.TEST_PROFILE_ID,
-                    })
-                        .send('{"bar":2}')
                         .expect(httpCodes_1.NO_CONTENT_204_HTTP_CODE)];
                 case 1:
                     _a.sent();
@@ -68,7 +62,7 @@ describe('expressPresenter.postProfile when outside client', function () {
                 case 0: return [4 /*yield*/, patchContent_1.default(testValues_1.TEST_OBJECT_CONTENT, testValues_1.JSON_CONTENT_TYPE)];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, patchOutsideProfile(testValues_1.TEST_OUTSIDE_ORG_TOKEN)];
+                    return [4 /*yield*/, patchOutsideClient(testValues_1.TEST_OUTSIDE_ORG_TOKEN)];
                 case 2:
                     _a.sent();
                     return [4 /*yield*/, assertProfile_1.default(testValues_1.TEST_OBJECT_CONTENT)];
@@ -84,7 +78,7 @@ describe('expressPresenter.postProfile when outside client', function () {
                 case 0: return [4 /*yield*/, patchContent_1.default(testValues_1.TEST_OBJECT_CONTENT, testValues_1.JSON_CONTENT_TYPE)];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, patchOutsideProfile(testValues_1.TEST_OUTSIDE_STORE_TOKEN)];
+                    return [4 /*yield*/, patchOutsideClient(testValues_1.TEST_OUTSIDE_STORE_TOKEN)];
                 case 2:
                     _a.sent();
                     return [4 /*yield*/, assertProfile_1.default(testValues_1.TEST_OBJECT_CONTENT)];

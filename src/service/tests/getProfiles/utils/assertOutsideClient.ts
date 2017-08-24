@@ -1,11 +1,7 @@
 import * as assert from 'assert';
-import service from '../../../../utils/testService';
-import { TEST_ACTIVITY_ID, TEST_CLIENT } from '../../../../utils/testValues';
+import getTestProfiles from '../../../../utils/getTestProfiles';
 
 export default async () => {
-  const profilesResult = await service.getProfiles({
-    activityId: TEST_ACTIVITY_ID,
-    client: TEST_CLIENT,
-  });
+  const profilesResult = await getTestProfiles();
   assert.deepEqual(profilesResult.profileIds, []);
 };

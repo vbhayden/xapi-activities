@@ -36,36 +36,20 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var stringToStream = require("string-to-stream");
 var assertProfile_1 = require("../../../utils/assertProfile");
+var overwriteProfileOutsideClient_1 = require("../../../utils/overwriteProfileOutsideClient");
 var testValues_1 = require("../../../utils/testValues");
 var setup_1 = require("../utils/setup");
 var overwriteProfile_1 = require("./utils/overwriteProfile");
 describe('overwriteProfile when outside client', function () {
-    var service = setup_1.default();
-    var overwriteOutsideProfile = function (client) { return __awaiter(_this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, service.overwriteProfile({
-                        activityId: testValues_1.TEST_ACTIVITY_ID,
-                        client: client,
-                        content: stringToStream('unused_content'),
-                        contentType: testValues_1.TEXT_CONTENT_TYPE,
-                        profileId: testValues_1.TEST_PROFILE_ID,
-                    })];
-                case 1:
-                    _a.sent();
-                    return [2 /*return*/];
-            }
-        });
-    }); };
+    setup_1.default();
     it('should not overwrite existing model when using a different organisation', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, overwriteProfile_1.default(testValues_1.TEST_ACTIVITY_ID, testValues_1.TEST_CONTENT)];
+                case 0: return [4 /*yield*/, overwriteProfile_1.default({}, testValues_1.TEST_CONTENT)];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, overwriteOutsideProfile(testValues_1.TEST_CLIENT_OUTSIDE_ORG)];
+                    return [4 /*yield*/, overwriteProfileOutsideClient_1.default(testValues_1.TEST_CLIENT_OUTSIDE_ORG)];
                 case 2:
                     _a.sent();
                     return [4 /*yield*/, assertProfile_1.default(testValues_1.TEST_CONTENT)];
@@ -78,10 +62,10 @@ describe('overwriteProfile when outside client', function () {
     it('should not overwrite existing model when using a different store', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, overwriteProfile_1.default(testValues_1.TEST_ACTIVITY_ID, testValues_1.TEST_CONTENT)];
+                case 0: return [4 /*yield*/, overwriteProfile_1.default({}, testValues_1.TEST_CONTENT)];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, overwriteOutsideProfile(testValues_1.TEST_CLIENT_OUTSIDE_STORE)];
+                    return [4 /*yield*/, overwriteProfileOutsideClient_1.default(testValues_1.TEST_CLIENT_OUTSIDE_STORE)];
                 case 2:
                     _a.sent();
                     return [4 /*yield*/, assertProfile_1.default(testValues_1.TEST_CONTENT)];

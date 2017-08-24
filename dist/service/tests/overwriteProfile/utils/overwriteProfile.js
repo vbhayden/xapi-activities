@@ -1,4 +1,12 @@
 "use strict";
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -39,20 +47,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var stringToStream = require("string-to-stream");
 var testService_1 = require("../../../../utils/testService");
 var testValues_1 = require("../../../../utils/testValues");
-exports.default = function (activityId, content) { return __awaiter(_this, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, testService_1.default.overwriteProfile({
-                    activityId: activityId,
-                    client: testValues_1.TEST_CLIENT,
-                    content: stringToStream(content),
-                    contentType: testValues_1.TEXT_CONTENT_TYPE,
-                    profileId: testValues_1.TEST_PROFILE_ID,
-                })];
-            case 1:
-                _a.sent();
-                return [2 /*return*/];
-        }
+exports.default = function (optsOverrides, content) {
+    if (optsOverrides === void 0) { optsOverrides = {}; }
+    if (content === void 0) { content = testValues_1.TEST_CONTENT; }
+    return __awaiter(_this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, testService_1.default.overwriteProfile(__assign({ activityId: testValues_1.TEST_ACTIVITY_ID, client: testValues_1.TEST_CLIENT, content: stringToStream(content), contentType: testValues_1.TEXT_CONTENT_TYPE, ifNoneMatch: '*', profileId: testValues_1.TEST_PROFILE_ID }, optsOverrides))];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
     });
-}); };
+};
 //# sourceMappingURL=overwriteProfile.js.map

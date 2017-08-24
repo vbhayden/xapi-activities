@@ -36,11 +36,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
+var assertDeleted_1 = require("../../../utils/assertDeleted");
+var constants_1 = require("../../../utils/constants");
+var createTextProfile_1 = require("../../../utils/createTextProfile");
 var testValues_1 = require("../../../utils/testValues");
 var httpCodes_1 = require("../../utils/httpCodes");
-var createTextProfile_1 = require("../utils/createTextProfile");
 var setup_1 = require("../utils/setup");
-var assertDeleted_1 = require("./utils/assertDeleted");
 describe('expressPresenter.deleteProfile using the alternate request syntax', function () {
     var supertest = setup_1.default().supertest;
     it('should delete when deleting text', function () { return __awaiter(_this, void 0, void 0, function () {
@@ -52,6 +53,7 @@ describe('expressPresenter.deleteProfile using the alternate request syntax', fu
                     return [4 /*yield*/, supertest
                             .post('/xAPI/activities/profile')
                             .set('Content-Type', testValues_1.ALTERNATE_CONTENT_TYPE)
+                            .set('X-Experience-API-Version', constants_1.xapiHeaderVersion)
                             .query({ method: 'DELETE' })
                             .send({
                             activityId: testValues_1.TEST_ACTIVITY_ID,

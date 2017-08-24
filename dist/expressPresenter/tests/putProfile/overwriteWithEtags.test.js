@@ -36,41 +36,27 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var testValues_1 = require("../../../utils/testValues");
+var createTextProfile_1 = require("../../../utils/createTextProfile");
+var getTestProfile_1 = require("../../../utils/getTestProfile");
 var httpCodes_1 = require("../../utils/httpCodes");
-var createTextProfile_1 = require("../utils/createTextProfile");
-var setRequestEtags_1 = require("../utils/setRequestEtags");
 var setup_1 = require("../utils/setup");
+var overwriteProfile_1 = require("./utils/overwriteProfile");
 describe('expressPresenter.putProfile with etags', function () {
-    var _a = setup_1.default(), service = _a.service, supertest = _a.supertest;
-    var overwriteProfileWithEtag = function (_a) {
-        var ifMatch = _a.ifMatch, ifNoneMatch = _a.ifNoneMatch;
-        var request = supertest.put('/xAPI/activities/profile');
-        setRequestEtags_1.default(request, ifMatch, ifNoneMatch);
-        return request
-            .set('Content-Type', testValues_1.TEXT_CONTENT_TYPE)
-            .query({
-            activityId: testValues_1.TEST_ACTIVITY_ID,
-            profileId: testValues_1.TEST_PROFILE_ID,
-        })
-            .send(testValues_1.TEST_CONTENT);
-    };
+    setup_1.default();
     it('should allow overwrites when using a correct etag', function () { return __awaiter(_this, void 0, void 0, function () {
-        var getProfileResult, opts;
+        var getProfileResult;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, createTextProfile_1.default()];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, service.getProfile({
-                            activityId: testValues_1.TEST_ACTIVITY_ID,
-                            client: testValues_1.TEST_CLIENT,
-                            profileId: testValues_1.TEST_PROFILE_ID,
-                        })];
+                    return [4 /*yield*/, getTestProfile_1.default()];
                 case 2:
                     getProfileResult = _a.sent();
-                    opts = { ifMatch: getProfileResult.etag };
-                    return [4 /*yield*/, overwriteProfileWithEtag(opts).expect(httpCodes_1.NO_CONTENT_204_HTTP_CODE)];
+                    return [4 /*yield*/, overwriteProfile_1.default()
+                            .set('If-Match', getProfileResult.etag)
+                            .unset('If-None-Match')
+                            .expect(httpCodes_1.NO_CONTENT_204_HTTP_CODE)];
                 case 3:
                     _a.sent();
                     return [2 /*return*/];
@@ -78,14 +64,15 @@ describe('expressPresenter.putProfile with etags', function () {
         });
     }); });
     it('should throw precondition error when using an incorrect ifMatch', function () { return __awaiter(_this, void 0, void 0, function () {
-        var opts;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, createTextProfile_1.default()];
                 case 1:
                     _a.sent();
-                    opts = { ifMatch: 'incorrect_etag' };
-                    return [4 /*yield*/, overwriteProfileWithEtag(opts).expect(httpCodes_1.PRECONDITION_FAILED_412_HTTP_CODE)];
+                    return [4 /*yield*/, overwriteProfile_1.default()
+                            .set('If-Match', 'incorrect_etag')
+                            .unset('If-None-Match')
+                            .expect(httpCodes_1.PRECONDITION_FAILED_412_HTTP_CODE)];
                 case 2:
                     _a.sent();
                     return [2 /*return*/];
@@ -93,14 +80,14 @@ describe('expressPresenter.putProfile with etags', function () {
         });
     }); });
     it('should throw precondition error when using an incorrect ifNoneMatch', function () { return __awaiter(_this, void 0, void 0, function () {
-        var opts;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, createTextProfile_1.default()];
                 case 1:
                     _a.sent();
-                    opts = { ifNoneMatch: '*' };
-                    return [4 /*yield*/, overwriteProfileWithEtag(opts).expect(httpCodes_1.PRECONDITION_FAILED_412_HTTP_CODE)];
+                    return [4 /*yield*/, overwriteProfile_1.default()
+                            .set('If-None-Match', '*')
+                            .expect(httpCodes_1.PRECONDITION_FAILED_412_HTTP_CODE)];
                 case 2:
                     _a.sent();
                     return [2 /*return*/];
@@ -113,7 +100,9 @@ describe('expressPresenter.putProfile with etags', function () {
                 case 0: return [4 /*yield*/, createTextProfile_1.default()];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, overwriteProfileWithEtag({}).expect(httpCodes_1.CONFLICT_409_HTTP_CODE)];
+                    return [4 /*yield*/, overwriteProfile_1.default()
+                            .unset('If-None-Match')
+                            .expect(httpCodes_1.CONFLICT_409_HTTP_CODE)];
                 case 2:
                     _a.sent();
                     return [2 /*return*/];
@@ -121,15 +110,28 @@ describe('expressPresenter.putProfile with etags', function () {
         });
     }); });
     it('should throw max etag error when using ifMatch and ifNoneMatch', function () { return __awaiter(_this, void 0, void 0, function () {
-        var opts;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, createTextProfile_1.default()];
                 case 1:
                     _a.sent();
-                    opts = { ifMatch: 'incorrect_etag', ifNoneMatch: '*' };
-                    return [4 /*yield*/, overwriteProfileWithEtag(opts).expect(httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];
+                    return [4 /*yield*/, overwriteProfile_1.default()
+                            .set('If-Match', 'incorrect_etag')
+                            .set('If-None-Match', '*')
+                            .expect(httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];
                 case 2:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    }); });
+    it('should throw missing etags error when not using ifMatch and ifNoneMatch', function () { return __awaiter(_this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, overwriteProfile_1.default()
+                        .unset('If-None-Match')
+                        .expect(httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];
+                case 1:
                     _a.sent();
                     return [2 /*return*/];
             }

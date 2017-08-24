@@ -38,11 +38,16 @@ export const TEST_ACTIVITY_ID = 'http://www.example.com';
 export const TEST_IMMUTABLE_ACTIVITY_ID = 'http://www.example.org';
 export const TEST_INVALID_ACTIVITY_ID = 'http';
 export const TEST_PROFILE_ID = 'dummy_profile_id';
+export const TEST_IMMUTABLE_PROFILE_ID = 'immutable_profile_id';
 export const TEST_INVALID_TIMESTAMP = '2';
 
 export const TEST_CONTENT = 'dummy_content';
+export const TEST_IMMUTABLE_CONTENT = 'immutable_content';
 export const TEST_JSON_CONTENT = '[]';
 export const TEST_OBJECT_CONTENT = '{"foo":1}';
+export const TEST_OBJECT_PATCH_CONTENT = '{"bar":2}';
+export const TEST_OBJECT_MERGED_CONTENT = '{"foo":1,"bar":2}';
+export const TEST_INVALID_JSON_CONTENT = '{"foo:1,"bar":2}';
 
 export const TEXT_CONTENT_TYPE = 'text/plain';
 export const JSON_CONTENT_TYPE = 'application/json';

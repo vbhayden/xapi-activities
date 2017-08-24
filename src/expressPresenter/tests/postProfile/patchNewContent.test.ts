@@ -1,21 +1,19 @@
 import assertProfile from '../../../utils/assertProfile';
 import {
   JSON_CONTENT_TYPE,
-  TEST_ACTIVITY_ID,
   TEST_CONTENT,
   TEST_INVALID_ACTIVITY_ID,
   TEST_JSON_CONTENT,
   TEST_OBJECT_CONTENT,
-  TEST_PROFILE_ID,
   TEXT_CONTENT_TYPE,
 } from '../../../utils/testValues';
 import { CLIENT_ERROR_400_HTTP_CODE, NO_CONTENT_204_HTTP_CODE } from '../../utils/httpCodes';
-import createImmutableProfile from '../utils/createImmutableProfile';
 import setup from '../utils/setup';
 import patchContent from './utils/patchContent';
+import patchProfile from './utils/patchProfile';
 
 describe('expressPresenter.postProfile with new content', () => {
-  const { supertest } = setup();
+  setup();
 
   it('should error when patching with text content', async () => {
     await patchContent(TEST_CONTENT, TEXT_CONTENT_TYPE).expect(CLIENT_ERROR_400_HTTP_CODE);
@@ -30,43 +28,17 @@ describe('expressPresenter.postProfile with new content', () => {
     await assertProfile(TEST_OBJECT_CONTENT);
   });
 
-  it('should not patch existing models when patching a non-existing model', async () => {
-    await createImmutableProfile();
-    await patchContent(TEST_OBJECT_CONTENT, JSON_CONTENT_TYPE).expect(NO_CONTENT_204_HTTP_CODE);
-    await assertProfile(TEST_OBJECT_CONTENT);
+  it('should throw warnings when using an invalid activityId', async () => {
+    await patchProfile({
+      activityId: TEST_INVALID_ACTIVITY_ID,
+    }).expect(CLIENT_ERROR_400_HTTP_CODE);
   });
 
-  it('should throw warnings when using an invalid activity id', async () => {
-    await supertest
-      .post('/xAPI/activities/profile')
-      .set('Content-Type', TEXT_CONTENT_TYPE)
-      .query({
-        activityId: TEST_INVALID_ACTIVITY_ID,
-        profileId: TEST_PROFILE_ID,
-      })
-      .send(TEST_CONTENT)
-      .expect(CLIENT_ERROR_400_HTTP_CODE);
-  });
-
-  it('should throw warnings when missing the activity id', async () => {
-    await supertest
-      .post('/xAPI/activities/profile')
-      .set('Content-Type', TEXT_CONTENT_TYPE)
-      .query({
-        profileId: TEST_PROFILE_ID,
-      })
-      .send(TEST_CONTENT)
-      .expect(CLIENT_ERROR_400_HTTP_CODE);
+  it('should throw warnings when missing the activityId', async () => {
+    await patchProfile({ activityId: undefined }).expect(CLIENT_ERROR_400_HTTP_CODE);
   });
 
   it('should throw warnings when missing the profile id', async () => {
-    await supertest
-      .post('/xAPI/activities/profile')
-      .set('Content-Type', TEXT_CONTENT_TYPE)
-      .query({
-        activityId: TEST_ACTIVITY_ID,
-      })
-      .send(TEST_CONTENT)
-      .expect(CLIENT_ERROR_400_HTTP_CODE);
+    await patchProfile({ profileId: undefined }).expect(CLIENT_ERROR_400_HTTP_CODE);
   });
 });

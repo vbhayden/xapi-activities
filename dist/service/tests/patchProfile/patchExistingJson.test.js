@@ -37,35 +37,22 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var assertError_1 = require("jscommons/dist/tests/utils/assertError");
-var stringToStream = require("string-to-stream");
 var NonJsonObject_1 = require("../../../errors/NonJsonObject");
+var assertImmutableProfile_1 = require("../../../utils/assertImmutableProfile");
+var assertProfile_1 = require("../../../utils/assertProfile");
+var createImmutableProfile_1 = require("../../../utils/createImmutableProfile");
+var createObjectProfile_1 = require("../../../utils/createObjectProfile");
 var testValues_1 = require("../../../utils/testValues");
 var setup_1 = require("../utils/setup");
 var patchContent_1 = require("./utils/patchContent");
-var patchExistingContent_1 = require("./utils/patchExistingContent");
+var patchProfile_1 = require("./utils/patchProfile");
 describe('patchProfile with existing JSON content', function () {
-    var service = setup_1.default();
-    var createJsonContent = function () { return __awaiter(_this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, service.overwriteProfile({
-                        activityId: testValues_1.TEST_ACTIVITY_ID,
-                        client: testValues_1.TEST_CLIENT,
-                        content: stringToStream(testValues_1.TEST_JSON_CONTENT),
-                        contentType: testValues_1.JSON_CONTENT_TYPE,
-                        profileId: testValues_1.TEST_PROFILE_ID,
-                    })];
-                case 1:
-                    _a.sent();
-                    return [2 /*return*/];
-            }
-        });
-    }); };
+    setup_1.default();
     it('should error when patching with text content', function () { return __awaiter(_this, void 0, void 0, function () {
         var promise;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, createJsonContent()];
+                case 0: return [4 /*yield*/, createObjectProfile_1.default()];
                 case 1:
                     _a.sent();
                     promise = patchContent_1.default(testValues_1.TEST_CONTENT, testValues_1.TEXT_CONTENT_TYPE);
@@ -80,7 +67,7 @@ describe('patchProfile with existing JSON content', function () {
         var promise;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, createJsonContent()];
+                case 0: return [4 /*yield*/, createObjectProfile_1.default()];
                 case 1:
                     _a.sent();
                     promise = patchContent_1.default(testValues_1.TEST_JSON_CONTENT, testValues_1.JSON_CONTENT_TYPE);
@@ -91,16 +78,36 @@ describe('patchProfile with existing JSON content', function () {
             }
         });
     }); });
-    it('should error when patching with object content', function () { return __awaiter(_this, void 0, void 0, function () {
-        var promise;
+    it('should merge when patching with object content', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, createJsonContent()];
+                case 0: return [4 /*yield*/, createObjectProfile_1.default()];
                 case 1:
                     _a.sent();
-                    promise = patchExistingContent_1.default(testValues_1.TEST_OBJECT_CONTENT, testValues_1.JSON_CONTENT_TYPE);
-                    return [4 /*yield*/, assertError_1.default(NonJsonObject_1.default, promise)];
+                    return [4 /*yield*/, patchContent_1.default(testValues_1.TEST_OBJECT_PATCH_CONTENT, testValues_1.JSON_CONTENT_TYPE)];
                 case 2:
+                    _a.sent();
+                    return [4 /*yield*/, assertProfile_1.default(testValues_1.TEST_OBJECT_MERGED_CONTENT)];
+                case 3:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    }); });
+    it('should not patch existing models when patching a non-existing model', function () { return __awaiter(_this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, createObjectProfile_1.default()];
+                case 1:
+                    _a.sent();
+                    return [4 /*yield*/, createImmutableProfile_1.default()];
+                case 2:
+                    _a.sent();
+                    return [4 /*yield*/, patchProfile_1.default()];
+                case 3:
+                    _a.sent();
+                    return [4 /*yield*/, assertImmutableProfile_1.default()];
+                case 4:
                     _a.sent();
                     return [2 /*return*/];
             }

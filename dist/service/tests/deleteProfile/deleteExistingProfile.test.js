@@ -36,49 +36,23 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var assert = require("assert");
-var NoModel_1 = require("jscommons/dist/errors/NoModel");
-var assertError_1 = require("jscommons/dist/tests/utils/assertError");
-var stringToStream = require("string-to-stream");
-var testValues_1 = require("../../../utils/testValues");
-var createTextProfile_1 = require("../utils/createTextProfile");
+var assertDeleted_1 = require("../../../utils/assertDeleted");
+var createJsonProfile_1 = require("../../../utils/createJsonProfile");
+var createTextProfile_1 = require("../../../utils/createTextProfile");
 var setup_1 = require("../utils/setup");
 var deleteProfile_1 = require("./utils/deleteProfile");
-describe('deleteProfile with existing profile', function () {
-    var service = setup_1.default();
-    var assertDeleted = function () { return __awaiter(_this, void 0, void 0, function () {
-        var getProfilesResult, getProfilePromise;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, service.getProfiles({
-                        activityId: testValues_1.TEST_ACTIVITY_ID,
-                        client: testValues_1.TEST_CLIENT,
-                    })];
-                case 1:
-                    getProfilesResult = _a.sent();
-                    assert.deepEqual([], getProfilesResult.profileIds);
-                    getProfilePromise = service.getProfile({
-                        activityId: testValues_1.TEST_ACTIVITY_ID,
-                        client: testValues_1.TEST_CLIENT,
-                        profileId: testValues_1.TEST_PROFILE_ID,
-                    });
-                    return [4 /*yield*/, assertError_1.default(NoModel_1.default, getProfilePromise)];
-                case 2:
-                    _a.sent();
-                    return [2 /*return*/];
-            }
-        });
-    }); };
+describe('deleteProfile with existing state', function () {
+    setup_1.default();
     it('should delete when deleting text', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, createTextProfile_1.default()];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, deleteProfile_1.default(testValues_1.TEST_ACTIVITY_ID)];
+                    return [4 /*yield*/, deleteProfile_1.default()];
                 case 2:
                     _a.sent();
-                    return [4 /*yield*/, assertDeleted()];
+                    return [4 /*yield*/, assertDeleted_1.default()];
                 case 3:
                     _a.sent();
                     return [2 /*return*/];
@@ -88,19 +62,13 @@ describe('deleteProfile with existing profile', function () {
     it('should delete when deleting json', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, service.overwriteProfile({
-                        activityId: testValues_1.TEST_ACTIVITY_ID,
-                        client: testValues_1.TEST_CLIENT,
-                        content: stringToStream(testValues_1.TEST_JSON_CONTENT),
-                        contentType: testValues_1.JSON_CONTENT_TYPE,
-                        profileId: testValues_1.TEST_PROFILE_ID,
-                    })];
+                case 0: return [4 /*yield*/, createJsonProfile_1.default()];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, deleteProfile_1.default(testValues_1.TEST_ACTIVITY_ID)];
+                    return [4 /*yield*/, deleteProfile_1.default()];
                 case 2:
                     _a.sent();
-                    return [4 /*yield*/, assertDeleted()];
+                    return [4 /*yield*/, assertDeleted_1.default()];
                 case 3:
                     _a.sent();
                     return [2 /*return*/];

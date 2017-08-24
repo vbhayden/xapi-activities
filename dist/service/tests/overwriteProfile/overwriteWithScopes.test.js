@@ -1,12 +1,4 @@
 "use strict";
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -46,28 +38,17 @@ var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var Forbidden_1 = require("jscommons/dist/errors/Forbidden");
 var assertError_1 = require("jscommons/dist/tests/utils/assertError");
-var stringToStream = require("string-to-stream");
-var scopes_1 = require("../../../utils/scopes");
 var testValues_1 = require("../../../utils/testValues");
 var setup_1 = require("../utils/setup");
+var overwriteProfile_1 = require("./utils/overwriteProfile");
 describe('overwriteProfile with scopes', function () {
-    var service = setup_1.default();
-    var overwriteProfileWithScopes = function (scopes) {
-        return service.overwriteProfile({
-            activityId: testValues_1.TEST_ACTIVITY_ID,
-            client: __assign({}, testValues_1.TEST_CLIENT, { scopes: scopes }),
-            content: stringToStream(testValues_1.TEST_CONTENT),
-            contentType: testValues_1.TEXT_CONTENT_TYPE,
-            profileId: testValues_1.TEST_PROFILE_ID,
-        });
-    };
+    setup_1.default();
     it('should throw forbidden error when using invalid scope', function () { return __awaiter(_this, void 0, void 0, function () {
-        var scopes, promise;
+        var promise;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    scopes = ['invalid_scope'];
-                    promise = overwriteProfileWithScopes(scopes);
+                    promise = overwriteProfile_1.default({ client: testValues_1.TEST_INVALID_SCOPE_CLIENT });
                     return [4 /*yield*/, assertError_1.default(Forbidden_1.default, promise)];
                 case 1:
                     _a.sent();
@@ -76,12 +57,9 @@ describe('overwriteProfile with scopes', function () {
         });
     }); });
     it('should not throw an error when using valid scopes', function () { return __awaiter(_this, void 0, void 0, function () {
-        var scopes;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    scopes = [scopes_1.XAPI_PROFILE_ALL];
-                    return [4 /*yield*/, overwriteProfileWithScopes(scopes)];
+                case 0: return [4 /*yield*/, overwriteProfile_1.default({ client: testValues_1.TEST_VALID_SCOPE_CLIENT })];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];

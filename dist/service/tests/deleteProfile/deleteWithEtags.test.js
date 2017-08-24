@@ -38,11 +38,12 @@ var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var assertError_1 = require("jscommons/dist/tests/utils/assertError");
 var IfMatch_1 = require("../../../errors/IfMatch");
-var testValues_1 = require("../../../utils/testValues");
-var createTextProfile_1 = require("../utils/createTextProfile");
+var createTextProfile_1 = require("../../../utils/createTextProfile");
+var getTestProfile_1 = require("../../../utils/getTestProfile");
 var setup_1 = require("../utils/setup");
+var deleteProfile_1 = require("./utils/deleteProfile");
 describe('deleteProfile with etags', function () {
-    var service = setup_1.default();
+    setup_1.default();
     it('should allow deletion when using a correct etag', function () { return __awaiter(_this, void 0, void 0, function () {
         var getProfileResult;
         return __generator(this, function (_a) {
@@ -50,19 +51,10 @@ describe('deleteProfile with etags', function () {
                 case 0: return [4 /*yield*/, createTextProfile_1.default()];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, service.getProfile({
-                            activityId: testValues_1.TEST_ACTIVITY_ID,
-                            client: testValues_1.TEST_CLIENT,
-                            profileId: testValues_1.TEST_PROFILE_ID,
-                        })];
+                    return [4 /*yield*/, getTestProfile_1.default()];
                 case 2:
                     getProfileResult = _a.sent();
-                    return [4 /*yield*/, service.deleteProfile({
-                            activityId: testValues_1.TEST_ACTIVITY_ID,
-                            client: testValues_1.TEST_CLIENT,
-                            ifMatch: getProfileResult.etag,
-                            profileId: testValues_1.TEST_PROFILE_ID,
-                        })];
+                    return [4 /*yield*/, deleteProfile_1.default({ ifMatch: getProfileResult.etag })];
                 case 3:
                     _a.sent();
                     return [2 /*return*/];
@@ -76,12 +68,7 @@ describe('deleteProfile with etags', function () {
                 case 0: return [4 /*yield*/, createTextProfile_1.default()];
                 case 1:
                     _a.sent();
-                    promise = service.deleteProfile({
-                        activityId: testValues_1.TEST_ACTIVITY_ID,
-                        client: testValues_1.TEST_CLIENT,
-                        ifMatch: 'incorrect_etag',
-                        profileId: testValues_1.TEST_PROFILE_ID,
-                    });
+                    promise = deleteProfile_1.default({ ifMatch: 'incorrect_etag' });
                     return [4 /*yield*/, assertError_1.default(IfMatch_1.default, promise)];
                 case 2:
                     _a.sent();
@@ -95,11 +82,7 @@ describe('deleteProfile with etags', function () {
                 case 0: return [4 /*yield*/, createTextProfile_1.default()];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, service.deleteProfile({
-                            activityId: testValues_1.TEST_ACTIVITY_ID,
-                            client: testValues_1.TEST_CLIENT,
-                            profileId: testValues_1.TEST_PROFILE_ID,
-                        })];
+                    return [4 /*yield*/, deleteProfile_1.default()];
                 case 2:
                     _a.sent();
                     return [2 /*return*/];

@@ -36,23 +36,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var stringToStream = require("string-to-stream");
 var assertProfile_1 = require("../../../utils/assertProfile");
 var testValues_1 = require("../../../utils/testValues");
 var setup_1 = require("../utils/setup");
-var patchContent_1 = require("./utils/patchContent");
+var patchProfile_1 = require("./utils/patchProfile");
 describe('patchProfile when outside client', function () {
-    var service = setup_1.default();
+    setup_1.default();
     var patchOutsideProfile = function (client) { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, service.patchProfile({
-                        activityId: testValues_1.TEST_ACTIVITY_ID,
-                        client: client,
-                        content: stringToStream('{"bar":2}'),
-                        contentType: testValues_1.JSON_CONTENT_TYPE,
-                        profileId: testValues_1.TEST_PROFILE_ID,
-                    })];
+                case 0: return [4 /*yield*/, patchProfile_1.default({ client: client }, testValues_1.TEST_OBJECT_PATCH_CONTENT)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];
@@ -62,7 +55,7 @@ describe('patchProfile when outside client', function () {
     it('should not overwrite existing model when using a different organisation', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, patchContent_1.default(testValues_1.TEST_OBJECT_CONTENT, testValues_1.JSON_CONTENT_TYPE)];
+                case 0: return [4 /*yield*/, patchProfile_1.default()];
                 case 1:
                     _a.sent();
                     return [4 /*yield*/, patchOutsideProfile(testValues_1.TEST_CLIENT_OUTSIDE_ORG)];
@@ -78,7 +71,7 @@ describe('patchProfile when outside client', function () {
     it('should not overwrite existing model when using a different store', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, patchContent_1.default(testValues_1.TEST_OBJECT_CONTENT, testValues_1.JSON_CONTENT_TYPE)];
+                case 0: return [4 /*yield*/, patchProfile_1.default()];
                 case 1:
                     _a.sent();
                     return [4 /*yield*/, patchOutsideProfile(testValues_1.TEST_CLIENT_OUTSIDE_STORE)];

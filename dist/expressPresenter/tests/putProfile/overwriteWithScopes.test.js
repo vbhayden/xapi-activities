@@ -39,23 +39,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var testValues_1 = require("../../../utils/testValues");
 var httpCodes_1 = require("../../utils/httpCodes");
 var setup_1 = require("../utils/setup");
+var overwriteProfile_1 = require("./utils/overwriteProfile");
 describe('expressPresenter.putProfile with scopes', function () {
-    var supertest = setup_1.default().supertest;
-    var overwriteProfileWithScopes = function (token) {
-        return supertest
-            .put('/xAPI/activities/profile')
-            .set('Authorization', token)
-            .set('Content-Type', testValues_1.TEXT_CONTENT_TYPE)
-            .query({
-            activityId: testValues_1.TEST_ACTIVITY_ID,
-            profileId: testValues_1.TEST_PROFILE_ID,
-        })
-            .send(testValues_1.TEST_CONTENT);
-    };
+    setup_1.default();
     it('should throw forbidden error when using invalid scope', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, overwriteProfileWithScopes(testValues_1.TEST_INVALID_SCOPE_TOKEN).expect(httpCodes_1.FORBIDDEN_403_HTTP_CODE)];
+                case 0: return [4 /*yield*/, overwriteProfile_1.default()
+                        .set('Authorization', testValues_1.TEST_INVALID_SCOPE_TOKEN)
+                        .expect(httpCodes_1.FORBIDDEN_403_HTTP_CODE)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];
@@ -65,7 +57,9 @@ describe('expressPresenter.putProfile with scopes', function () {
     it('should not throw an error when using valid scopes', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, overwriteProfileWithScopes(testValues_1.TEST_VALID_SCOPE_TOKEN).expect(httpCodes_1.NO_CONTENT_204_HTTP_CODE)];
+                case 0: return [4 /*yield*/, overwriteProfile_1.default()
+                        .set('Authorization', testValues_1.TEST_VALID_SCOPE_TOKEN)
+                        .expect(httpCodes_1.NO_CONTENT_204_HTTP_CODE)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];

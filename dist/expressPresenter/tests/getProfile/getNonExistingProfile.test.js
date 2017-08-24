@@ -39,42 +39,40 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var testValues_1 = require("../../../utils/testValues");
 var httpCodes_1 = require("../../utils/httpCodes");
 var setup_1 = require("../utils/setup");
+var getProfile_1 = require("./utils/getProfile");
 describe('expressPresenter.getProfile with non-existing model', function () {
-    var supertest = setup_1.default().supertest;
+    setup_1.default();
     it('should error when getting a non-existing model', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, supertest
-                        .get('/xAPI/activities/profile')
-                        .query({
-                        activityId: testValues_1.TEST_ACTIVITY_ID,
-                        profileId: testValues_1.TEST_PROFILE_ID,
-                    })
-                        .expect(httpCodes_1.NOT_FOUND_404_HTTP_CODE)];
+                case 0: return [4 /*yield*/, getProfile_1.default().expect(httpCodes_1.NOT_FOUND_404_HTTP_CODE)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];
             }
         });
     }); });
-    it('should throw warnings when using an invalid activity id', function () { return __awaiter(_this, void 0, void 0, function () {
+    it('should throw warnings when using an invalid activityId', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, supertest
-                        .get('/xAPI/activities/profile')
-                        .query({
-                        activityId: testValues_1.TEST_INVALID_ACTIVITY_ID,
-                        profileId: testValues_1.TEST_PROFILE_ID,
-                    })
-                        .expect(httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];
+                case 0: return [4 /*yield*/, getProfile_1.default({
+                        activityId: JSON.stringify(testValues_1.TEST_INVALID_ACTIVITY_ID),
+                    }).expect(httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/];
             }
         });
     }); });
-    // Could have tested that 400s are returned when missing activity ID and profile ID.
-    // However, when missing profile ID, the express presenter will use getProfiles.
-    // The missing actvitiy ID case is covered in the getProfiles tests.
+    it('should throw warnings when missing the activityId', function () { return __awaiter(_this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, getProfile_1.default({ activityId: undefined }).expect(httpCodes_1.CLIENT_ERROR_400_HTTP_CODE)];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/];
+            }
+        });
+    }); });
 });
 //# sourceMappingURL=getNonExistingProfile.test.js.map

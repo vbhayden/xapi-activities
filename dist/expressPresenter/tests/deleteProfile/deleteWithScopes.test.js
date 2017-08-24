@@ -36,21 +36,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var testValues_1 = require("../../../utils/testValues");
 var httpCodes_1 = require("../../utils/httpCodes");
 var setup_1 = require("../utils/setup");
+var deleteProfile_1 = require("./utils/deleteProfile");
 describe('expressPresenter.deleteProfile with scopes', function () {
-    var supertest = setup_1.default().supertest;
+    setup_1.default();
     it('should throw forbidden error when using invalid scope', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, supertest
-                        .delete('/xAPI/activities/profile')
+                case 0: return [4 /*yield*/, deleteProfile_1.default()
                         .set('Authorization', 'invalid_scope_client')
-                        .query({
-                        activityId: testValues_1.TEST_ACTIVITY_ID,
-                        profileId: testValues_1.TEST_PROFILE_ID,
-                    })
                         .expect(httpCodes_1.FORBIDDEN_403_HTTP_CODE)];
                 case 1:
                     _a.sent();
@@ -61,13 +56,8 @@ describe('expressPresenter.deleteProfile with scopes', function () {
     it('should throw no model error when using valid scopes', function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, supertest
-                        .delete('/xAPI/activities/profile')
+                case 0: return [4 /*yield*/, deleteProfile_1.default()
                         .set('Authorization', 'valid_scope_client')
-                        .query({
-                        activityId: testValues_1.TEST_ACTIVITY_ID,
-                        profileId: testValues_1.TEST_PROFILE_ID,
-                    })
                         .expect(httpCodes_1.NOT_FOUND_404_HTTP_CODE)];
                 case 1:
                     _a.sent();

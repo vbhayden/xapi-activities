@@ -1,10 +1,15 @@
 import { Test } from 'supertest';
-import { TEST_PROFILE_ID } from '../../../../utils/testValues';
+import { xapiHeaderVersion } from '../../../../utils/constants';
+import { TEST_ACTIVITY_ID, TEST_PROFILE_ID } from '../../../../utils/testValues';
 import supertest from '../../utils/supertest';
 
-export default (activityId: string): Test => {
-  const profileId = TEST_PROFILE_ID;
+export default (optsOverrides: object = {}): Test => {
   return supertest
     .delete('/xAPI/activities/profile')
-    .query({ activityId, profileId });
+    .set('X-Experience-API-Version', xapiHeaderVersion)
+    .query({
+      activityId: TEST_ACTIVITY_ID,
+      profileId: TEST_PROFILE_ID,
+      ...optsOverrides,
+    });
 };

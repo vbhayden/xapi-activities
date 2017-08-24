@@ -39,20 +39,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var NoModel_1 = require("jscommons/dist/errors/NoModel");
 var assertError_1 = require("jscommons/dist/tests/utils/assertError");
 var rulr_1 = require("rulr");
+var getTestProfile_1 = require("../../../utils/getTestProfile");
 var testValues_1 = require("../../../utils/testValues");
 var setup_1 = require("../utils/setup");
 describe('getProfile with non-existing model', function () {
-    var service = setup_1.default();
+    setup_1.default();
     it('should error when getting a non-existing model', function () { return __awaiter(_this, void 0, void 0, function () {
         var promise;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    promise = service.getProfile({
-                        activityId: testValues_1.TEST_ACTIVITY_ID,
-                        client: testValues_1.TEST_CLIENT,
-                        profileId: testValues_1.TEST_PROFILE_ID,
-                    });
+                    promise = getTestProfile_1.default();
                     return [4 /*yield*/, assertError_1.default(NoModel_1.default, promise)];
                 case 1:
                     _a.sent();
@@ -60,16 +57,12 @@ describe('getProfile with non-existing model', function () {
             }
         });
     }); });
-    it('should throw warnings when using an invalid activity id', function () { return __awaiter(_this, void 0, void 0, function () {
+    it('should throw warnings when using an invalid activityId', function () { return __awaiter(_this, void 0, void 0, function () {
         var promise;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    promise = service.getProfile({
-                        activityId: testValues_1.TEST_INVALID_ACTIVITY_ID,
-                        client: testValues_1.TEST_CLIENT,
-                        profileId: testValues_1.TEST_PROFILE_ID,
-                    });
+                    promise = getTestProfile_1.default({ activityId: testValues_1.TEST_INVALID_ACTIVITY_ID });
                     return [4 /*yield*/, assertError_1.default(rulr_1.Warnings, promise)];
                 case 1:
                     _a.sent();

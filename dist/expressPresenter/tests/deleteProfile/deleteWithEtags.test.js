@@ -36,12 +36,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var testValues_1 = require("../../../utils/testValues");
+var createTextProfile_1 = require("../../../utils/createTextProfile");
+var getTestProfile_1 = require("../../../utils/getTestProfile");
 var httpCodes_1 = require("../../utils/httpCodes");
-var createTextProfile_1 = require("../utils/createTextProfile");
 var setup_1 = require("../utils/setup");
+var deleteProfile_1 = require("./utils/deleteProfile");
 describe('expressPresenter.deleteProfile with etags', function () {
-    var _a = setup_1.default(), service = _a.service, supertest = _a.supertest;
+    setup_1.default();
     it('should allow deletion when using a correct etag', function () { return __awaiter(_this, void 0, void 0, function () {
         var getProfileResult;
         return __generator(this, function (_a) {
@@ -49,20 +50,11 @@ describe('expressPresenter.deleteProfile with etags', function () {
                 case 0: return [4 /*yield*/, createTextProfile_1.default()];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, service.getProfile({
-                            activityId: testValues_1.TEST_ACTIVITY_ID,
-                            client: testValues_1.TEST_CLIENT,
-                            profileId: testValues_1.TEST_PROFILE_ID,
-                        })];
+                    return [4 /*yield*/, getTestProfile_1.default()];
                 case 2:
                     getProfileResult = _a.sent();
-                    return [4 /*yield*/, supertest
-                            .delete('/xAPI/activities/profile')
+                    return [4 /*yield*/, deleteProfile_1.default()
                             .set('If-Match', "\"" + getProfileResult.etag + "\"")
-                            .query({
-                            activityId: testValues_1.TEST_ACTIVITY_ID,
-                            profileId: testValues_1.TEST_PROFILE_ID,
-                        })
                             .expect(httpCodes_1.NO_CONTENT_204_HTTP_CODE)];
                 case 3:
                     _a.sent();
@@ -76,13 +68,8 @@ describe('expressPresenter.deleteProfile with etags', function () {
                 case 0: return [4 /*yield*/, createTextProfile_1.default()];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, supertest
-                            .delete('/xAPI/activities/profile')
+                    return [4 /*yield*/, deleteProfile_1.default()
                             .set('If-Match', "\"incorrect_etag\"")
-                            .query({
-                            activityId: testValues_1.TEST_ACTIVITY_ID,
-                            profileId: testValues_1.TEST_PROFILE_ID,
-                        })
                             .expect(httpCodes_1.PRECONDITION_FAILED_412_HTTP_CODE)];
                 case 2:
                     _a.sent();
@@ -96,13 +83,7 @@ describe('expressPresenter.deleteProfile with etags', function () {
                 case 0: return [4 /*yield*/, createTextProfile_1.default()];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, supertest
-                            .delete('/xAPI/activities/profile')
-                            .query({
-                            activityId: testValues_1.TEST_ACTIVITY_ID,
-                            profileId: testValues_1.TEST_PROFILE_ID,
-                        })
-                            .expect(httpCodes_1.NO_CONTENT_204_HTTP_CODE)];
+                    return [4 /*yield*/, deleteProfile_1.default().expect(httpCodes_1.NO_CONTENT_204_HTTP_CODE)];
                 case 2:
                     _a.sent();
                     return [2 /*return*/];

@@ -6,6 +6,7 @@ import IfNoneMatch from '../errors/IfNoneMatch';
 import InvalidContentType from '../errors/InvalidContentType';
 import InvalidMethod from '../errors/InvalidMethod';
 import MaxEtags from '../errors/MaxEtags';
+import MissingEtags from '../errors/MissingEtags';
 import NonJsonObject from '../errors/NonJsonObject';
 
 interface Translator extends CommonTranslator {
@@ -15,6 +16,7 @@ interface Translator extends CommonTranslator {
   readonly invalidContentTypeError: (err: InvalidContentType) => string;
   readonly invalidMethodError: (err: InvalidMethod) => string;
   readonly maxEtagsError: (err: MaxEtags) => string;
+  readonly missingEtagsError: (err: MissingEtags) => string;
   readonly nonJsonObjectError: (err: NonJsonObject) => string;
   readonly xapiTypeWarning: (err: TypeWarning) => string;
 }

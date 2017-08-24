@@ -10,6 +10,7 @@ import IfNoneMatch from '../../errors/IfNoneMatch';
 import InvalidContentType from '../../errors/InvalidContentType';
 import InvalidMethod from '../../errors/InvalidMethod';
 import MaxEtags from '../../errors/MaxEtags';
+import MissingEtags from '../../errors/MissingEtags';
 import NonJsonObject from '../../errors/NonJsonObject';
 import Translator from '../../translatorFactory/Translator';
 import { xapiHeaderVersion } from '../../utils/constants';
@@ -36,7 +37,11 @@ export default ({ translator, errorId, res, err }: Options): Response => {
   }
 
   switch (err.constructor) {
-    case InvalidContentType: {
+    case MissingEtags: {
+      const code = CLIENT_ERROR_400_HTTP_CODE;
+      const message = translator.missingEtagsError(err as MissingEtags);
+      return sendMessage({ res, code, errorId, message });
+    } case InvalidContentType: {
       const code = CLIENT_ERROR_400_HTTP_CODE;
       const message = translator.invalidContentTypeError(err as InvalidContentType);
       return sendMessage({ res, code, errorId, message });

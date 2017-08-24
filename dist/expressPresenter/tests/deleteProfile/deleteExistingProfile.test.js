@@ -36,12 +36,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var testValues_1 = require("../../../utils/testValues");
+var assertDeleted_1 = require("../../../utils/assertDeleted");
+var createJsonProfile_1 = require("../../../utils/createJsonProfile");
+var createTextProfile_1 = require("../../../utils/createTextProfile");
 var httpCodes_1 = require("../../utils/httpCodes");
-var createJsonProfile_1 = require("../utils/createJsonProfile");
-var createTextProfile_1 = require("../utils/createTextProfile");
 var setup_1 = require("../utils/setup");
-var assertDeleted_1 = require("./utils/assertDeleted");
 var deleteProfile_1 = require("./utils/deleteProfile");
 describe('expressPresenter.deleteProfile with existing profile', function () {
     setup_1.default();
@@ -51,7 +50,7 @@ describe('expressPresenter.deleteProfile with existing profile', function () {
                 case 0: return [4 /*yield*/, createTextProfile_1.default()];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, deleteProfile_1.default(testValues_1.TEST_ACTIVITY_ID).expect(httpCodes_1.NO_CONTENT_204_HTTP_CODE)];
+                    return [4 /*yield*/, deleteProfile_1.default().expect(httpCodes_1.NO_CONTENT_204_HTTP_CODE)];
                 case 2:
                     _a.sent();
                     return [4 /*yield*/, assertDeleted_1.default()];
@@ -67,7 +66,7 @@ describe('expressPresenter.deleteProfile with existing profile', function () {
                 case 0: return [4 /*yield*/, createJsonProfile_1.default()];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, deleteProfile_1.default(testValues_1.TEST_ACTIVITY_ID).expect(httpCodes_1.NO_CONTENT_204_HTTP_CODE)];
+                    return [4 /*yield*/, deleteProfile_1.default().expect(httpCodes_1.NO_CONTENT_204_HTTP_CODE)];
                 case 2:
                     _a.sent();
                     return [4 /*yield*/, assertDeleted_1.default()];

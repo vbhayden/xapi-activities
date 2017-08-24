@@ -38,38 +38,35 @@ var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var assert = require("assert");
 var streamToString = require("stream-to-string");
-var testService_1 = require("./testService");
+var getTestProfile_1 = require("./getTestProfile");
+var getTestProfiles_1 = require("./getTestProfiles");
 var testValues_1 = require("./testValues");
-exports.default = function (content) { return __awaiter(_this, void 0, void 0, function () {
-    var expectedProfileIds, activityProfilesResult, actualProfileIds, agentProfileResult, actualContent;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                expectedProfileIds = [testValues_1.TEST_PROFILE_ID];
-                return [4 /*yield*/, testService_1.default.getProfiles({
-                        activityId: testValues_1.TEST_ACTIVITY_ID,
-                        client: testValues_1.TEST_CLIENT,
-                    })];
-            case 1:
-                activityProfilesResult = _a.sent();
-                actualProfileIds = activityProfilesResult.profileIds;
-                assert.deepEqual(actualProfileIds, expectedProfileIds);
-                return [4 /*yield*/, testService_1.default.getProfile({
-                        activityId: testValues_1.TEST_ACTIVITY_ID,
-                        client: testValues_1.TEST_CLIENT,
-                        profileId: testValues_1.TEST_PROFILE_ID,
-                    })];
-            case 2:
-                agentProfileResult = _a.sent();
-                return [4 /*yield*/, streamToString(agentProfileResult.content)];
-            case 3:
-                actualContent = _a.sent();
-                assert.equal(actualContent, content);
-                assert.equal(agentProfileResult.contentType.constructor, String);
-                assert.equal(agentProfileResult.updatedAt.constructor, Date);
-                assert.equal(agentProfileResult.etag.constructor, String);
-                return [2 /*return*/];
-        }
+exports.default = function (content, optsOverrides) {
+    if (optsOverrides === void 0) { optsOverrides = {}; }
+    return __awaiter(_this, void 0, void 0, function () {
+        var expectedProfileIds, profilesResult, actualProfileIds, agentProfileResult, actualContent;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    expectedProfileIds = [testValues_1.TEST_PROFILE_ID];
+                    return [4 /*yield*/, getTestProfiles_1.default(optsOverrides)];
+                case 1:
+                    profilesResult = _a.sent();
+                    actualProfileIds = profilesResult.profileIds;
+                    assert.deepEqual(actualProfileIds, expectedProfileIds);
+                    return [4 /*yield*/, getTestProfile_1.default(optsOverrides)];
+                case 2:
+                    agentProfileResult = _a.sent();
+                    return [4 /*yield*/, streamToString(agentProfileResult.content)];
+                case 3:
+                    actualContent = _a.sent();
+                    assert.equal(actualContent, content);
+                    assert.equal(agentProfileResult.contentType.constructor, String);
+                    assert.equal(agentProfileResult.updatedAt.constructor, Date);
+                    assert.equal(agentProfileResult.etag.constructor, String);
+                    return [2 /*return*/];
+            }
+        });
     });
-}); };
+};
 //# sourceMappingURL=assertProfile.js.map
