@@ -18,6 +18,7 @@ before_script:
 script:
   - npm run cover-ci
   - npm run build
+  - node ./node_modules/travis-check-changes/travis-check-changes.js
   - npm run lint -- -c tslint.travis.json
   - npm run duplication -- --limit=0.01
 
