@@ -11,12 +11,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var service_1 = require("jscommons/dist/service");
 var deleteProfile_1 = require("./deleteProfile");
 var getClient_1 = require("./getClient");
-var getFullActivity_1 = require("./getFullActivity");
 var getProfile_1 = require("./getProfile");
 var getProfiles_1 = require("./getProfiles");
 var overwriteProfile_1 = require("./overwriteProfile");
 var patchProfile_1 = require("./patchProfile");
 exports.default = function (config) {
-    return __assign({ deleteProfile: deleteProfile_1.default(config), getClient: getClient_1.default(config), getFullActivity: getFullActivity_1.default(config), getProfile: getProfile_1.default(config), getProfiles: getProfiles_1.default(config), overwriteProfile: overwriteProfile_1.default(config), patchProfile: patchProfile_1.default(config) }, service_1.default(config));
+    return __assign({ deleteProfile: deleteProfile_1.default(config), getClient: getClient_1.default(config), getProfile: getProfile_1.default(config), getProfiles: getProfiles_1.default(config), overwriteProfile: overwriteProfile_1.default(config), patchProfile: patchProfile_1.default(config) }, service_1.default(config));
 };
 //# sourceMappingURL=index.js.map
