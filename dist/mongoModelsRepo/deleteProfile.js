@@ -74,6 +74,7 @@ exports.default = function (config) {
                         deletedDoc = opResult.value;
                         return [2 /*return*/, {
                                 contentType: deletedDoc.contentType,
+                                extension: deletedDoc.extension,
                                 id: deletedDoc._id.toString(),
                             }];
                     }

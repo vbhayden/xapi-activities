@@ -23,7 +23,7 @@ export default (config: Config) => {
       }
 
       await config.repo.deleteProfileContent({
-        key: deleteResult.id,
+        key: `${deleteResult.id}.${deleteResult.extension}`,
       });
     } catch (err) {
       // If no profile was found, we will handle this as a 204 instead

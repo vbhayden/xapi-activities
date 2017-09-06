@@ -8,6 +8,7 @@ export interface Options {
   readonly content: any;
   readonly contentType: string;
   readonly etag: string;
+  readonly extension: string;
   readonly activityId: string;
   readonly profileId: string;
 }
@@ -18,6 +19,7 @@ export default (config: Config, opts: Options): Profile => {
     content: opts.content,
     contentType: opts.contentType,
     etag: opts.etag,
+    extension: opts.extension,
     id: uuid(),
     lrs: opts.client.lrs_id,
     organisation: opts.client.organisation,

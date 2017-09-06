@@ -70,9 +70,9 @@ exports.default = function (config) {
             // Creates the Profile if the profile doesn't already exist.
             if (existingId === undefined) {
                 createdProfile = createProfile_1.default(config, opts);
-                return [2 /*return*/, { id: createdProfile.id }];
+                return [2 /*return*/, { id: createdProfile.id, extension: createdProfile.extension }];
             }
-            return [2 /*return*/, { id: existingId }];
+            return [2 /*return*/, { id: existingId, extension: '' }];
         });
     }); };
 };

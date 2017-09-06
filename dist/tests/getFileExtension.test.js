@@ -36,43 +36,32 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-/* tslint:disable:no-let */
-var NoModel_1 = require("jscommons/dist/errors/NoModel");
-var IfMatch_1 = require("../errors/IfMatch");
-var matchProfileIdentifier_1 = require("./utils/matchProfileIdentifier");
-exports.default = function (config) {
-    return function (opts) { return __awaiter(_this, void 0, void 0, function () {
-        var storedProfiles, client, activityId, existingId, existingContentType, existingExtension, remainingProfiles;
+var assert = require("assert");
+var getFileExtension_1 = require("../utils/getFileExtension");
+describe('getFileExtension', function () {
+    it('should return json on application/json', function () { return __awaiter(_this, void 0, void 0, function () {
+        var ext;
         return __generator(this, function (_a) {
-            storedProfiles = config.state.activityProfiles;
-            client = opts.client;
-            activityId = opts.activityId;
-            remainingProfiles = storedProfiles.filter(function (profile) {
-                var isMatch = (matchProfileIdentifier_1.default({ client: client, activityId: activityId, profile: profile }) &&
-                    profile.profileId === opts.profileId);
-                if (isMatch) {
-                    existingId = profile.id;
-                    existingContentType = profile.contentType;
-                    existingExtension = profile.extension;
-                    if (opts.ifMatch !== undefined && profile.etag !== opts.ifMatch) {
-                        throw new IfMatch_1.default();
-                    }
-                }
-                return !isMatch;
-            });
-            if (existingId !== undefined &&
-                existingContentType !== undefined &&
-                existingExtension !== undefined) {
-                config.state.activityProfiles = remainingProfiles;
-                return [2 /*return*/, {
-                        contentType: existingContentType,
-                        extension: existingExtension,
-                        id: existingId,
-                    }];
-            }
-            /* istanbul ignore next */
-            throw new NoModel_1.default('Activity Profile');
+            ext = getFileExtension_1.default('application/json');
+            assert.equal(ext, 'json');
+            return [2 /*return*/];
         });
-    }); };
-};
-//# sourceMappingURL=deleteProfile.js.map
+    }); });
+    it('should return known extension', function () { return __awaiter(_this, void 0, void 0, function () {
+        var ext;
+        return __generator(this, function (_a) {
+            ext = getFileExtension_1.default('text/plain');
+            assert.equal(ext, 'txt');
+            return [2 /*return*/];
+        });
+    }); });
+    it('should return `bin` on unknown extension', function () { return __awaiter(_this, void 0, void 0, function () {
+        var ext;
+        return __generator(this, function (_a) {
+            ext = getFileExtension_1.default('ht2/binary');
+            assert.equal(ext, 'bin');
+            return [2 /*return*/];
+        });
+    }); });
+});
+//# sourceMappingURL=getFileExtension.test.js.map

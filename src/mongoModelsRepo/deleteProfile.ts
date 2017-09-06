@@ -12,8 +12,8 @@ export default (config: Config) => {
     // Docs: https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Communication.md#concurrency
     const etagFilter = (
       opts.ifMatch !== undefined
-      ? { etag: opts.ifMatch }
-      : {}
+        ? { etag: opts.ifMatch }
+        : {}
     );
 
     const profileFilter = {
@@ -41,6 +41,7 @@ export default (config: Config) => {
       const deletedDoc = opResult.value;
       return {
         contentType: deletedDoc.contentType,
+        extension: deletedDoc.extension,
         id: deletedDoc._id.toString(),
       };
     }
