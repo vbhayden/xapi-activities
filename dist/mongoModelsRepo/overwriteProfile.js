@@ -76,6 +76,7 @@ exports.default = function (config) {
                         content: opts.content,
                         contentType: opts.contentType,
                         etag: opts.etag,
+                        extension: opts.extension,
                         isObjectContent: lodash_1.isPlainObject(opts.content),
                         // Updates updatedAt time.
                         updatedAt: new Date(),
@@ -93,6 +94,7 @@ exports.default = function (config) {
                     updatedDocuments = updateOpResult.lastErrorObject.n;
                     if (updatedDocuments === 1) {
                         return [2 /*return*/, {
+                                extension: updateOpResult.value.extension,
                                 id: updateOpResult.value._id.toString(),
                             }];
                     }
@@ -115,6 +117,7 @@ exports.default = function (config) {
                         throw new IfNoneMatch_1.default();
                     }
                     return [2 /*return*/, {
+                            extension: createOpResult.value.extension,
                             id: createOpResult.value._id.toString(),
                         }];
             }

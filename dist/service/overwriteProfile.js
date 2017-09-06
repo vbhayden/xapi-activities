@@ -39,12 +39,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var streamToString = require("stream-to-string");
 var Conflict_1 = require("../errors/Conflict");
 var MissingEtags_1 = require("../errors/MissingEtags");
+var getFileExtension_1 = require("../utils/getFileExtension");
 var checkProfileWriteScopes_1 = require("./utils/checkProfileWriteScopes");
 var createEtag_1 = require("./utils/createEtag");
 var validateActivityId_1 = require("./utils/validateActivityId");
 exports.default = function (config) {
     return function (opts) { return __awaiter(_this, void 0, void 0, function () {
-        var etag, hasProfile, jsonContent, _a, _b, _c, overwriteProfileResult;
+        var etag, hasProfile, jsonContent, _a, _b, _c, extension, overwriteProfileResult;
         return __generator(this, function (_d) {
             switch (_d.label) {
                 case 0:
@@ -78,12 +79,14 @@ exports.default = function (config) {
                     _d.label = 5;
                 case 5:
                     jsonContent = (_a);
+                    extension = getFileExtension_1.default(opts.contentType);
                     return [4 /*yield*/, config.repo.overwriteProfile({
                             activityId: opts.activityId,
                             client: opts.client,
                             content: jsonContent,
                             contentType: opts.contentType,
                             etag: etag,
+                            extension: extension,
                             ifMatch: opts.ifMatch,
                             ifNoneMatch: opts.ifNoneMatch,
                             profileId: opts.profileId,
@@ -93,7 +96,8 @@ exports.default = function (config) {
                     if (!(opts.contentType !== 'application/json')) return [3 /*break*/, 8];
                     return [4 /*yield*/, config.repo.storeProfileContent({
                             content: opts.content,
-                            key: overwriteProfileResult.id,
+                            key: overwriteProfileResult.id + "." + extension,
+                            lrs_id: opts.client.lrs_id,
                         })];
                 case 7:
                     _d.sent();

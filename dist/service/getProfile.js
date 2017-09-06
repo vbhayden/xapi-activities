@@ -63,7 +63,8 @@ exports.default = function (config) {
                             }];
                     }
                     return [4 /*yield*/, config.repo.getProfileContent({
-                            key: profile.id,
+                            key: profile.id + "." + profile.extension,
+                            lrs_id: opts.client.lrs_id,
                         })];
                 case 2:
                     profileContentResult = _a.sent();

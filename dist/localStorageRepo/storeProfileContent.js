@@ -37,13 +37,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs = require("fs-extra");
+var getStorageDir_1 = require("../utils/getStorageDir");
 exports.default = function (config) {
     return function (opts) { return __awaiter(_this, void 0, void 0, function () {
         var profileDir;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    profileDir = config.storageDir + "/activityProfiles";
+                    profileDir = getStorageDir_1.default({ subfolder: config.storageDir, lrs_id: opts.lrs_id });
                     return [4 /*yield*/, fs.ensureDir(profileDir)];
                 case 1:
                     _a.sent();

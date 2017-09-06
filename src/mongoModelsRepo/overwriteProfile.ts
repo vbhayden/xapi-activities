@@ -33,6 +33,7 @@ export default (config: Config) => {
       content: opts.content,
       contentType: opts.contentType,
       etag: opts.etag,
+      extension: opts.extension,
       isObjectContent: isPlainObject(opts.content),
 
       // Updates updatedAt time.
@@ -50,17 +51,18 @@ export default (config: Config) => {
         ...ifMatchFilter,
         ...profileFilter,
       }, {
-        $set: update,
-      }, {
-        returnOriginal: false, // Ensures the updated document is returned.
-        upsert: false, // Does not create the profile when it doesn't exist.
-      });
+          $set: update,
+        }, {
+          returnOriginal: false, // Ensures the updated document is returned.
+          upsert: false, // Does not create the profile when it doesn't exist.
+        });
 
       // Determines if the Profile was updated.
       // Docs: https://docs.mongodb.com/manual/reference/command/getLastError/#getLastError.n
       const updatedDocuments = updateOpResult.lastErrorObject.n as number;
       if (updatedDocuments === 1) {
         return {
+          extension: updateOpResult.value.extension,
           id: updateOpResult.value._id.toString(),
         };
       }
@@ -72,9 +74,9 @@ export default (config: Config) => {
     const createOpResult = await collection.findOneAndUpdate(profileFilter, {
       $setOnInsert: update,
     }, {
-      returnOriginal: false, // Ensures the updated document is returned.
-      upsert: true, // Creates the profile when it's not found.
-    });
+        returnOriginal: false, // Ensures the updated document is returned.
+        upsert: true, // Creates the profile when it's not found.
+      });
 
     // Determines if the Profile was created or found.
     // Docs: https://docs.mongodb.com/manual/reference/command/getLastError/#getLastError.n
@@ -91,6 +93,7 @@ export default (config: Config) => {
     }
 
     return {
+      extension: createOpResult.value.extension,
       id: createOpResult.value._id.toString(),
     };
   };

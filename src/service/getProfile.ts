@@ -25,7 +25,8 @@ export default (config: Config) => {
     }
 
     const profileContentResult = await config.repo.getProfileContent({
-      key: profile.id,
+      key: `${profile.id}.${profile.extension}`,
+      lrs_id: opts.client.lrs_id,
     });
     return {
       content: profileContentResult.content,

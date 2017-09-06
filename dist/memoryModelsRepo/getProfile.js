@@ -40,7 +40,7 @@ var NoModel_1 = require("jscommons/dist/errors/NoModel");
 var matchProfileIdentifier_1 = require("./utils/matchProfileIdentifier");
 exports.default = function (config) {
     return function (opts) { return __awaiter(_this, void 0, void 0, function () {
-        var client, activityId, matchingProfiles, isExistingIfi, _a, id, content, contentType, updatedAt, etag;
+        var client, activityId, matchingProfiles, isExistingIfi, _a, id, content, contentType, updatedAt, etag, extension;
         return __generator(this, function (_b) {
             client = opts.client;
             activityId = opts.activityId;
@@ -53,8 +53,8 @@ exports.default = function (config) {
                 /* istanbul ignore next */
                 throw new NoModel_1.default('Activity Profile');
             }
-            _a = matchingProfiles[0], id = _a.id, content = _a.content, contentType = _a.contentType, updatedAt = _a.updatedAt, etag = _a.etag;
-            return [2 /*return*/, { id: id, content: content, contentType: contentType, updatedAt: updatedAt, etag: etag }];
+            _a = matchingProfiles[0], id = _a.id, content = _a.content, contentType = _a.contentType, updatedAt = _a.updatedAt, etag = _a.etag, extension = _a.extension;
+            return [2 /*return*/, { id: id, content: content, contentType: contentType, updatedAt: updatedAt, etag: etag, extension: extension }];
         });
     }); };
 };

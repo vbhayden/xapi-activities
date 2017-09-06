@@ -2,6 +2,7 @@ import { isPlainObject } from 'lodash';
 import * as streamToString from 'stream-to-string';
 import NonJsonObject from '../errors/NonJsonObject';
 import PatchProfileOptions from '../serviceFactory/options/PatchProfileOptions';
+import getFileExtension from '../utils/getFileExtension';
 import Config from './Config';
 import checkProfileWriteScopes from './utils/checkProfileWriteScopes';
 import createEtag from './utils/createEtag';
@@ -22,6 +23,8 @@ export default (config: Config) => {
       throw new NonJsonObject();
     }
 
+    const extension = getFileExtension(opts.contentType);
+
     const etag = createEtag();
     await config.repo.patchProfile({
       activityId: opts.activityId,
@@ -29,6 +32,7 @@ export default (config: Config) => {
       content,
       contentType: opts.contentType,
       etag,
+      extension,
       ifMatch: opts.ifMatch,
       ifNoneMatch: opts.ifNoneMatch,
       profileId: opts.profileId,

@@ -10,7 +10,7 @@ import matchUniqueProfile from './utils/matchUniqueProfile';
 export default (config: Config) => {
   return async (opts: OverwriteProfileOptions): Promise<OverwriteProfileResult> => {
     // Overwrites the content if the profile does already exist.
-    let existingId: string|undefined;
+    let existingId: string | undefined;
     const { activityId, profileId, client, ifMatch, ifNoneMatch } = opts;
     checkMaxEtags(ifMatch, ifNoneMatch);
     config.state.activityProfiles = config.state.activityProfiles.map((profile) => {
@@ -39,9 +39,9 @@ export default (config: Config) => {
     // Creates the Profile if the profile doesn't already exist.
     if (existingId === undefined) {
       const createdProfile = createProfile(config, opts);
-      return { id: createdProfile.id };
+      return { id: createdProfile.id, extension: createdProfile.extension };
     }
 
-    return { id: existingId };
+    return { id: existingId, extension: '' };
   };
 };

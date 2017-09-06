@@ -6,6 +6,7 @@ interface Model {
     readonly profileId: string;
     readonly content?: any;
     readonly contentType: string;
+    readonly extension: string;
     readonly lrs: string;
     readonly updatedAt: Date;
 }

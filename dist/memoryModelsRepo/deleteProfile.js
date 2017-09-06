@@ -42,7 +42,7 @@ var IfMatch_1 = require("../errors/IfMatch");
 var matchProfileIdentifier_1 = require("./utils/matchProfileIdentifier");
 exports.default = function (config) {
     return function (opts) { return __awaiter(_this, void 0, void 0, function () {
-        var storedProfiles, client, activityId, existingId, existingContentType, remainingProfiles;
+        var storedProfiles, client, activityId, existingId, existingContentType, existingExtension, remainingProfiles;
         return __generator(this, function (_a) {
             storedProfiles = config.state.activityProfiles;
             client = opts.client;
@@ -53,15 +53,22 @@ exports.default = function (config) {
                 if (isMatch) {
                     existingId = profile.id;
                     existingContentType = profile.contentType;
+                    existingExtension = profile.extension;
                     if (opts.ifMatch !== undefined && profile.etag !== opts.ifMatch) {
                         throw new IfMatch_1.default();
                     }
                 }
                 return !isMatch;
             });
-            if (existingId !== undefined && existingContentType !== undefined) {
+            if (existingId !== undefined &&
+                existingContentType !== undefined &&
+                existingExtension !== undefined) {
                 config.state.activityProfiles = remainingProfiles;
-                return [2 /*return*/, { id: existingId, contentType: existingContentType }];
+                return [2 /*return*/, {
+                        contentType: existingContentType,
+                        extension: existingExtension,
+                        id: existingId,
+                    }];
             }
             /* istanbul ignore next */
             throw new NoModel_1.default('Activity Profile');

@@ -39,12 +39,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var lodash_1 = require("lodash");
 var streamToString = require("stream-to-string");
 var NonJsonObject_1 = require("../errors/NonJsonObject");
+var getFileExtension_1 = require("../utils/getFileExtension");
 var checkProfileWriteScopes_1 = require("./utils/checkProfileWriteScopes");
 var createEtag_1 = require("./utils/createEtag");
 var validateActivityId_1 = require("./utils/validateActivityId");
 exports.default = function (config) {
     return function (opts) { return __awaiter(_this, void 0, void 0, function () {
-        var client, content, _a, _b, etag;
+        var client, content, _a, _b, extension, etag;
         return __generator(this, function (_c) {
             switch (_c.label) {
                 case 0:
@@ -61,6 +62,7 @@ exports.default = function (config) {
                     if (!lodash_1.isPlainObject(content)) {
                         throw new NonJsonObject_1.default();
                     }
+                    extension = getFileExtension_1.default(opts.contentType);
                     etag = createEtag_1.default();
                     return [4 /*yield*/, config.repo.patchProfile({
                             activityId: opts.activityId,
@@ -68,6 +70,7 @@ exports.default = function (config) {
                             content: content,
                             contentType: opts.contentType,
                             etag: etag,
+                            extension: extension,
                             ifMatch: opts.ifMatch,
                             ifNoneMatch: opts.ifNoneMatch,
                             profileId: opts.profileId,
