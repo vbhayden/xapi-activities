@@ -53,6 +53,7 @@ export default (config: Config) => {
       await config.repo.storeProfileContent({
         content: opts.content,
         key: `${overwriteProfileResult.id}.${extension}`,
+        lrs_id: opts.client.lrs_id,
       });
     }
 

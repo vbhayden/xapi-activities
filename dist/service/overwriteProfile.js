@@ -97,6 +97,7 @@ exports.default = function (config) {
                     return [4 /*yield*/, config.repo.storeProfileContent({
                             content: opts.content,
                             key: overwriteProfileResult.id + "." + extension,
+                            lrs_id: opts.client.lrs_id,
                         })];
                 case 7:
                     _d.sent();
