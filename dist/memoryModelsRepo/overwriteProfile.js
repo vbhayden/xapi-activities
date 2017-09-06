@@ -63,7 +63,7 @@ exports.default = function (config) {
                 existingId = profile.id;
                 return __assign({}, profile, { 
                     // Overwrites the content and contentType.
-                    content: opts.content, contentType: opts.contentType, etag: opts.etag, 
+                    content: opts.content, contentType: opts.contentType, etag: opts.etag, extension: opts.extension, 
                     // Updates updatedAt time.
                     updatedAt: new Date() });
             });

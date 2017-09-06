@@ -73,7 +73,7 @@ exports.default = function (config) {
                 }
                 return __assign({}, profile, { 
                     // Merges top-level properties in content.
-                    content: __assign({}, profile.content, opts.content), etag: opts.etag, 
+                    content: __assign({}, profile.content, opts.content), etag: opts.etag, extension: 'json', 
                     // Updates updatedAt time.
                     updatedAt: new Date() });
             });

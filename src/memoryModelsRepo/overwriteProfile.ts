@@ -30,6 +30,7 @@ export default (config: Config) => {
         content: opts.content,
         contentType: opts.contentType,
         etag: opts.etag,
+        extension: opts.extension,
 
         // Updates updatedAt time.
         updatedAt: new Date(),

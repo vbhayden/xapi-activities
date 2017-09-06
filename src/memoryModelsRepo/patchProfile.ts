@@ -42,6 +42,7 @@ export default (config: Config) => {
           ...opts.content,
         },
         etag: opts.etag,
+        extension: 'json',
 
         // Updates updatedAt time.
         updatedAt: new Date(),
