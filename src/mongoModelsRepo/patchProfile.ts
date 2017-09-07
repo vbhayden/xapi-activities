@@ -7,13 +7,14 @@ import MaxEtags from '../errors/MaxEtags';
 import NonJsonObject from '../errors/NonJsonObject';
 import PatchProfileOptions from '../repoFactory/options/PatchProfileOptions';
 import Config from './Config';
+import { COLLECTION_NAME } from './utils/constants';
 
 // Within this code, Etags (ifMatch/ifNoneMatch) are used to manage concurrent creates/updates.
 // Docs: https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Communication.md#concurrency
 
 export default (config: Config) => {
   return async (opts: PatchProfileOptions): Promise<void> => {
-    const collection = (await config.db).collection('activityProfiles');
+    const collection = (await config.db).collection(COLLECTION_NAME);
     const checkIfMatch = opts.ifMatch !== undefined;
     const checkIfNoneMatch = opts.ifNoneMatch === '*';
 

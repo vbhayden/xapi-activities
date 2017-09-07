@@ -46,6 +46,7 @@ var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 /* tslint:disable:deprecation - find isn't really deprecated */
 var mongodb_1 = require("mongodb");
+var constants_1 = require("./utils/constants");
 exports.default = function (config) {
     return function (opts) { return __awaiter(_this, void 0, void 0, function () {
         var collection, sinceFilter, filter, documents, profileIds;
@@ -53,7 +54,7 @@ exports.default = function (config) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, config.db];
                 case 1:
-                    collection = (_a.sent()).collection('activityProfiles');
+                    collection = (_a.sent()).collection(constants_1.COLLECTION_NAME);
                     sinceFilter = (opts.since !== undefined
                         ? { updatedAt: { $gt: opts.since } }
                         : {});

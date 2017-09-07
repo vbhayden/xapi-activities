@@ -47,6 +47,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var NoModel_1 = require("jscommons/dist/errors/NoModel");
 var mongodb_1 = require("mongodb");
 var IfMatch_1 = require("../errors/IfMatch");
+var constants_1 = require("./utils/constants");
 exports.default = function (config) {
     return function (opts) { return __awaiter(_this, void 0, void 0, function () {
         var collection, etagFilter, profileFilter, opResult, matchedDocuments, wasDeleted, deletedDoc, foundDoc;
@@ -54,7 +55,7 @@ exports.default = function (config) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, config.db];
                 case 1:
-                    collection = (_a.sent()).collection('activityProfiles');
+                    collection = (_a.sent()).collection(constants_1.COLLECTION_NAME);
                     etagFilter = (opts.ifMatch !== undefined
                         ? { etag: opts.ifMatch }
                         : {});

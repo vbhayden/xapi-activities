@@ -4,10 +4,11 @@ import { ObjectID } from 'mongodb';
 import GetProfileOptions from '../repoFactory/options/GetProfileOptions';
 import GetProfileResult from '../repoFactory/results/GetProfileResult';
 import Config from './Config';
+import { COLLECTION_NAME } from './utils/constants';
 
 export default (config: Config) => {
   return async (opts: GetProfileOptions): Promise<GetProfileResult> => {
-    const collection = (await config.db).collection('activityProfiles');
+    const collection = (await config.db).collection(COLLECTION_NAME);
 
     const filter = {
       activityId: opts.activityId,
