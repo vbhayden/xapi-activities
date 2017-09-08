@@ -4,10 +4,11 @@ import IfMatch from '../errors/IfMatch';
 import DeleteProfileOptions from '../repoFactory/options/DeleteProfileOptions';
 import DeleteProfileResult from '../repoFactory/results/DeleteProfileResult';
 import Config from './Config';
+import { COLLECTION_NAME } from './utils/constants';
 
 export default (config: Config) => {
   return async (opts: DeleteProfileOptions): Promise<DeleteProfileResult> => {
-    const collection = (await config.db).collection('activityProfiles');
+    const collection = (await config.db).collection(COLLECTION_NAME);
 
     // Docs: https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Communication.md#concurrency
     const etagFilter = (

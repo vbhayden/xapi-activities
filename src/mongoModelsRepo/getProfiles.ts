@@ -3,15 +3,16 @@ import { ObjectID } from 'mongodb';
 import GetProfilesOptions from '../repoFactory/options/GetProfilesOptions';
 import GetProfilesResult from '../repoFactory/results/GetProfilesResult';
 import Config from './Config';
+import { COLLECTION_NAME } from './utils/constants';
 
 export default (config: Config) => {
   return async (opts: GetProfilesOptions): Promise<GetProfilesResult> => {
-    const collection = (await config.db).collection('activityProfiles');
+    const collection = (await config.db).collection(COLLECTION_NAME);
 
     const sinceFilter = (
       opts.since !== undefined
-      ? { updatedAt: { $gt: opts.since } }
-      : {}
+        ? { updatedAt: { $gt: opts.since } }
+        : {}
     );
     const filter = {
       activityId: opts.activityId,

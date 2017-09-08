@@ -51,6 +51,7 @@ var IfMatch_1 = require("../errors/IfMatch");
 var IfNoneMatch_1 = require("../errors/IfNoneMatch");
 var MaxEtags_1 = require("../errors/MaxEtags");
 var NonJsonObject_1 = require("../errors/NonJsonObject");
+var constants_1 = require("./utils/constants");
 // Within this code, Etags (ifMatch/ifNoneMatch) are used to manage concurrent creates/updates.
 // Docs: https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Communication.md#concurrency
 exports.default = function (config) {
@@ -60,7 +61,7 @@ exports.default = function (config) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, config.db];
                 case 1:
-                    collection = (_a.sent()).collection('activityProfiles');
+                    collection = (_a.sent()).collection(constants_1.COLLECTION_NAME);
                     checkIfMatch = opts.ifMatch !== undefined;
                     checkIfNoneMatch = opts.ifNoneMatch === '*';
                     if (checkIfMatch && checkIfNoneMatch) {
