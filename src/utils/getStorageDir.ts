@@ -1,6 +1,10 @@
+import { join } from 'path';
+
 export interface GetStorageDirOptions {
   readonly subfolder: string;
   readonly lrs_id: string;
 }
 
-export default (opts: GetStorageDirOptions) => `${opts.subfolder}/${opts.lrs_id}/activityProfiles`;
+export default (opts: GetStorageDirOptions) => {
+  return join(opts.subfolder, opts.lrs_id, 'activityProfiles');
+};
