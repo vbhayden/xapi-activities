@@ -14,13 +14,17 @@ install:
 before_script:
   - mkdir ${PWD}/mongodb-linux-x86_64-${MONGODB}/data
   - ${PWD}/mongodb-linux-x86_64-${MONGODB}/bin/mongod --dbpath ${PWD}/mongodb-linux-x86_64-${MONGODB}/data --logpath ${PWD}/mongodb-linux-x86_64-${MONGODB}/mongodb.log --fork
+  - npm prune
 
 script:
-  - npm run cover-ci
   - npm run build
-  - git diff --quiet # Exits with 1 if files have changed.
+  - npm run cover-ci
   - npm run lint -- -c tslint.travis.json
   - npm run duplication -- --limit=0.01
 
 after_script:
   - pkill mongod
+
+after_success:
+  - npm prune --production
+  - npm run semantic-release
