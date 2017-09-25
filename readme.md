@@ -1,4 +1,6 @@
 # xAPI activities
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/LearningLocker/xapi-activities.svg)](https://greenkeeper.io/)
 > A server for xAPI activities
 
 [![Build Status](https://travis-ci.org/LearningLocker/xapi-activities.svg?branch=master)](https://travis-ci.org/LearningLocker/xapi-activities)
