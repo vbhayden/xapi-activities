@@ -1,6 +1,5 @@
 # xAPI activities
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/LearningLocker/xapi-activities.svg)](https://greenkeeper.io/)
 > A server for xAPI activities
 
 [![NPM Package Version](https://badge.fury.io/js/xapi-activities.svg)](https://www.npmjs.com/package/xapi-activities)
