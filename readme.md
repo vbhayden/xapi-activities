@@ -1,4 +1,5 @@
 # xAPI activities
+
 > A server for xAPI activities
 
 [![NPM Package Version](https://badge.fury.io/js/xapi-activities.svg)](https://www.npmjs.com/package/xapi-activities)
