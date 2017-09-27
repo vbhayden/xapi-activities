@@ -17,7 +17,6 @@ To install all of Learning Locker, see the [installation documentation](http://d
 1. Clone the repository `git clone git@github.com:LearningLocker/xapi-activities.git`.
 1. Install dependencies `npm install`.
 1. Build the code `npm run build`.
-1. Run migrations `npm run migrate`.
 1. Start the server `npm start`.
 
 ### Development
@@ -32,4 +31,4 @@ You can use the steps below to install and run the xAPI activities service.
 
 - Create a ".env" file using the ".env.example" file in this Github repository.
 - Pull the image from DockerHub `docker pull learninglocker/xapi-activities:master`.
-- Run the image in a container `docker run -d -p 8080:80 --name xus --env-file .env learninglocker/xapi-activities:master`.
+- Run the image in a container `docker run -d -p 8080:80 --env-file .env learninglocker/xapi-activities:master`.
