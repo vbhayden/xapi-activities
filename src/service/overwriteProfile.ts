@@ -2,6 +2,7 @@ import * as streamToString from 'stream-to-string';
 import Conflict from '../errors/Conflict';
 import MissingEtags from '../errors/MissingEtags';
 import OverwriteProfileOptions from '../serviceFactory/options/OverwriteProfileOptions';
+import { jsonContentType } from '../utils/constants';
 import getFileExtension from '../utils/getFileExtension';
 import Config from './Config';
 import checkProfileWriteScopes from './utils/checkProfileWriteScopes';
@@ -30,7 +31,7 @@ export default (config: Config) => {
 
     // Update or create Profile.
     const jsonContent = (
-      opts.contentType === 'application/json'
+      opts.contentType === jsonContentType
         ? JSON.parse(await streamToString(opts.content))
         : undefined
     );
@@ -49,7 +50,7 @@ export default (config: Config) => {
       profileId: opts.profileId,
     });
 
-    if (opts.contentType !== 'application/json') {
+    if (opts.contentType !== jsonContentType) {
       await config.repo.storeProfileContent({
         content: opts.content,
         key: `${overwriteProfileResult.id}.${extension}`,

@@ -2,6 +2,7 @@
 import { isPlainObject } from 'lodash';
 import NonJsonObject from '../errors/NonJsonObject';
 import PatchProfileOptions from '../repoFactory/options/PatchProfileOptions';
+import { jsonContentType } from '../utils/constants';
 import Config from './Config';
 import checkEtag from './utils/checkEtag';
 import checkMaxEtags from './utils/checkMaxEtags';
@@ -18,7 +19,7 @@ export default (config: Config) => {
       const isMatch = matchUniqueProfile({ client, activityId, profile, profileId });
       const isJson = (
         isMatch &&
-        profile.contentType === 'application/json' &&
+        profile.contentType === jsonContentType &&
         isPlainObject(profile.content)
       );
 

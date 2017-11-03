@@ -1,5 +1,6 @@
 import NoModel from 'jscommons/dist/errors/NoModel';
 import DeleteProfileOptions from '../serviceFactory/options/DeleteProfileOptions';
+import { jsonContentType } from '../utils/constants';
 import Config from './Config';
 import checkProfileWriteScopes from './utils/checkProfileWriteScopes';
 import validateActivityId from './utils/validateActivityId';
@@ -18,7 +19,7 @@ export default (config: Config) => {
         profileId: opts.profileId,
       });
 
-      if (deleteResult.contentType === 'application/json') {
+      if (deleteResult.contentType === jsonContentType) {
         return;
       }
 

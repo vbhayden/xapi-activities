@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import InvalidContentType from '../../errors/InvalidContentType';
 import InvalidMethod from '../../errors/InvalidMethod';
 import Config from '../Config';
+import { alternateContentTypePattern } from './contentTypePatterns';
 import getActivityId from './getActivityId';
 import getAlternateProfileWriteOpts from './getAlternateProfileWriteOpts';
 import getClient from './getClient';
@@ -20,7 +21,8 @@ export interface Options {
 }
 
 export default async ({ config, method, req, res }: Options) => {
-  if (req.header('Content-Type') !== 'application/x-www-form-urlencoded') {
+  const contentType = req.header('Content-Type');
+  if (contentType === undefined || !alternateContentTypePattern.test(contentType)) {
     throw new InvalidContentType(req.header('Content-Type'));
   }
 

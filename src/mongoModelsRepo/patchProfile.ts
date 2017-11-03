@@ -6,6 +6,7 @@ import IfNoneMatch from '../errors/IfNoneMatch';
 import MaxEtags from '../errors/MaxEtags';
 import NonJsonObject from '../errors/NonJsonObject';
 import PatchProfileOptions from '../repoFactory/options/PatchProfileOptions';
+import { jsonContentType } from '../utils/constants';
 import Config from './Config';
 import { COLLECTION_NAME } from './utils/constants';
 
@@ -24,7 +25,7 @@ export default (config: Config) => {
 
     // Filters out non-JSON objects.
     const jsonObjectFilter = {
-      contentType: 'application/json',
+      contentType: jsonContentType,
       isObjectContent: true,
     };
 
@@ -42,7 +43,7 @@ export default (config: Config) => {
 
     const update = {
       // Overwrites the content and contentType.
-      contentType: 'application/json',
+      contentType: jsonContentType,
       etag: opts.etag,
       extension: 'json',
       isObjectContent: true,

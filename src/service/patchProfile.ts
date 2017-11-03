@@ -2,6 +2,7 @@ import { isPlainObject } from 'lodash';
 import * as streamToString from 'stream-to-string';
 import NonJsonObject from '../errors/NonJsonObject';
 import PatchProfileOptions from '../serviceFactory/options/PatchProfileOptions';
+import { jsonContentType } from '../utils/constants';
 import getFileExtension from '../utils/getFileExtension';
 import Config from './Config';
 import checkProfileWriteScopes from './utils/checkProfileWriteScopes';
@@ -14,7 +15,7 @@ export default (config: Config) => {
     checkProfileWriteScopes(client.scopes);
     validateActivityId(opts.activityId);
 
-    if (opts.contentType !== 'application/json') {
+    if (opts.contentType !== jsonContentType) {
       throw new NonJsonObject();
     }
 
