@@ -34,7 +34,7 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package-lock.lock" }}
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
       - run:
           name: Compiling Code
           command: npm run build
