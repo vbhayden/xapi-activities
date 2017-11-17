@@ -29,7 +29,8 @@ const translator: Translator = {
   ),
   xapiTypeWarning: (warning) => {
     const path = stringPath(warning.path);
-    return `Expected ${warning.typeName} in ${path}`;
+    const dataString = JSON.stringify(warning.data);
+    return `Expected ${warning.typeName} in ${path}. Received '${dataString}'`;
   },
   ...commonTranslator,
 };
