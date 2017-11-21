@@ -2,7 +2,6 @@ import { Request } from 'express';
 import { isString } from 'lodash';
 import * as stringToStream from 'string-to-stream';
 import ClientModel from '../../models/ClientModel';
-import { jsonContentType } from '../../utils/constants';
 import Config from '../Config';
 import getActivityId from './getActivityId';
 import getClient from './getClient';
@@ -10,10 +9,7 @@ import getContentType from './getContentType';
 import getEtag from './getEtag';
 import getProfileId from './getProfileId';
 
-const getContent = (req: Request, contentType: string) => {
-  if (contentType === jsonContentType) {
-    return stringToStream(JSON.stringify(req.body));
-  }
+const getContent = (req: Request) => {
   /* istanbul ignore next - superagent always streams content */
   if (isString(req.body)) {
     return stringToStream(req.body);
@@ -38,7 +34,7 @@ export default async (config: Config, req: Request): Promise<Result> => {
   const profileId = getProfileId(req.query.profileId);
   const activityId = getActivityId(req.query.activityId);
   const contentType = getContentType(req.header('Content-Type'));
-  const content = getContent(req, contentType);
+  const content = getContent(req);
 
   return { activityId, client, content, contentType, ifMatch, ifNoneMatch, profileId };
 };
