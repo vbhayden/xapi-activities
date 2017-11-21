@@ -1,5 +1,5 @@
 import { Test } from 'supertest';
-import { xapiHeaderVersion } from '../../../../utils/constants';
+import { route, xapiHeaderVersion } from '../../../../utils/constants';
 import {
   TEST_ACTIVITY_ID,
   TEST_CONTENT,
@@ -14,7 +14,7 @@ export default (
   contentType: string = TEXT_CONTENT_TYPE,
 ): Test => {
   return supertest
-    .put('/xAPI/activities/profile')
+    .put(route)
     .set('Content-Type', contentType)
     .set('If-None-Match', '*')
     .set('X-Experience-API-Version', xapiHeaderVersion)

@@ -1,11 +1,11 @@
 import { Test } from 'supertest';
-import { xapiHeaderVersion } from '../../../../utils/constants';
+import { route, xapiHeaderVersion } from '../../../../utils/constants';
 import { TEST_ACTIVITY_ID, TEST_PROFILE_ID } from '../../../../utils/testValues';
 import supertest from '../../utils/supertest';
 
 export default (optsOverrides: object = {}): Test => {
   return supertest
-    .delete('/xAPI/activities/profile')
+    .delete(route)
     .set('X-Experience-API-Version', xapiHeaderVersion)
     .query({
       activityId: TEST_ACTIVITY_ID,

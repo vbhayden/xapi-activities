@@ -1,4 +1,4 @@
-import { xapiHeaderVersion } from '../../../utils/constants';
+import { route, xapiHeaderVersion } from '../../../utils/constants';
 import createTextProfile from '../../../utils/createTextProfile';
 import {
   ALTERNATE_CONTENT_TYPE,
@@ -15,7 +15,7 @@ describe('expressPresenter.getProfile using the alternate request syntax', () =>
   it('should get when getting text', async () => {
     await createTextProfile();
     await supertest
-      .post('/xAPI/activities/profile')
+      .post(route)
       .set('Content-Type', ALTERNATE_CONTENT_TYPE)
       .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({ method: 'GET' })

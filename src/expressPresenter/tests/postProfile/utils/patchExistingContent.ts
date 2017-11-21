@@ -1,5 +1,5 @@
 import { Response } from 'supertest';
-import { xapiHeaderVersion } from '../../../../utils/constants';
+import { route, xapiHeaderVersion } from '../../../../utils/constants';
 import service from '../../../../utils/testService';
 import {
   TEST_ACTIVITY_ID,
@@ -19,7 +19,7 @@ export default async (
     profileId: TEST_PROFILE_ID,
   });
   return supertest
-    .post('/xAPI/activities/profile')
+    .post(route)
     .set('Content-Type', contentType)
     .set('If-Match', `"${getProfileResult.etag}"`)
     .set('X-Experience-API-Version', xapiHeaderVersion)

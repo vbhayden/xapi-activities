@@ -1,4 +1,4 @@
-import { xapiHeaderVersion } from '../../../utils/constants';
+import { route, xapiHeaderVersion } from '../../../utils/constants';
 import {
   ALTERNATE_CONTENT_TYPE,
   TEST_ACTIVITY_ID,
@@ -11,7 +11,7 @@ describe('expressPresenter.getProfiles using the alternate request syntax', () =
 
   it('should return no profile ids when getting a non-existing activity id', async () => {
     await supertest
-      .post('/xAPI/activities/profile')
+      .post(route)
       .set('Content-Type', ALTERNATE_CONTENT_TYPE)
       .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({ method: 'GET' })
