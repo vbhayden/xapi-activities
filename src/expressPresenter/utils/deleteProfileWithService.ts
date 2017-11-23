@@ -4,7 +4,9 @@ import { xapiHeaderVersion } from '../../utils/constants';
 import Config from '../Config';
 import getActivityId from './getActivityId';
 import getClient from './getClient';
-import { OK_200_HTTP_CODE } from './httpCodes';
+import getEtag from './getEtag';
+import getProfileId from './getProfileId';
+import { NO_CONTENT_204_HTTP_CODE } from './httpCodes';
 import validateVersionHeader from './validateVersionHeader';
 
 export interface Options {
@@ -18,12 +20,12 @@ export default async ({ query, config, headers, res }: Options) => {
   const client = await getClient(config, get(headers, 'authorization', ''));
   validateVersionHeader(get(headers, 'x-experience-api-version'));
 
+  const ifMatch = getEtag(get(headers, 'if-match'));
   const activityId = getActivityId(get(query, 'activityId'));
-  const since = get(query, 'since') as string | undefined;
+  const profileId = getProfileId(get(query, 'profileId'));
 
-  const getProfilesResult = await config.service.getProfiles({ activityId, client, since });
-
-  res.status(OK_200_HTTP_CODE);
+  await config.service.deleteProfile({ activityId, client, profileId, ifMatch });
+  res.status(NO_CONTENT_204_HTTP_CODE);
   res.setHeader('X-Experience-API-Version', xapiHeaderVersion);
-  res.json(getProfilesResult.profileIds);
+  res.send();
 };
