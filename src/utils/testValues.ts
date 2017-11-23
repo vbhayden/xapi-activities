@@ -47,6 +47,7 @@ export const TEST_CONTENT = 'dummy_content';
 export const TEST_IMMUTABLE_CONTENT = 'immutable_content';
 export const TEST_JSON_CONTENT = '[]';
 export const TEST_OBJECT_CONTENT = '{"foo":1}';
+export const TEST_INVALID_OBJECT_CONTENT = '{"foo":1}[';
 export const TEST_OBJECT_PATCH_CONTENT = '{"bar":2}';
 export const TEST_OBJECT_MERGED_CONTENT = '{"foo":1,"bar":2}';
 export const TEST_INVALID_JSON_CONTENT = '{"foo:1,"bar":2}';

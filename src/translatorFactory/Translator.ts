@@ -4,6 +4,7 @@ import Conflict from '../errors/Conflict';
 import IfMatch from '../errors/IfMatch';
 import IfNoneMatch from '../errors/IfNoneMatch';
 import InvalidMethod from '../errors/InvalidMethod';
+import JsonSyntaxError from '../errors/JsonSyntaxError';
 import MaxEtags from '../errors/MaxEtags';
 import MissingEtags from '../errors/MissingEtags';
 import NonJsonObject from '../errors/NonJsonObject';
@@ -13,6 +14,7 @@ interface Translator extends CommonTranslator {
   readonly ifMatchError: (err: IfMatch) => string;
   readonly ifNoneMatchError: (err: IfNoneMatch) => string;
   readonly invalidMethodError: (err: InvalidMethod) => string;
+  readonly jsonSyntaxError: (err: JsonSyntaxError) => string;
   readonly maxEtagsError: (err: MaxEtags) => string;
   readonly missingEtagsError: (err: MissingEtags) => string;
   readonly nonJsonObjectError: (err: NonJsonObject) => string;

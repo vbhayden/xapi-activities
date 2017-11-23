@@ -4,6 +4,7 @@ import MissingEtags from '../errors/MissingEtags';
 import OverwriteProfileOptions from '../serviceFactory/options/OverwriteProfileOptions';
 import { jsonContentType } from '../utils/constants';
 import getFileExtension from '../utils/getFileExtension';
+import parseJson from '../utils/parseJson';
 import Config from './Config';
 import checkProfileWriteScopes from './utils/checkProfileWriteScopes';
 import createEtag from './utils/createEtag';
@@ -32,7 +33,7 @@ export default (config: Config) => {
     // Update or create Profile.
     const jsonContent = (
       opts.contentType === jsonContentType
-        ? JSON.parse(await streamToString(opts.content))
+        ? parseJson(await streamToString(opts.content), ['content'])
         : undefined
     );
 

@@ -8,6 +8,7 @@ import Conflict from '../../errors/Conflict';
 import IfMatch from '../../errors/IfMatch';
 import IfNoneMatch from '../../errors/IfNoneMatch';
 import InvalidMethod from '../../errors/InvalidMethod';
+import JsonSyntaxError from '../../errors/JsonSyntaxError';
 import MaxEtags from '../../errors/MaxEtags';
 import MissingEtags from '../../errors/MissingEtags';
 import NonJsonObject from '../../errors/NonJsonObject';
@@ -32,6 +33,12 @@ export default ({ config, errorId, res, err }: Options): Response => {
 
   res.setHeader('X-Experience-API-Version', xapiHeaderVersion);
 
+  if (err instanceof JsonSyntaxError) {
+    const code = CLIENT_ERROR_400_HTTP_CODE;
+    const message = translator.jsonSyntaxError(err);
+    logError(message);
+    return sendMessage({ res, code, errorId, message });
+  }
   if (err instanceof MissingEtags) {
     const code = CLIENT_ERROR_400_HTTP_CODE;
     const message = translator.missingEtagsError(err);

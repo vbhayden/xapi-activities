@@ -3,6 +3,7 @@ import {
   JSON_CONTENT_TYPE,
   TEST_CONTENT,
   TEST_INVALID_ACTIVITY_ID,
+  TEST_INVALID_JSON_CONTENT,
   TEST_JSON_CONTENT,
   TEST_OBJECT_CONTENT,
   TEXT_CONTENT_TYPE,
@@ -40,5 +41,9 @@ describe('expressPresenter.postProfile with new content', () => {
 
   it('should throw warnings when missing the profile id', async () => {
     await patchProfile({ profileId: undefined }).expect(CLIENT_ERROR_400_HTTP_CODE);
+  });
+
+  it('should error when using invalid JSON', async () => {
+    await patchProfile({}, TEST_INVALID_JSON_CONTENT).expect(CLIENT_ERROR_400_HTTP_CODE);
   });
 });
