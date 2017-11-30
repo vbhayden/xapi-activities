@@ -70,3 +70,7 @@ jobs:
           command: |
             docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
             docker push $DOCKER_REPO_SLUG:$CIRCLE_BRANCH
+      - deploy:
+          name: NPM Publish
+          command: |
+            npm publish --tag $CIRCLE_BRANCH
