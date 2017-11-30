@@ -11,6 +11,7 @@ jobs:
     environment:
       - DOCKER_REPO_SLUG: learninglocker/xapi-activities
       - DOCKER_USERNAME: ryansmith94
+      - DOCKER_EMAIL: 0ryansmith1994@gmail.com
       - NPM_CONFIG_LOGLEVEL: warn
       - WINSTON_CONSOLE_LEVEL: none
       - EXPRESS_PORT: 1337
