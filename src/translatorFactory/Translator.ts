@@ -1,5 +1,5 @@
+import TypeWarning from '@learninglocker/xapi-validation/dist/warnings/TypeWarning';
 import CommonTranslator from 'jscommons/dist/translatorFactory/Translator';
-import TypeWarning from 'xapi-validation/dist/warnings/TypeWarning';
 import Conflict from '../errors/Conflict';
 import IfMatch from '../errors/IfMatch';
 import IfNoneMatch from '../errors/IfNoneMatch';
