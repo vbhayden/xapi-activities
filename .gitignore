@@ -9,3 +9,4 @@
 /storage
 /yarn-error.log
 /yarn.lock
+*.keyfile.json
