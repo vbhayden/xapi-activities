@@ -15,7 +15,7 @@ import { COLLECTION_NAME } from './utils/constants';
 
 export default (config: Config) => {
   return async (opts: PatchProfileOptions): Promise<void> => {
-    const collection = (await config.db).collection(COLLECTION_NAME);
+    const collection = (await config.db()).collection(COLLECTION_NAME);
     const checkIfMatch = opts.ifMatch !== undefined;
     const checkIfNoneMatch = opts.ifNoneMatch === '*';
 

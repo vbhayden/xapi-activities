@@ -1,4 +1,3 @@
-import commonMongoRepo from 'jscommons/dist/mongoRepo';
 import ModelsRepo from '../repoFactory/ModelsRepo';
 import Config from './Config';
 import deleteProfile from './deleteProfile';
@@ -10,12 +9,16 @@ import patchProfile from './patchProfile';
 
 export default (config: Config): ModelsRepo => {
   return {
+    clearRepo: async () => {
+      await (await config.db()).dropDatabase();
+    },
     deleteProfile: deleteProfile(config),
     getProfile: getProfile(config),
     getProfiles: getProfiles(config),
     hasProfile: hasProfile(config),
+    migrate: () => Promise.resolve(),
     overwriteProfile: overwriteProfile(config),
     patchProfile: patchProfile(config),
-    ...commonMongoRepo(config),
+    rollback: () => Promise.resolve(),
   };
 };

@@ -8,7 +8,7 @@ import { COLLECTION_NAME } from './utils/constants';
 
 export default (config: Config) => {
   return async (opts: DeleteProfileOptions): Promise<DeleteProfileResult> => {
-    const collection = (await config.db).collection(COLLECTION_NAME);
+    const collection = (await config.db()).collection(COLLECTION_NAME);
 
     // Docs: https://github.com/adlnet/xAPI-Spec/blob/master/xAPI-Communication.md#concurrency
     const etagFilter = (

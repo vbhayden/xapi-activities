@@ -10,13 +10,12 @@ import patchProfile from './patchProfile';
 
 export default (config: Config): Service => {
   return {
+    ...commonService(config),
     deleteProfile: deleteProfile(config),
     getClient: getClient(config),
     getProfile: getProfile(config),
     getProfiles: getProfiles(config),
     overwriteProfile: overwriteProfile(config),
     patchProfile: patchProfile(config),
-
-    ...commonService(config),
   };
 };

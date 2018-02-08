@@ -7,7 +7,7 @@ import { COLLECTION_NAME } from './utils/constants';
 
 export default (config: Config) => {
   return async (opts: GetProfilesOptions): Promise<GetProfilesResult> => {
-    const collection = (await config.db).collection(COLLECTION_NAME);
+    const collection = (await config.db()).collection(COLLECTION_NAME);
 
     const sinceFilter = (
       opts.since !== undefined

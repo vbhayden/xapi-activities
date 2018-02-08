@@ -8,7 +8,7 @@ import { COLLECTION_NAME } from './utils/constants';
 
 export default (config: Config) => {
   return async (opts: GetProfileOptions): Promise<GetProfileResult> => {
-    const collection = (await config.db).collection(COLLECTION_NAME);
+    const collection = (await config.db()).collection(COLLECTION_NAME);
 
     const filter = {
       activityId: opts.activityId,
