@@ -1,10 +1,6 @@
+import { BAD_REQUEST, NO_CONTENT, PRECONDITION_FAILED } from 'http-status-codes';
 import createObjectProfile from '../../../utils/createObjectProfile';
 import getTestProfile from '../../../utils/getTestProfile';
-import {
-  CLIENT_ERROR_400_HTTP_CODE,
-  NO_CONTENT_204_HTTP_CODE,
-  PRECONDITION_FAILED_412_HTTP_CODE,
-} from '../../utils/httpCodes';
 import setup from '../utils/setup';
 import patchProfile from './utils/patchProfile';
 
@@ -16,26 +12,26 @@ describe('expressPresenter.postProfile with etags', () => {
     const getProfileResult = await getTestProfile();
     await patchProfile()
       .set('If-Match', getProfileResult.etag)
-      .expect(NO_CONTENT_204_HTTP_CODE);
+      .expect(NO_CONTENT);
   });
 
   it('should throw precondition error when using an incorrect ifMatch', async () => {
     await createObjectProfile();
     await patchProfile()
       .set('If-Match', 'incorrect_etag')
-      .expect(PRECONDITION_FAILED_412_HTTP_CODE);
+      .expect(PRECONDITION_FAILED);
   });
 
   it('should throw precondition error when using an incorrect ifNoneMatch', async () => {
     await createObjectProfile();
     await patchProfile()
       .set('If-None-Match', '*')
-      .expect(PRECONDITION_FAILED_412_HTTP_CODE);
+      .expect(PRECONDITION_FAILED);
   });
 
   it('should allow patch when not using an ifMatch or ifNoneMatch', async () => {
     await createObjectProfile();
-    await patchProfile().expect(NO_CONTENT_204_HTTP_CODE);
+    await patchProfile().expect(NO_CONTENT);
   });
 
   it('should throw max etag error when using ifMatch and ifNoneMatch', async () => {
@@ -43,6 +39,6 @@ describe('expressPresenter.postProfile with etags', () => {
     await patchProfile()
       .set('If-Match', 'incorrect_etag')
       .set('If-None-Match', '*')
-      .expect(CLIENT_ERROR_400_HTTP_CODE);
+      .expect(BAD_REQUEST);
   });
 });

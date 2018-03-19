@@ -1,6 +1,6 @@
-import { OK_200_HTTP_CODE } from '../../../utils/httpCodes';
+import { OK } from 'http-status-codes';
 import getProfiles from './getProfiles';
 
 export default async () => {
-  await getProfiles().expect(OK_200_HTTP_CODE, []);
+  await getProfiles().expect(OK, []);
 };

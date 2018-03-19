@@ -1,7 +1,7 @@
 import { delay } from 'bluebird';
+import { OK } from 'http-status-codes';
 import createTextProfile from '../../../utils/createTextProfile';
 import { TEST_PROFILE_ID } from '../../../utils/testValues';
-import { OK_200_HTTP_CODE } from '../../utils/httpCodes';
 import setup from '../utils/setup';
 import getProfiles from './utils/getProfiles';
 
@@ -14,7 +14,7 @@ describe('expressPresenter.getProfiles with since', () => {
     await createTextProfile();
     await Promise.resolve(delay(TEST_DELAY_MS));
     const timestamp = new Date();
-    await getProfiles({ since: timestamp.toISOString() }).expect(OK_200_HTTP_CODE, []);
+    await getProfiles({ since: timestamp.toISOString() }).expect(OK, []);
   });
 
   it('should return the profile id when updated after since', async () => {
@@ -23,6 +23,6 @@ describe('expressPresenter.getProfiles with since', () => {
     await createTextProfile();
     await getProfiles({
       since: timestamp.toISOString(),
-    }).expect(OK_200_HTTP_CODE, [TEST_PROFILE_ID]);
+    }).expect(OK, [TEST_PROFILE_ID]);
   });
 });

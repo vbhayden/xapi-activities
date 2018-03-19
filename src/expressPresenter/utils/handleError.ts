@@ -1,10 +1,12 @@
 import { Response } from 'express';
+import { BAD_REQUEST, CONFLICT, FORBIDDEN, PRECONDITION_FAILED } from 'http-status-codes';
 import commonErrorHandler from 'jscommons/dist/expressPresenter/utils/handleError';
 import { Options as CommonOptions } from 'jscommons/dist/expressPresenter/utils/handleError';
 import sendMessage from 'jscommons/dist/expressPresenter/utils/sendMessage';
 import sendObject from 'jscommons/dist/expressPresenter/utils/sendObject';
 import { Warnings } from 'rulr';
 import Conflict from '../../errors/Conflict';
+import ExpiredClientError from '../../errors/ExpiredClientError';
 import IfMatch from '../../errors/IfMatch';
 import IfNoneMatch from '../../errors/IfNoneMatch';
 import InvalidMethod from '../../errors/InvalidMethod';
@@ -14,11 +16,6 @@ import MissingEtags from '../../errors/MissingEtags';
 import NonJsonObject from '../../errors/NonJsonObject';
 import { xapiHeaderVersion } from '../../utils/constants';
 import Config from '../Config';
-import {
-  CLIENT_ERROR_400_HTTP_CODE,
-  CONFLICT_409_HTTP_CODE,
-  PRECONDITION_FAILED_412_HTTP_CODE,
-} from './httpCodes';
 import translateWarning from './translateWarning';
 
 export interface Options extends CommonOptions {
@@ -34,43 +31,43 @@ export default ({ config, errorId, res, err }: Options): Response => {
   res.setHeader('X-Experience-API-Version', xapiHeaderVersion);
 
   if (err instanceof JsonSyntaxError) {
-    const code = CLIENT_ERROR_400_HTTP_CODE;
+    const code = BAD_REQUEST;
     const message = translator.jsonSyntaxError(err);
     logError(message);
     return sendMessage({ res, code, errorId, message });
   }
   if (err instanceof MissingEtags) {
-    const code = CLIENT_ERROR_400_HTTP_CODE;
+    const code = BAD_REQUEST;
     const message = translator.missingEtagsError(err);
     logError(message);
     return sendMessage({ res, code, errorId, message });
   }
   if (err instanceof MaxEtags) {
-    const code = CLIENT_ERROR_400_HTTP_CODE;
+    const code = BAD_REQUEST;
     const message = translator.maxEtagsError(err);
     logError(message);
     return sendMessage({ res, code, errorId, message });
   }
   if (err instanceof Conflict) {
-    const code = CONFLICT_409_HTTP_CODE;
+    const code = CONFLICT;
     const message = translator.conflictError(err);
     logError(message);
     return sendMessage({ res, code, errorId, message });
   }
   if (err instanceof IfMatch) {
-    const code = PRECONDITION_FAILED_412_HTTP_CODE;
+    const code = PRECONDITION_FAILED;
     const message = translator.ifMatchError(err);
     logError(message);
     return sendMessage({ res, code, errorId, message });
   }
   if (err instanceof IfNoneMatch) {
-    const code = PRECONDITION_FAILED_412_HTTP_CODE;
+    const code = PRECONDITION_FAILED;
     const message = translator.ifNoneMatchError(err);
     logError(message);
     return sendMessage({ res, code, errorId, message });
   }
   if (err instanceof NonJsonObject) {
-    const code = CLIENT_ERROR_400_HTTP_CODE;
+    const code = BAD_REQUEST;
     const message = translator.nonJsonObjectError(err);
     logError(message);
     return sendMessage({ res, code, errorId, message });
@@ -86,8 +83,14 @@ export default ({ config, errorId, res, err }: Options): Response => {
     return sendObject({ res, code, errorId, obj });
   }
   if (err instanceof InvalidMethod) {
-    const code = CLIENT_ERROR_400_HTTP_CODE;
+    const code = BAD_REQUEST;
     const message = translator.invalidMethodError(err);
+    logError(message);
+    return sendMessage({ res, code, errorId, message });
+  }
+  if (err instanceof ExpiredClientError) {
+    const code = FORBIDDEN;
+    const message = translator.expiredClientError(err);
     logError(message);
     return sendMessage({ res, code, errorId, message });
   }

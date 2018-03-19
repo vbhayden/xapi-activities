@@ -1,3 +1,4 @@
+import { NO_CONTENT } from 'http-status-codes';
 import assertDeleted from '../../../utils/assertDeleted';
 import { route, xapiHeaderVersion } from '../../../utils/constants';
 import createTextProfile from '../../../utils/createTextProfile';
@@ -6,7 +7,6 @@ import {
   TEST_ACTIVITY_ID,
   TEST_PROFILE_ID,
 } from '../../../utils/testValues';
-import { NO_CONTENT_204_HTTP_CODE } from '../../utils/httpCodes';
 import setup from '../utils/setup';
 
 describe('expressPresenter.deleteProfile using the alternate request syntax', () => {
@@ -23,7 +23,7 @@ describe('expressPresenter.deleteProfile using the alternate request syntax', ()
         activityId: TEST_ACTIVITY_ID,
         profileId: TEST_PROFILE_ID,
       })
-      .expect(NO_CONTENT_204_HTTP_CODE);
+      .expect(NO_CONTENT);
     await assertDeleted();
   });
 });

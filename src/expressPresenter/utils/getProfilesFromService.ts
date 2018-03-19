@@ -1,10 +1,10 @@
 import { Response } from 'express';
+import { OK } from 'http-status-codes';
 import { get } from 'lodash';
 import { xapiHeaderVersion } from '../../utils/constants';
 import Config from '../Config';
 import getActivityId from './getActivityId';
 import getClient from './getClient';
-import { OK_200_HTTP_CODE } from './httpCodes';
 import validateVersionHeader from './validateVersionHeader';
 
 export interface Options {
@@ -23,7 +23,7 @@ export default async ({ query, config, headers, res }: Options) => {
 
   const getProfilesResult = await config.service.getProfiles({ activityId, client, since });
 
-  res.status(OK_200_HTTP_CODE);
+  res.status(OK);
   res.setHeader('X-Experience-API-Version', xapiHeaderVersion);
   res.json(getProfilesResult.profileIds);
 };

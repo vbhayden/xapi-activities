@@ -1,9 +1,9 @@
+import { OK } from 'http-status-codes';
 import { route, xapiHeaderVersion } from '../../../utils/constants';
 import {
   ALTERNATE_CONTENT_TYPE,
   TEST_ACTIVITY_ID,
 } from '../../../utils/testValues';
-import { OK_200_HTTP_CODE } from '../../utils/httpCodes';
 import setup from '../utils/setup';
 
 describe('expressPresenter.getProfiles using the alternate request syntax', () => {
@@ -16,6 +16,6 @@ describe('expressPresenter.getProfiles using the alternate request syntax', () =
       .set('X-Experience-API-Version', xapiHeaderVersion)
       .query({ method: 'GET' })
       .send({ activityId: TEST_ACTIVITY_ID })
-      .expect(OK_200_HTTP_CODE, []);
+      .expect(OK, []);
   });
 });

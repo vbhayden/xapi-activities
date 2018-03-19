@@ -1,7 +1,5 @@
-import {
-  FORBIDDEN_403_HTTP_CODE,
-  NO_CONTENT_204_HTTP_CODE,
-} from '../../utils/httpCodes';
+import { FORBIDDEN, NO_CONTENT } from 'http-status-codes';
+import { TEST_EXPIRED_ORG_TOKEN } from '../../../utils/testValues';
 import setup from '../utils/setup';
 import deleteProfile from './utils/deleteProfile';
 
@@ -11,12 +9,18 @@ describe('expressPresenter.deleteProfile with scopes', () => {
   it('should throw forbidden error when using invalid scope', async () => {
     await deleteProfile()
       .set('Authorization', 'invalid_scope_client')
-      .expect(FORBIDDEN_403_HTTP_CODE);
+      .expect(FORBIDDEN);
+  });
+
+  it('should throw forbidden error when using expired client', async () => {
+    await deleteProfile()
+      .set('Authorization', TEST_EXPIRED_ORG_TOKEN)
+      .expect(FORBIDDEN);
   });
 
   it('should not throw an error when using valid scopes', async () => {
     await deleteProfile()
       .set('Authorization', 'valid_scope_client')
-      .expect(NO_CONTENT_204_HTTP_CODE);
+      .expect(NO_CONTENT);
   });
 });

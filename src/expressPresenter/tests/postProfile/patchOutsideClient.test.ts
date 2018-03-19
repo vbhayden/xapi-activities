@@ -1,3 +1,4 @@
+import { NO_CONTENT } from 'http-status-codes';
 import assertProfile from '../../../utils/assertProfile';
 import {
   JSON_CONTENT_TYPE,
@@ -6,7 +7,6 @@ import {
   TEST_OUTSIDE_ORG_TOKEN,
   TEST_OUTSIDE_STORE_TOKEN,
 } from '../../../utils/testValues';
-import { NO_CONTENT_204_HTTP_CODE } from '../../utils/httpCodes';
 import setup from '../utils/setup';
 import patchContent from './utils/patchContent';
 import patchProfile from './utils/patchProfile';
@@ -17,7 +17,7 @@ describe('expressPresenter.postProfile when outside client', () => {
   const patchOutsideClient = async (token: string) => {
     await patchProfile({}, TEST_OBJECT_PATCH_CONTENT)
       .set('Authorization', token)
-      .expect(NO_CONTENT_204_HTTP_CODE);
+      .expect(NO_CONTENT);
   };
 
   it('should not overwrite existing model when using a different organisation', async () => {

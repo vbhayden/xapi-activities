@@ -1,6 +1,7 @@
 import TypeWarning from '@learninglocker/xapi-validation/dist/warnings/TypeWarning';
 import CommonTranslator from 'jscommons/dist/translatorFactory/Translator';
 import Conflict from '../errors/Conflict';
+import ExpiredClientError from '../errors/ExpiredClientError';
 import IfMatch from '../errors/IfMatch';
 import IfNoneMatch from '../errors/IfNoneMatch';
 import InvalidMethod from '../errors/InvalidMethod';
@@ -11,6 +12,7 @@ import NonJsonObject from '../errors/NonJsonObject';
 
 interface Translator extends CommonTranslator {
   readonly conflictError: (err: Conflict) => string;
+  readonly expiredClientError: (err: ExpiredClientError) => string;
   readonly ifMatchError: (err: IfMatch) => string;
   readonly ifNoneMatchError: (err: IfNoneMatch) => string;
   readonly invalidMethodError: (err: InvalidMethod) => string;

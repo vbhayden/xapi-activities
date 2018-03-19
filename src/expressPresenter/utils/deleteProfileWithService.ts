@@ -1,4 +1,5 @@
 import { Response } from 'express';
+import { NO_CONTENT } from 'http-status-codes';
 import { get } from 'lodash';
 import { xapiHeaderVersion } from '../../utils/constants';
 import Config from '../Config';
@@ -6,7 +7,6 @@ import getActivityId from './getActivityId';
 import getClient from './getClient';
 import getEtag from './getEtag';
 import getProfileId from './getProfileId';
-import { NO_CONTENT_204_HTTP_CODE } from './httpCodes';
 import validateVersionHeader from './validateVersionHeader';
 
 export interface Options {
@@ -25,7 +25,7 @@ export default async ({ query, config, headers, res }: Options) => {
   const profileId = getProfileId(get(query, 'profileId'));
 
   await config.service.deleteProfile({ activityId, client, profileId, ifMatch });
-  res.status(NO_CONTENT_204_HTTP_CODE);
+  res.status(NO_CONTENT);
   res.setHeader('X-Experience-API-Version', xapiHeaderVersion);
   res.send();
 };
