@@ -1,3 +1,4 @@
+// tslint:disable:max-file-line-count
 import { Response } from 'express';
 import { BAD_REQUEST, CONFLICT, FORBIDDEN, PRECONDITION_FAILED } from 'http-status-codes';
 import commonErrorHandler from 'jscommons/dist/expressPresenter/utils/handleError';
@@ -14,6 +15,7 @@ import JsonSyntaxError from '../../errors/JsonSyntaxError';
 import MaxEtags from '../../errors/MaxEtags';
 import MissingEtags from '../../errors/MissingEtags';
 import NonJsonObject from '../../errors/NonJsonObject';
+import UntrustedClientError from '../../errors/UntrustedClientError';
 import { xapiHeaderVersion } from '../../utils/constants';
 import Config from '../Config';
 import translateWarning from './translateWarning';
@@ -91,6 +93,12 @@ export default ({ config, errorId, res, err }: Options): Response => {
   if (err instanceof ExpiredClientError) {
     const code = FORBIDDEN;
     const message = translator.expiredClientError(err);
+    logError(message);
+    return sendMessage({ res, code, errorId, message });
+  }
+  if (err instanceof UntrustedClientError) {
+    const code = FORBIDDEN;
+    const message = translator.untrustedClientError(err);
     logError(message);
     return sendMessage({ res, code, errorId, message });
   }

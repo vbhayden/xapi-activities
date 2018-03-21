@@ -1,9 +1,11 @@
+// tslint:disable:max-file-line-count
 import * as assert from 'assert';
 import * as btoa from 'btoa';
 import NoModel from 'jscommons/dist/errors/NoModel';
 import assertError from 'jscommons/dist/tests/utils/assertError';
 import { ObjectID } from 'mongodb';
 import ExpiredClientError from '../../errors/ExpiredClientError';
+import UntrustedClientError from '../../errors/UntrustedClientError';
 import connectToMongoDb from '../../repoFactory/utils/connectToMongoDb';
 import mongoFactory from '../index';
 
@@ -43,11 +45,9 @@ describe('getClient from mongo client', () => {
   const connection = connectToMongoDb();
   const authRepo = mongoFactory({ db: connection });
 
-  afterEach(async () => {
+  beforeEach(async () => {
     const db = await connection();
-    await db.collection('client').deleteMany({});
-    await db.collection('lrs').deleteMany({});
-    await db.collection('organisation').deleteMany({});
+    await db.dropDatabase();
   });
 
   it('should return a client from the db', async () => {
@@ -57,6 +57,16 @@ describe('getClient from mongo client', () => {
     await db.collection('client').insertOne(TEST_CLIENT);
     const result = await authRepo.getClient({ authToken: TEST_TOKEN });
     assert.equal(result.client._id, TEST_CLIENT._id);
+  });
+
+  it('should error when getting a untrusted client', async () => {
+    const db = await connection();
+    await db.collection('client').insertOne({
+      ...TEST_CLIENT,
+      isTrusted: false,
+    });
+    const promise = authRepo.getClient({ authToken: TEST_TOKEN });
+    await assertError(UntrustedClientError, promise);
   });
 
   it('should error when getting without any clients in the DB', async () => {

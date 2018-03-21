@@ -29,6 +29,7 @@ const translator: Translator = {
   nonJsonObjectError: () => (
     'Expected a JSON object to be provided and stored (if it exists)'
   ),
+  untrustedClientError: () => 'Your client has been disabled',
   xapiTypeWarning: (warning) => {
     const path = stringPath(warning.path);
     const dataString = JSON.stringify(warning.data);
