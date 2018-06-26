@@ -1,0 +1,1 @@
+{"version":3,"file":"getStorageDir.js","sourceRoot":"","sources":["../../src/utils/getStorageDir.ts"],"names":[],"mappings":";;AAAA,6BAA4B;AAO5B,mBAAe,UAAC,IAA0B;IACxC,OAAO,WAAI,CAAC,IAAI,CAAC,SAAS,EAAE,IAAI,CAAC,MAAM,EAAE,kBAAkB,CAAC,CAAC;AAC/D,CAAC,EAAC"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"createImmutableProfile.js","sourceRoot":"","sources":["../../src/utils/createImmutableProfile.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA,iBAaA;;AAbA,iDAAmD;AACnD,yDAAoD;AACpD,2CAGsB;AAEtB,mBAAe;;;oBACb,qBAAM,2BAAiB,CAAC;oBACtB,UAAU,EAAE,uCAA0B;oBACtC,OAAO,EAAE,cAAc,CAAC,mCAAsB,CAAC;iBAChD,CAAC,EAAA;;gBAHF,SAGE,CAAC;;;;KACJ,EAAC"}
